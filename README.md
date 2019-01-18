@@ -7,7 +7,7 @@ React Browser Hooks
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-Describe react-browser-hooks here.
+A simple library that provides custom hooks for some common browser events.
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo

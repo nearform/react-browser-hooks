@@ -1,6 +1,6 @@
 {
   "name": "react-browser-hooks",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "react-browser-hooks React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "nwb build-react-component",
+    "lint": "eslint --fix src/**/*.js",
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
     "start": "nwb serve-react-demo",
@@ -19,20 +20,45 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {},
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.12.0",
+    "eslint-config-react-app": "^3.0.6",
+    "eslint-plugin-flowtype": "^3.2.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "0.0.0",
     "nwb": "0.23.x",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react": "^16.8.0-alpha.1",
+    "react-dom": "^16.8.0-alpha.1"
   },
-  "author": "",
+  "eslintConfig": {
+    "extends": "react-app",
+    "plugins": [
+      "react-hooks"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "quotes": [
+        "error",
+        "single"
+      ]
+    }
+  },
+  "author": "nearForm Ltd.",
   "homepage": "",
-  "license": "MIT",
-  "repository": "",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/nearform/react-browser-hooks",
   "keywords": [
-    "react-component"
+    "react, hooks, browser, events, listeners, fullscreen, resize, scroll, mouse"
   ]
 }
