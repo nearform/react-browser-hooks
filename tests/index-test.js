@@ -2,9 +2,9 @@ import expect from 'expect'
 import React from 'react'
 import {render, unmountComponentAtNode} from 'react-dom'
 
-import Component from 'src/'
+import FullScreen from '../demo/src/components/fullscreen'
 
-describe('Component', () => {
+describe('FullScreen', () => {
   let node
 
   beforeEach(() => {
@@ -15,8 +15,8 @@ describe('Component', () => {
     unmountComponentAtNode(node)
   })
   it('displays a welcome message', () => {
-    render(<Component/>, node, () => {
-      expect(node.innerHTML).toContain('Welcome to React components')
+    render(<FullScreen />, node, () => {
+      expect(node.innerHTML).toContain('FullScreen Demo')
     })
   })
 })
