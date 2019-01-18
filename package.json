@@ -55,7 +55,7 @@
     }
   },
   "author": "nearForm Ltd.",
-  "homepage": "",
+  "homepage": "https://github.com/nearform/react-browser-hooks",
   "license": "Apache-2.0",
   "repository": "https://github.com/nearform/react-browser-hooks",
   "keywords": [
