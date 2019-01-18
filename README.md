@@ -1,7 +1,5 @@
 # react-browser-hooks
-<<<<<<< HEAD
 React Browser Hooks
-=======
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
@@ -17,4 +15,3 @@ A simple library that provides custom hooks for some common browser events.
 
 [coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/user/repo
->>>>>>> Initial commit from nwb v0.23.0
