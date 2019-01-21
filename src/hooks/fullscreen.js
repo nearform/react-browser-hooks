@@ -7,13 +7,14 @@ import { useResize } from './resize'
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
 export function useFullScreen(element) {
-  const el = element || document.documentElement
+  const docEl = document.documentElement
   const [fullScreen, setFullScreen] = useState(isFullScreen())
   const [lastEvent, setLastEvent] = useState(null)
   const [lastRequest, setLastRequest] = useState(null)
 
   // access various open fullscreen methods
   function openFullScreen() {
+    const el = (element && element.current) || docEl
     if (el.requestFullscreen) {
       setLastRequest('requestFullScreen')
       el.requestFullscreen()
@@ -75,15 +76,22 @@ export function useFullScreen(element) {
   // determine if we are in fullscreen mode and why
   // don't set any state in here as called on init too
   function isFullScreen() {
-    if (document.fullscreenElement) return { open: true, reason: 'fullscreenElement set'}
-    if (document.mozFullScreenElement) return { open: true, reason: 'mozFullScreenElement set'}
-    if (document.webkitFullscreenElement) return { open: true, reason: 'webkitFullscreenElement set'}
-    if (document.msFullscreenElement) return { open: true, reason: 'msFullscreenElement set'}
-
-    if (document.fullscreen) return { open: true, reason: 'fullscreen true'}
-    if (document.mozFullScreen) return { open: true, reason: 'mozFullScreen true'}
-    if (document.webkitIsFullScreen) return { open: true, reason: 'webkitIsFullScreen true'}
-    if (document.fullScreenMode) return { open: true, reason: 'fullScreenMode true'}
+    if (element && element.current) {
+      if (document.fullscreenElement === element.current) return { open: true, reason: 'fullscreenElement set to element'}
+      if (document.mozFullScreenElement === element.current) return { open: true, reason: 'mozFullScreenElement set to element'}
+      if (document.webkitFullscreenElement === element.current) return { open: true, reason: 'webkitFullscreenElement set to element'}
+      if (document.msFullscreenElement === element.current) return { open: true, reason: 'msFullscreenElement set to element'}
+    } else {
+      if (document.fullscreenElement) return { open: true, reason: 'fullscreenElement set'}
+      if (document.mozFullScreenElement) return { open: true, reason: 'mozFullScreenElement set'}
+      if (document.webkitFullscreenElement) return { open: true, reason: 'webkitFullscreenElement set'}
+      if (document.msFullscreenElement) return { open: true, reason: 'msFullscreenElement set'}
+  
+      if (document.fullscreen) return { open: true, reason: 'fullscreen true'}
+      if (document.mozFullScreen) return { open: true, reason: 'mozFullScreen true'}
+      if (document.webkitIsFullScreen) return { open: true, reason: 'webkitIsFullScreen true'}
+      if (document.fullScreenMode) return { open: true, reason: 'fullScreenMode true'}
+    }
 
     return { open: false }
   }
