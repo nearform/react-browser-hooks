@@ -5,7 +5,28 @@ React Browser Hooks
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-A simple library that provides custom hooks for some common browser events.
+A simple utility library that provides custom hooks for some common browser events.
+
+## Installation
+
+[npm][]:
+
+```bash
+npm install @nearform/react-browser-hooks
+```
+
+## Example Usage
+
+Eg. The FullScreen hook:
+
+```javascript
+import { FullScreen } from '@nearform/react-browser-hooks' 
+```
+
+```javascript
+const fs = useFullScreen()
+<button onClick={fs.toggle}>{fs.fullScreen ? 'Close' : 'Open'}</button>
+```
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo

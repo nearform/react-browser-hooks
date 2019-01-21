@@ -51,6 +51,10 @@
       "quotes": [
         "error",
         "single"
+      ],
+      "semi": [
+        2,
+        "never"
       ]
     }
   },
@@ -60,5 +64,6 @@
   "repository": "https://github.com/nearform/react-browser-hooks",
   "keywords": [
     "react, hooks, browser, events, listeners, fullscreen, resize, scroll, mouse"
-  ]
+  ],
+  "dependencies": {}
 }
