@@ -16,8 +16,9 @@
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
     "start": "nwb serve-react-demo",
-    "test": "npm run test:unit",
+    "test": "npm run test:unit && npm run test:acceptance",
     "test:unit": "nwb test-react",
+    "test:acceptance": "testcafe chrome,firefox test/acceptance/ --app 'npm start'",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
@@ -35,7 +36,8 @@
     "eslint-plugin-react-hooks": "0.0.0",
     "nwb": "0.23.x",
     "react": "^16.8.0-alpha.1",
-    "react-dom": "^16.8.0-alpha.1"
+    "react-dom": "^16.8.0-alpha.1",
+    "testcafe": "^0.23.3"
   },
   "eslintConfig": {
     "extends": "react-app",
