@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useResize } from './resize'
 
 /**
- * Fullscreen hook based on user invoked requestFullScreen and associated events
+ * Fullscreen hook based on user invoked request/exitFullScreen and associated triggered events
  * @param {object} element The element to be viewed fullscreen, defaults to documentElement
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
