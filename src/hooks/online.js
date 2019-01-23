@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 //e.g. favicon polling
 export function useOnline(callback) {
   const initialState = window.navigator && window.navigator.onLine
-  console.log(initialState)
   const [online, setOnline] = useState(initialState)
   const [reason, setReason] = useState('initial status')
 

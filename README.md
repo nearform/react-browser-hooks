@@ -20,7 +20,7 @@ npm install @nearform/react-browser-hooks
 Eg. The FullScreen hook:
 
 ```javascript
-import { FullScreen } from '@nearform/react-browser-hooks' 
+import { useFullScreen } from '@nearform/react-browser-hooks' 
 ```
 
 ```javascript
