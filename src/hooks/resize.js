@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { fpsToMs } from '../utils/fps'
 
 /**
  * Throttled resize hook
@@ -7,33 +8,36 @@ import { useState, useEffect } from 'react'
  * @returns {object} The size object with dimensions of window innerWidth and innerHeight
  */
 export function useResize(fps, callback) {
-  // set fps to min 1 and max 60, default 15
-  if (isNaN(fps)) fps = 15
-  else if (fps < 1) fps = 1
-  else if (fps > 60) fps = 60
-
-  // convert fps to timeout
-  const timeout = Math.floor(1000 / fps)
-
   const [size, setSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth
   })
 
-  var resizeTimeout
+  const ms = fpsToMs(fps)
+  let resizeTimeout
   function handleResizeThrottled(e) {
-    if (!resizeTimeout) {
-      resizeTimeout = setTimeout(function () {
-        resizeTimeout = null
-        const newSize = { width: e.target.innerWidth, height: e.target.innerHeight }
-        if (size.width !== newSize.width || size.height !== newSize.height) {
-          setSize(newSize)
-          if (callback) callback(newSize) //@todo: async?
-        } 
-      }, timeout)
+    if(fps && ms) {
+      if (!resizeTimeout) {
+        resizeTimeout = setTimeout(function () {
+          resizeTimeout = null
+          handleResize(e)
+        }, ms)
+      }
+    } else {
+      // no throttle
+      handleResize(e)
     }
   }
 
+  function handleResize(e) {
+    const newSize = { width: e.target.innerWidth, height: e.target.innerHeight }
+    if (size.width !== newSize.width || size.height !== newSize.height) {
+      setSize(newSize)
+      if (callback) callback(newSize) //@todo: async?
+    } 
+  }
+
+  
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
    if (window.addEventListener) {
@@ -55,5 +59,9 @@ export function useResize(fps, callback) {
     }
   }, [size])
 
-  return size
+  return {
+    ...size,
+    throttled: fps && ms ? 'yes' : 'no',
+    delay: fps && ms ? ms : 0
+  }
 }
