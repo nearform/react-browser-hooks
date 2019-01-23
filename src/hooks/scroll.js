@@ -11,10 +11,20 @@ export function useScroll(callback) {
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    if (window.addEventListener) {
+      window.addEventListener('scroll', handleScroll, false)           
+    }
+    else if (window.attachEvent) { //IE 8
+        window.attachEvent('onscroll', handleScroll)            
+    }
 
     return function cleanup() {
-      window.removeEventListener('scroll', handleScroll)
+      if (window.removeEventListener) {
+        window.removeEventListener('scroll', handleScroll)        
+      }
+      else if (window.detachEvent) {
+        window.detachEvent('onscroll', handleScroll)            
+      }
     }
   })
 
