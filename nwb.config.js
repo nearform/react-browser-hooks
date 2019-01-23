@@ -8,5 +8,20 @@ module.exports = {
         react: 'React'
       }
     }
+  },
+  karma: {
+    browsers: ['Chrome_without_security', 'Firefox', 'Safari'],
+    plugins: [
+      require('karma-firefox-launcher'),
+      require('karma-safari-launcher')
+    ],
+    extra: {
+      customLaunchers: {
+        Chrome_without_security: {
+          base: 'Chrome',
+          flags: ['--disable-web-security']
+        }
+      }
+    }
   }
 }

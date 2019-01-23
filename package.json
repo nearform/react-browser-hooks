@@ -32,6 +32,8 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "0.0.0",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-safari-launcher": "^1.0.0",
     "nwb": "0.23.x",
     "react": "^16.8.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1"
