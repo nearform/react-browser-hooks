@@ -28,11 +28,22 @@ export function useMousePosition(fps, callback) {
     }
   }
 
-  useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMoveThrottled)
+  useEffect(() => {  
+    if (window.addEventListener) {
+      window.addEventListener('mousemove', handleMouseMoveThrottled, false)           
+    }
+    else if (window.attachEvent) { //IE 8
+        window.attachEvent('onmousemove', handleMouseMoveThrottled)            
+    }
+    
     return function cleanUp() {
       clearTimeout(moveTimeout)
-      window.removeEventListener('mousemove', handleMouseMoveThrottled)
+      if (window.removeEventListener) {
+        window.removeEventListener('mousemove', handleMouseMoveThrottled)        
+      }
+      else if (window.detachEvent) {
+        window.detachEvent('onmousemove', handleMouseMoveThrottled)            
+      }
     }
   }, [position])
 
