@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function useScroll() {
+export function useScroll(callback) {
   const [state, setState] = useState({
     top: window.scrollY,
     left: window.scrollX
@@ -10,7 +10,6 @@ export function useScroll() {
     setState({ top: window.scrollY, left: window.scrollX })
   }
 
-  // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
 

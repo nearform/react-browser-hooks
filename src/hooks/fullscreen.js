@@ -139,12 +139,12 @@ export function useFullScreen(element) {
  * @param {object} element The element to be viewed fullscreen, defaults to documentElement
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
-export function useFullScreenBrowser() {
+export function useFullScreenBrowser(callback) {
   // reuse the useResizeHook to determine act on screen size changes,
-  // 5fps should be enough, doesn't really need to be faster for this event
-  useResize(5, handleResize) 
+  // 1fps should be enough, doesn't really need to be faster for this event
+  useResize(1, handleResize) 
 
-  const [fullScreen, setFullScreen] = useState(isFullScreen())
+  const [fullScreen, setFullScreen] = useState(isFullScreen(getSizeInfo()))
   
   function getSizeInfo() {
     return { 
@@ -163,14 +163,18 @@ export function useFullScreenBrowser() {
 
   function handleResize(newSize) {
     //something has changed so let's see if in fullscreen mode
-    const result = isFullScreen()
-    setFullScreen(result)
-    setSizeInfo(getSizeInfo())
+    const sizeInfo = getSizeInfo()
+    const result = isFullScreen(sizeInfo)
+    console.log(result.open, fullScreen.open)
+    if(result.open !== fullScreen.open) {
+      console.log('set full screen')
+      setFullScreen(result)
+      setSizeInfo(sizeInfo)
+      if(callback) callback(result)
+    }
   }
 
-  function isFullScreen() {
-    const sizeInfo = getSizeInfo()
-    
+  function isFullScreen(sizeInfo) {
     if (sizeInfo.screenWidth === sizeInfo.innerWidth && sizeInfo.screenHeight === sizeInfo.innerHeight) {
       return { open: true, reason: 'borderless fullscreen'}
     } else if (!window.screenTop && !window.screenY) {
