@@ -40,13 +40,12 @@ export function useResize(fps, callback) {
   
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-   if (window.addEventListener) {
-      window.addEventListener('resize', handleResizeThrottled, false)           
-   }
-   else if (window.attachEvent) { //IE 8
-      window.attachEvent('onresize', handleResizeThrottled)            
-   }
-    
+    if (window.addEventListener) {
+        window.addEventListener('resize', handleResizeThrottled, false)           
+    }
+    else if (window.attachEvent) { //IE 8
+        window.attachEvent('onresize', handleResizeThrottled)            
+    }
 
     return function cleanup() {
       clearTimeout(resizeTimeout)

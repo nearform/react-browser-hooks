@@ -4,6 +4,8 @@ import { render } from 'react-dom'
 import FullScreen from './components/fullscreen'
 import Resize from './components/resize'
 import MousePosition from './components/mouse-position'
+import Online from './components/online'
+import Scroll from './components/scroll'
 class Demo extends Component {
   render() {
     return (
@@ -12,6 +14,8 @@ class Demo extends Component {
         <FullScreen />
         <Resize />
         <MousePosition />
+        <Online />
+        <Scroll />
       </div>
     )
   }
