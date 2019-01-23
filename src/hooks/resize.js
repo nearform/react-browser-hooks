@@ -44,7 +44,7 @@ export function useResize(fps, callback) {
       window.addEventListener('resize', handleResizeThrottled, false)           
    }
    else if (window.attachEvent) { //IE 8
-      window.attachEvent('resize', handleResizeThrottled)            
+      window.attachEvent('onresize', handleResizeThrottled)            
    }
     
 
@@ -54,7 +54,7 @@ export function useResize(fps, callback) {
         window.removeEventListener('resize', handleResizeThrottled)        
       }
       else if (window.detachEvent) {
-        window.detachEvent('resize', handleResizeThrottled)            
+        window.detachEvent('onresize', handleResizeThrottled)            
       }
     }
   }, [size])

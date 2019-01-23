@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import { useResize } from '../../../src'
 
 export default function Resize () {
-  const [fps, setFps] = useState(60)
+  const [fps, setFps] = useState(3)
   const size = useResize(fps)
 
   function handleChange (e) {
