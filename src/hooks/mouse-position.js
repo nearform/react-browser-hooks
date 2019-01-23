@@ -24,7 +24,7 @@ export function useMousePosition(fps, callback) {
     const newPos = { x: clientX, y: clientY }
     if(position.x !== newPos.x || position.y !== newPos.y) {
       setPosition(newPos)
-      callback(newPos)
+      if(callback) callback(newPos)
     }
   }
 
