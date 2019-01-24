@@ -13,6 +13,7 @@ export default function Resize () {
   return (
     <div>
       <h2>Resize Demo</h2>
+      <em>The red border shows this visually.</em>
       <p>Width: {size.width}px, Height: {size.height}px<br/>
       Throttled: {size.throttled}, Delay: {size.delay}ms</p>
       FPS: <input value={fps} onChange={handleChange} />
