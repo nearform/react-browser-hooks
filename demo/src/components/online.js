@@ -1,7 +1,7 @@
 import React from 'react'
 import { useOnline } from '../../../src'
 
-export default function Resize () {
+export default function Online () {
   const status = useOnline()
 
   return (

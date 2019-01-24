@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useScroll } from '../../../src'
 
-export default function Resize () {
+export default function Scroll () {
   const scroll = useScroll()
 
   return (
