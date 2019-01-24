@@ -2,6 +2,8 @@
 
 Note: npm package does not exist yet.
 
+Following is a list of the hooks supported in Nearform's React Browser Hooks library.
+
 ## useFullScreen Hook
 
 The useFullScreen hook allows a page or element to occupy the full screen.
@@ -145,6 +147,7 @@ const scroll = useScroll()
 ```
 
 Parameters:
+- fps (int): optional frames per second parameter to throttle mouse position event (default: null, no throttling)
 - callback (function): optional callback function
 
 Returns an object containing:

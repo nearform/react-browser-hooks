@@ -9,8 +9,9 @@ import Scroll from './components/scroll'
 class Demo extends Component {
   render() {
     return (
-      <div>
+      <div style={{width: '150%'}}>
         <h1>Reach Browser Hooks Examples</h1>
+        <em>Configure react developer tools with 'highlight updates' on to see components update based on state.</em>
         <FullScreen />
         <Resize />
         <MousePosition />

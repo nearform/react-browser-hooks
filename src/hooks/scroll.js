@@ -1,32 +1,50 @@
 import { useState, useEffect } from 'react'
+import { fpsToMs } from '../utils/fps'
 
-export function useScroll(callback) {
-  const [state, setState] = useState({
+export function useScroll(fps, callback) {
+  const [pos, setPos] = useState({
     top: window.scrollY,
     left: window.scrollX
   })
 
   function handleScroll() {
-    setState({ top: window.scrollY, left: window.scrollX })
+    const newPos = { top: window.scrollY, left: window.scrollX }
+    if(newPos.top !== pos.top || newPos.left !== pos.left) {
+      setPos(newPos)
+      if (callback) callback (newPos)
+    }
+  }
+
+  const ms = fpsToMs(fps)
+  let throttleTimeout
+  function handleScrollThrottled() {
+    if(!fps || !ms) return handleScroll()
+    if (throttleTimeout) return
+
+    throttleTimeout = setTimeout(function () {
+      throttleTimeout = null
+      handleScroll()
+    }, ms)
   }
 
   useEffect(() => {
     if (window.addEventListener) {
-      window.addEventListener('scroll', handleScroll, false)           
+      window.addEventListener('scroll', handleScrollThrottled, false)           
     }
     else if (window.attachEvent) { //IE 8
-      window.attachEvent('onscroll', handleScroll)            
+      window.attachEvent('onscroll', handleScrollThrottled)            
     }
 
     return function cleanup() {
+      clearTimeout(throttleTimeout)
       if (window.removeEventListener) {
-        window.removeEventListener('scroll', handleScroll)        
+        window.removeEventListener('scroll', handleScrollThrottled)        
       }
       else if (window.detachEvent) {
-        window.detachEvent('onscroll', handleScroll)            
+        window.detachEvent('onscroll', handleScrollThrottled)            
       }
     }
-  })
+  }, [pos])
 
-  return state
+  return pos
 }

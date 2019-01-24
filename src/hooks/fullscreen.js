@@ -174,7 +174,6 @@ export function useFullScreenBrowser(callback) {
 
   function handleResize(newSize) {
     //something has changed so let's see if in fullscreen mode
-    console.log('handleResize', newSize)
     const sizeInfo = getSizeInfo()
     const result = isFullScreenSize(sizeInfo)
     setFullScreen(result)
