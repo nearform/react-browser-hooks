@@ -1,6 +1,6 @@
 const DEF_FPS = 15
 const DEF_MIN = 1
-const DEF_MAX = 60
+const DEF_MAX = 120
 
 //converts frames per second into milliseconds for timers
 export function fpsToMs(fps, min = DEF_MIN, max = DEF_MAX, def = DEF_FPS) {
