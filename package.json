@@ -13,6 +13,7 @@
   "scripts": {
     "build": "nwb build-react-component",
     "lint": "eslint --fix src/**/*.js test/**/*.js",
+    "format": "prettier --write '**/*.js'",
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
     "start": "nwb serve-react-demo",
@@ -35,6 +36,7 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "0.0.0",
     "nwb": "0.23.x",
+    "prettier": "1.16.1",
     "react": "^16.8.0-alpha.1",
     "react-dom": "^16.8.0-alpha.1",
     "testcafe": "^0.23.3"
