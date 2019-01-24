@@ -12,4 +12,4 @@ module.exports = {
   karma: {
     testFiles: 'test/unit/*.test.js'
   }
-}
+};
