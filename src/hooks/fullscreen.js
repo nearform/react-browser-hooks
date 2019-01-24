@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useResize } from './resize'
 
-  // determine if we are in fullscreen mode and why
-  // don't set any state in here as called on init too
- export function isFullScreenElement(doc, el) {
+// determine if we are in fullscreen mode and why
+// don't set any state in here as called on init too
+export function isFullScreenElement(doc, el) {
   if (el && el.current) {
     if (doc.fullscreenElement === el.current) return { open: true, reason: 'fullscreenElement set to element'}
     if (doc.mozFullScreenElement === el.current) return { open: true, reason: 'mozFullScreenElement set to element'}

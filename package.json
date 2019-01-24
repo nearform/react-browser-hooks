@@ -50,6 +50,14 @@
       }
     },
     "rules": {
+      "eol-last": [
+        "error",
+        "always"
+      ],
+      "indent": [
+        "error",
+        2
+      ],
       "react-hooks/rules-of-hooks": "error",
       "quotes": [
         "error",

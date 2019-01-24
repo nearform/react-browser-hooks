@@ -16,7 +16,14 @@ export default function MousePosition () {
       <p>X: {pos.x}px, Y: {pos.y}px<br/>
       Throttled: {pos.throttled}, Delay: {pos.delay}ms</p>
       FPS: <input value={fps} onChange={handleChange} />
+      <div id='follow-cursor' 
+        style={{
+          borderRadius: '50%',
+          backgroundColor: 'red', 
+          position: 'fixed', 
+          top: `${pos.y}px`, left: `${pos.x}px`, 
+          width: '4px', height: '4px'}}>
+      </div>
     </div>
   )
 }
-

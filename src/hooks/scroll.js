@@ -15,7 +15,7 @@ export function useScroll(callback) {
       window.addEventListener('scroll', handleScroll, false)           
     }
     else if (window.attachEvent) { //IE 8
-        window.attachEvent('onscroll', handleScroll)            
+      window.attachEvent('onscroll', handleScroll)            
     }
 
     return function cleanup() {

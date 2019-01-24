@@ -15,22 +15,22 @@ export function useResize(fps, callback) {
 
   const ms = fpsToMs(fps)
   let resizeTimeout
-  function handleResizeThrottled(e) {
-    if(fps && ms) {
-      if (!resizeTimeout) {
-        resizeTimeout = setTimeout(function () {
-          resizeTimeout = null
-          handleResize(e)
-        }, ms)
-      }
-    } else {
-      // no throttle
-      handleResize(e)
-    }
+
+  function handleResizeThrottled() {
+    if(!fps || !ms) return handleResize()
+    if (resizeTimeout) return
+
+    resizeTimeout = setTimeout(function () {
+      resizeTimeout = null
+      handleResize()
+    }, ms)
   }
 
-  function handleResize(e) {
-    const newSize = { width: e.target.innerWidth, height: e.target.innerHeight }
+  function handleResize() {
+    const newSize = {
+      height: window.innerHeight,
+      width: window.innerWidth
+    }
     if (size.width !== newSize.width || size.height !== newSize.height) {
       setSize(newSize)
       if (callback) callback(newSize) //@todo: async?
@@ -41,10 +41,10 @@ export function useResize(fps, callback) {
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     if (window.addEventListener) {
-        window.addEventListener('resize', handleResizeThrottled, false)           
+      window.addEventListener('resize', handleResizeThrottled, false)           
     }
     else if (window.attachEvent) { //IE 8
-        window.attachEvent('onresize', handleResizeThrottled)            
+      window.attachEvent('onresize', handleResizeThrottled)            
     }
 
     return function cleanup() {
