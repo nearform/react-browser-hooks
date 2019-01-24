@@ -6,25 +6,22 @@ export function useMousePosition(fps, callback) {
 
   const ms = fpsToMs(fps)
   let moveTimeout
+  let evPos
   function handleMouseMoveThrottled(e) {
-    if(fps && ms) {
-      if (!moveTimeout) {
-          moveTimeout = setTimeout(function () {
-          moveTimeout = null
-          handleMouseMove(e)
-        }, ms)
-      }
-    } else {
-      // no throttle
-      handleMouseMove(e)
-    }
+    evPos = { x: e.clientX, y: e.clientY }
+    if(!fps || !ms) return handleMouseMove()
+    if (moveTimeout) return
+
+    moveTimeout = setTimeout(function () {
+      moveTimeout = null
+      handleMouseMove()
+    }, ms)
   }
 
-  function handleMouseMove ({ clientX, clientY }) {
-    const newPos = { x: clientX, y: clientY }
-    if(position.x !== newPos.x || position.y !== newPos.y) {
-      setPosition(newPos)
-      if(callback) callback(newPos)
+  function handleMouseMove () {
+    if(position.x !== evPos.x || position.y !== evPos.y) {
+      setPosition(evPos)
+      if(callback) callback(evPos)
     }
   }
 
@@ -33,7 +30,7 @@ export function useMousePosition(fps, callback) {
       window.addEventListener('mousemove', handleMouseMoveThrottled, false)           
     }
     else if (window.attachEvent) { //IE 8
-        window.attachEvent('onmousemove', handleMouseMoveThrottled)            
+      window.attachEvent('onmousemove', handleMouseMoveThrottled)            
     }
     
     return function cleanUp() {

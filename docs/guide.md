@@ -1,10 +1,10 @@
 # React Browser Hooks User Guide
 
-Note: npm package that does not exist yet.
+Note: npm package does not exist yet.
 
 ## useFullScreen Hook
 
-The useFullScreen hook allows a page or element to occupy the full screen using modern browser calls and event listeners.
+The useFullScreen hook allows a page or element to occupy the full screen.
 
 Import as follows:
 
@@ -19,18 +19,19 @@ const fs = useFullScreen()
 <button onClick={fs.toggle}>{fs.fullScreen ? 'Close' : 'Open'}</button>
 ```
 
-The object returned has the following functions:
+Parameters:
+- element (object): optional useRef() React hook returned object (defaults to document element)
+- callback (function): optional callback function
 
-- toggle()
-- open()
-- close()
-
-It also has the following properties:
-- fullScreen: whether in full screen mode or not
-- info: some information as to why we are in fullScreen (browser specific)
-    - lastRequest: the request made to enter/exist fullscreen
-    - lastEvent: the event raised
-    - reason: the reason why, if in fullScreen mode
+Returns an object containing:
+- toggle (function): toggles full screen mode
+- open (function): opens full screen mode
+- close (function): closes full screen mode
+- fullScreen (boolean): whether in full screen mode or not
+- info (object): some information as to why we are in fullScreen (browser specific)
+    - lastRequest (string): the request made to enter/exist fullscreen
+    - lastEvent (string): the event raised
+    - reason (string): the reason why, if in fullScreen mode
 
 A callback can be passed into the hook, which is called when the fullScreen property changes.
 
@@ -53,11 +54,14 @@ const fsb = useFullScreenBrowser()
 <p>Full Screen: {fsb.fullScreen ? 'open' : 'closed'}</p>
 ```
 
-The returned object has the following properties:
-- fullScreen: whether in full screen mode or not
-- info: some information as to why we are in fullScreen mode
-    - reason: why we are in full screen mode e.g. borderless full screen as innerWidth and innerHeight are the same size as the screen
-    - sizeInfo: the sizeInfo object used to determine if in full screen, this is returned so that users can make further judgement as to whether in fullscreen mode or not
+Parameters:
+- callback (function): optional callback function
+
+Returns an object containing:
+- fullScreen (boolean): whether in full screen mode or not
+- info (object): some information as to why we are in fullScreen mode
+    - reason (string): why we are in full screen mode e.g. borderless full screen as innerWidth and innerHeight are the same size as the screen
+    - sizeInfo (object): the sizeInfo object used to determine if in full screen, this is returned so that users can make further judgement as to whether in fullscreen mode or not
 
 A callback can be passed into the hook, which is called when the fullScreen property changes.
 
@@ -80,10 +84,14 @@ const resize = useResize(5)
 <p>Width: {resize.width}px, Height: {resize.height}px<br/>
 ```
 
-The returned object has the following properties:
-- width, height: dimensions of the screen
-- throttled: if set, throttling is enabled
-- delay: the actual delay in ms, based on fps parameter
+Parameters:
+- fps (int): optional frames per second parameter to throttle resize event (default: null, no throttling)
+- callback (function): optional callback function
+
+Returns an object containing:
+- width (int), height (int): dimensions of the screen
+- throttled (boolean): if set, throttling is enabled
+- delay (int): the actual delay in ms, based on fps parameter
 
 A callback can be passed into the hook, which is called when the browser is resized
 
@@ -106,10 +114,14 @@ const pos = useMousePosition(60)
 <p>X: {pos.x}px, Y: {pos.y}px<br/>
 ```
 
-The returned object has the following properties:
-- x, y: the mouse pointer position
-- throttled: if set, throttling is enabled
-- delay: the actual delay in ms, based on fps parameter
+Parameters:
+- fps (int): optional frames per second parameter to throttle mouse position event (default: null, no throttling)
+- callback (function): optional callback function
+
+Returns an object containing:
+- x (int), y (int): the mouse pointer position
+- throttled (boolean): if set, throttling is enabled
+- delay (int): the actual delay in ms, based on fps parameter
 
 A callback can be passed into the hook, which is called when mouse position changes
 
@@ -132,8 +144,11 @@ const scroll = useScroll()
 <p>Top: {scroll.top}px, Left: {scroll.left}px<br/>
 ```
 
-The returned object has the following properties:
-- top, left: the current scroll position
+Parameters:
+- callback (function): optional callback function
+
+Returns an object containing:
+- top (int), left (int): the current scroll position
 
 A callback can be passed into the hook, which is called when scroll position changes
 
@@ -156,9 +171,12 @@ const status = useOnline()
 <p>Status: {statis.online ? 'online' : 'offline'}<br/>
 ```
 
-The returned object has the following properties:
-- online: the current online status
-- reason: the reason for this status
+Parameters:
+- callback (function): optional callback function
+
+Returns an object containing:
+- online (boolean): the current online status
+- reason (string): the reason for this status
 
 A callback can be passed into the hook, which is called when online status changes
 
