@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 import { useMousePosition } from '../../../src'
 
-export default function Resize () {
+export default function MousePosition () {
   const [fps, setFps] = useState(3)
   const pos = useMousePosition(fps)
 
