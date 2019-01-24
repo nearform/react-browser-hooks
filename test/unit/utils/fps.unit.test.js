@@ -11,10 +11,11 @@ describe('fps tests', () => {
     expect(fpsToMs(10)).toBe(100)
     expect(fpsToMs(30)).toBe(33)
     expect(fpsToMs(60)).toBe(16)
+    expect(fpsToMs(120)).toBe(8)
   })
   it('it sets min and max', () => {
     expect(fpsToMs(0)).toBe(1000)
-    expect(fpsToMs(61)).toBe(16)
+    expect(fpsToMs(200000)).toBe(8)
   })
   it('invalid returns null', () => {
     expect(fpsToMs('blaa')).toBe(null)
