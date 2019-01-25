@@ -23,9 +23,8 @@ export function useMousePosition(fps, callback) {
     if (ticking) return
 
     var d = new Date()
-    var n = d.getMilliseconds()
     var currentSecond = Math.floor(d.getTime() / 1000)
-    const currentFrame = Math.floor(n / ms)
+    const currentFrame = Math.floor(d.getMilliseconds() / ms)
 
     //if rAF supported
     if(raf) {
