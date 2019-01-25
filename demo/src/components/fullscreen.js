@@ -1,12 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef } from 'react'
 
-import { useFullScreen, useFullScreenBrowser } from '../../../src';
+import { useFullScreen, useFullScreenBrowser } from '../../../src'
 
 export default function FullScreen() {
-  const fs = useFullScreen();
-  const fsb = useFullScreenBrowser();
-  const el = useRef(null);
-  const fsEl = useFullScreen(el);
+  const fs = useFullScreen()
+  const fsb = useFullScreenBrowser()
+  const el = useRef(null)
+  const fsEl = useFullScreen(el)
   return (
     <div>
       <h2>FullScreen Demo</h2>
@@ -33,5 +33,5 @@ export default function FullScreen() {
       <h3>Fullscreen Browser</h3>
       <pre>{JSON.stringify(fsb, null, 2)}</pre>
     </div>
-  );
+  )
 }
