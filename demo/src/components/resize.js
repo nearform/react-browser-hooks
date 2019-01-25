@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-import { useResize } from '../../../src';
+import { useResize } from '../../../src'
 
 export default function Resize() {
-  const [debounce, setDebounce] = useState(60);
-  const size = useResize(debounce);
+  const [debounce, setDebounce] = useState(60)
+  const size = useResize(debounce)
 
   function handleChange(e) {
-    var parsed = parseInt(e.target.value);
+    var parsed = parseInt(e.target.value)
     if (isNaN(parsed)) {
-      setDebounce(null);
+      setDebounce(null)
     } else {
-      setDebounce(parsed);
+      setDebounce(parsed)
     }
   }
 
@@ -23,5 +23,5 @@ export default function Resize() {
       </p>
       FPS: <input value={debounce} onChange={handleChange} />
     </div>
-  );
+  )
 }

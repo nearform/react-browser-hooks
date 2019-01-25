@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 
-import FullScreen from './components/fullscreen';
-import Resize from './components/resize';
+import FullScreen from './components/fullscreen'
+import Resize from './components/resize'
 class Demo extends Component {
   render() {
     return (
@@ -11,8 +11,8 @@ class Demo extends Component {
         <FullScreen />
         <Resize />
       </div>
-    );
+    )
   }
 }
 
-render(<Demo />, document.querySelector('#demo'));
+render(<Demo />, document.querySelector('#demo'))
