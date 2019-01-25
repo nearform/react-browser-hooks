@@ -48,7 +48,7 @@ export function useResize(fps, callback) {
     }
 
     return function cleanup() {
-      clearTimeout(resizeTimeout)
+      if (resizeTimeout) clearTimeout(resizeTimeout)
       if (window.removeEventListener) {
         window.removeEventListener('resize', handleResizeThrottled)        
       }
@@ -56,7 +56,7 @@ export function useResize(fps, callback) {
         window.detachEvent('onresize', handleResizeThrottled)            
       }
     }
-  }, [size])
+  }, [fps])
 
   return {
     ...size,

@@ -44,7 +44,7 @@ export function useScroll(fps, callback) {
         window.detachEvent('onscroll', handleScrollThrottled)            
       }
     }
-  }, [pos])
+  }, [fps])
 
   return pos
 }

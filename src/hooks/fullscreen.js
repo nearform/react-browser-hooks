@@ -117,7 +117,7 @@ export function useFullScreen(element, callback) {
         document.removeEventListener('fullscreenchange', handleChange)
       }
     },
-    [fullScreen.open]
+    []
   )
 
   return {

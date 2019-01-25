@@ -1,17 +1,51 @@
 import { useState, useEffect } from 'react'
-import { fpsToMs } from '../utils/fps'
+import { fpsToMs, raf, caf } from '../utils/fps'
+
 
 export function useMousePosition(fps, callback) {
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
+  //get the frame rate in ms
   const ms = fpsToMs(fps)
-  let moveTimeout
-  let evPos
+
+  let moveTimeout  // backup timer id
+  let lastFrameTimeout  // timer id to ensure last position is shown
+  let newPos   // holds the latest position 
+  let ticking // whether a frame is being updated
+  let frame // current frame
+  let second // current second
+  let rafId // request animation frame id
   function handleMouseMoveThrottled(e) {
-    evPos = { x: e.clientX, y: e.clientY }
+    newPos = { x: e.clientX, y: e.clientY }
+
     if(!fps || !ms) return handleMouseMove()
     if (moveTimeout) return
+    if (ticking) return
 
+    var d = new Date()
+    var n = d.getMilliseconds()
+    var currentSecond = Math.floor(d.getTime() / 1000)
+    const currentFrame = Math.floor(n / ms)
+
+    //if rAF supported
+    if(raf) {
+      // clear last frame timeout if kicked off
+      if(lastFrameTimeout) clearTimeout(lastFrameTimeout)
+
+      if(frame !== currentFrame || second !== currentSecond) {
+        //don't kick off another rAF request while one is underway
+        ticking = true
+        rafId = raf(handleMouseMove)
+      } else {
+        //kick off a timer to perform last frame, but cancel always first thing
+        lastFrameTimeout = setTimeout(handleMouseMove, ms)
+      }
+      frame = currentFrame
+      second = currentSecond
+      return
+    }
+
+    // fps fallback, if equest animation frame isn't supported
     moveTimeout = setTimeout(function () {
       moveTimeout = null
       handleMouseMove()
@@ -19,10 +53,13 @@ export function useMousePosition(fps, callback) {
   }
 
   function handleMouseMove () {
-    if(position.x !== evPos.x || position.y !== evPos.y) {
-      setPosition(evPos)
-      if(callback) callback(evPos)
+    if(position.x !== newPos.x || position.y !== newPos.y) {
+      setPosition(newPos)
+      if(callback) callback(newPos)
     }
+
+    // only used for rAF request
+    ticking = false
   }
 
   useEffect(() => {  
@@ -34,7 +71,10 @@ export function useMousePosition(fps, callback) {
     }
     
     return function cleanUp() {
-      clearTimeout(moveTimeout)
+      if (caf && rafId) caf(rafId)
+      if(moveTimeout) clearTimeout(moveTimeout)      
+      if(lastFrameTimeout) clearTimeout(lastFrameTimeout)
+
       if (window.removeEventListener) {
         window.removeEventListener('mousemove', handleMouseMoveThrottled)        
       }
@@ -42,7 +82,7 @@ export function useMousePosition(fps, callback) {
         window.detachEvent('onmousemove', handleMouseMoveThrottled)            
       }
     }
-  }, [position])
+  }, [fps])
 
   return {
     ...position,

@@ -35,7 +35,7 @@ export function useOnline(callback) {
         window.removeEventListener('offline', handleOffline)
       }
     }
-  }, [online])
+  }, [])
 
   return {
     online,

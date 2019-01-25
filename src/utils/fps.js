@@ -22,3 +22,21 @@ export function fpsToMs(fps, min = DEF_MIN, max = DEF_MAX, def = DEF_FPS) {
 
   return Math.floor(1000 / fps)
 }
+
+//from stack exchange example, needs cross-browser validation
+export const raf = 
+  window.requestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  window.oRequestAnimationFrame ||
+  window.msRequestAnimationFrame
+
+export const caf = window.cancelAnimationFrame ||
+  window.webkitCancelRequestAnimationFrame || 
+  window.webkitCancelAnimationFrame ||
+  window.mozCancelRequestAnimationFrame || 
+  window.mozCancelAnimationFrame ||
+  window.oCancelRequestAnimationFrame || 
+  window.oCancelAnimationFrame ||
+  window.msCancelRequestAnimationFrame || 
+  window.msCancelAnimationFrame
