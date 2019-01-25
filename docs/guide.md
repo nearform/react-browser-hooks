@@ -17,8 +17,8 @@ import { useFullScreen } from '@nearform/react-browser-hooks'
 Example of usage:
 
 ```javascript
-const fs = useFullScreen()
-<button onClick={fs.toggle}>{fs.fullScreen ? 'Close' : 'Open'}</button>
+const { toggle, fullsceen } = useFullScreen()
+<button onClick={toggle}>{fullScreen ? 'Close' : 'Open'}</button>
 ```
 
 Parameters:
@@ -82,8 +82,8 @@ import { useResize } from '@nearform/react-browser-hooks'
 Example of usage:
 
 ```javascript
-const resize = useResize(5)
-<p>Width: {resize.width}px, Height: {resize.height}px<br/>
+const { width, height } = useResize(5)
+<p>Width: {width}px, Height: {height}px<br/>
 ```
 
 Parameters:
@@ -112,8 +112,8 @@ import { useMousePosition } from '@nearform/react-browser-hooks'
 Example of usage:
 
 ```javascript
-const pos = useMousePosition(60)
-<p>X: {pos.x}px, Y: {pos.y}px<br/>
+const { x, y } = useMousePosition(60)
+<p>X: {x}px, Y: {y}px<br/>
 ```
 
 Parameters:
@@ -142,8 +142,8 @@ import { useScroll } from '@nearform/react-browser-hooks'
 Example of usage:
 
 ```javascript
-const scroll = useScroll()
-<p>Top: {scroll.top}px, Left: {scroll.left}px<br/>
+const { top, left } = useScroll()
+<p>Top: {top}px, Left: {left}px<br/>
 ```
 
 Parameters:
@@ -171,7 +171,7 @@ Example of usage:
 
 ```javascript
 const status = useOnline()
-<p>Status: {statis.online ? 'online' : 'offline'}<br/>
+<p>Status: {status.online ? 'online' : 'offline'}<br/>
 ```
 
 Parameters:
