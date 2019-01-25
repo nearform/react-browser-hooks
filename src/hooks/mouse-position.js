@@ -37,7 +37,8 @@ export function useMousePosition(fps, callback) {
         rafId = raf(handleMouseMove)
       } else {
         //kick off a timer to perform last frame, but cancel always first thing
-        lastFrameTimeout = setTimeout(handleMouseMove, ms)
+        //remainder is ms to next frame
+        lastFrameTimeout = setTimeout(handleMouseMove, d.getMilliseconds() % ms)
       }
       frame = currentFrame
       second = currentSecond
