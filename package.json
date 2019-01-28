@@ -50,40 +50,6 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
-  "eslintConfig": {
-    "extends": [
-      "prettier",
-      "react-app"
-    ],
-    "plugins": [
-      "react-hooks",
-      "prettier"
-    ],
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    },
-    "rules": {
-      "prettier/prettier": 2,
-      "react-hooks/rules-of-hooks": "error",
-      "quotes": [
-        "error",
-        "single"
-      ],
-      "semi": [
-        2,
-        "never"
-      ]
-    },
-    "env": {
-      "mocha": true
-    },
-    "globals": {
-      "fixture": true,
-      "test": true
-    }
-  },
   "author": "nearForm Ltd.",
   "homepage": "https://github.com/nearform/react-browser-hooks",
   "license": "Apache-2.0",
