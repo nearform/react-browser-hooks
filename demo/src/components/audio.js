@@ -8,9 +8,10 @@ export default function Audio() {
     mute,
     muted,
     unmute,
+    pause,
     paused,
+    play,
     setVolume,
-    toggle,
     volume
   } = useMediaControls(player)
 
@@ -27,7 +28,7 @@ export default function Audio() {
         </audio>
       </p>
       <p>
-        <button onClick={toggle}>Play/Pause</button>
+        <button onClick={paused ? play : pause}>Play/Pause</button>
         <button onClick={muted ? unmute : mute}>
           {muted ? 'Unmute' : 'Mute'}
         </button>
