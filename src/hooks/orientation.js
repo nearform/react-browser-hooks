@@ -7,7 +7,7 @@ export function useOrientation() {
 
   useEffect(() => {
     const handler = () => setState(window.screen.orientation)
-    if (typeof window !== 'object') return () => {}
+    if (typeof window !== 'object') return
 
     window.addEventListener('orientationchange', handler)
     return () => window.removeEventListener('orientationchange', handler)
