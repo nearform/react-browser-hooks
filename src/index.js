@@ -1,5 +1,6 @@
 export * from './hooks/fullscreen'
 export * from './hooks/geolocation'
 export * from './hooks/mouse-position'
+export * from './hooks/orientation'
 export * from './hooks/resize'
 export * from './hooks/scroll'
