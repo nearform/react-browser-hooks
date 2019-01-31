@@ -30,7 +30,7 @@ export function isFullScreenElement(doc, el) {
  * @param {object} element The element to be viewed fullscreen, defaults to documentElement
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
-export function useFullScreen(element) {
+export function useFullScreen(element, callback) {
   const docEl = document.documentElement
   const [fullScreen, setFullScreen] = useState(isFullScreenElement(document, element))
   const [lastEvent, setLastEvent] = useState(null)
@@ -162,10 +162,10 @@ export function isFullScreenSize(sizeInfo) {
  * @param {object} element The element to be viewed fullscreen, defaults to documentElement
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
-export function useFullScreenBrowser() {
+export function useFullScreenBrowser(callback) {
   // reuse the useResizeHook to determine act on screen size changes,
   // 1fps should be enough, doesn't really need to be faster for this event
-  useResize(1, handleResize) 
+  useResize(1, handleResize)
 
   const initialSizeInfo = getSizeInfo()
   const [fullScreen, setFullScreen] = useState(isFullScreenSize(initialSizeInfo))
