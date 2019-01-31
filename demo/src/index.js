@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 
 import FullScreen from './components/fullscreen'
 import Resize from './components/resize'
+import Geolocation from './components/geolocation'
+
 class Demo extends Component {
   render() {
     return (
@@ -10,6 +12,7 @@ class Demo extends Component {
         <h1>Reach Browser Hooks Examples</h1>
         <FullScreen />
         <Resize />
+        <Geolocation />
       </div>
     )
   }
