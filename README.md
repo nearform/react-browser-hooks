@@ -1,7 +1,7 @@
 # react-browser-hooks
 React Browser Hooks
 
-[![Travis][build-badge]][build]
+[![CircleCI](https://circleci.com/gh/nearform/react-browser-hooks.svg?style=svg)](https://circleci.com/gh/nearform/react-browser-hooks)
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
