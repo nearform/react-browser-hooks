@@ -7,7 +7,24 @@ const CurrentLocation = () => {
   return error ? (
     <p>There was an error: {error.message}</p>
   ) : (
-    <pre>{JSON.stringify(position, null, 2)}</pre>
+    <pre>
+      {JSON.stringify(
+        {
+          timestamp: position.timestamp,
+          coords: {
+            accuracy: position.coords.accuracy,
+            altitude: position.coords.altitude,
+            altitudeAccuracy: position.coords.altitudeAccuracy,
+            heading: position.coords.heading,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            speed: position.coords.speed
+          }
+        },
+        null,
+        2
+      )}
+    </pre>
   )
 }
 
