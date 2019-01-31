@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function usePlayPause(element) {
+export function useMediaControls(element) {
   const [paused, setPaused] = useState(isPaused())
 
   function isPaused() {

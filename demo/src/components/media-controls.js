@@ -1,21 +1,20 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react'
 
-import { usePlayPause } from "../../../src";
+import { useMediaControls } from '../../../src'
 
-export default function PlayPause() {
-  const player = useRef(null);
-  const { pause, paused, play, toggle } = usePlayPause(player);
+export default function MediaControls() {
+  const player = useRef(null)
+  const { pause, paused, play, toggle } = useMediaControls(player)
 
   return (
     <div>
-      <h2>Play/Pause Demo</h2>
+      <h2>Media Controls Demo</h2>
       <p>
         <audio
           autoPlay
           controls
           ref={player}
-          src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3"
-        >
+          src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3">
           Your browser does not support the <code>audio</code> element.
         </audio>
       </p>
@@ -26,5 +25,5 @@ export default function PlayPause() {
       </p>
       <p>The media paused: {paused.toString()}</p>
     </div>
-  );
+  )
 }
