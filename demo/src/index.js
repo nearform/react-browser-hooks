@@ -9,7 +9,7 @@ import Geolocation from './components/geolocation'
 
 const Demo = () => (
   <Fragment>
-    <h1>Reach Browser Hooks Examples</h1>
+    <h1>React Browser Hooks Examples</h1>
     <FullScreen />
     <Resize />
     <Orientation />
