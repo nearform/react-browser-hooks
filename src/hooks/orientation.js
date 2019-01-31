@@ -13,5 +13,5 @@ export function useOrientation() {
     return () => window.removeEventListener('orientationchange', handler)
   }, [])
 
-  return { angle: state.angle, orientationType: state.type }
+  return state
 }

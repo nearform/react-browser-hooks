@@ -3,7 +3,7 @@ import React from 'react'
 import { useOrientation } from '../../../src'
 
 export default function Resize() {
-  const { angle, orientationType } = useOrientation()
+  const { angle, type } = useOrientation()
 
   return (
     <div>
@@ -11,7 +11,7 @@ export default function Resize() {
       <p>
         Screen angle: {angle}&deg;
         <br />
-        Orientation type: {orientationType}
+        Orientation type: {type}
       </p>
       Try using dev tools to rotate your screen, you should see these values
       change.
