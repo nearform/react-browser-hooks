@@ -23,7 +23,6 @@ const { toggle, fullsceen } = useFullScreen()
 
 Parameters:
 - element (object): optional useRef() React hook returned object (defaults to document element)
-- callback (function): optional callback function
 
 Returns an object containing:
 - toggle (function): toggles full screen mode
@@ -34,8 +33,6 @@ Returns an object containing:
     - lastRequest (string): the request made to enter/exist fullscreen
     - lastEvent (string): the event raised
     - reason (string): the reason why, if in fullScreen mode
-
-A callback can be passed into the hook, which is called when the fullScreen property changes.
 
 See the /demo/src/components/fullscreen component for a full usage example.
 
@@ -56,16 +53,11 @@ const fsb = useFullScreenBrowser()
 <p>Full Screen: {fsb.fullScreen ? 'open' : 'closed'}</p>
 ```
 
-Parameters:
-- callback (function): optional callback function
-
 Returns an object containing:
 - fullScreen (boolean): whether in full screen mode or not
 - info (object): some information as to why we are in fullScreen mode
     - reason (string): why we are in full screen mode e.g. borderless full screen as innerWidth and innerHeight are the same size as the screen
     - sizeInfo (object): the sizeInfo object used to determine if in full screen, this is returned so that users can make further judgement as to whether in fullscreen mode or not
-
-A callback can be passed into the hook, which is called when the fullScreen property changes.
 
 See the /demo/src/components/fullscreen component for a full usage example.
 
@@ -88,14 +80,11 @@ const { width, height } = useResize(5)
 
 Parameters:
 - fps (int): optional frames per second parameter to throttle resize event (default: null, no throttling)
-- callback (function): optional callback function
 
 Returns an object containing:
 - width (int), height (int): dimensions of the screen
 - throttled (boolean): if set, throttling is enabled
 - delay (int): the actual delay in ms, based on fps parameter
-
-A callback can be passed into the hook, which is called when the browser is resized
 
 See the /demo/src/components/resize component for a full usage example.
 
@@ -118,14 +107,11 @@ const { x, y } = useMousePosition(60)
 
 Parameters:
 - fps (int): optional frames per second parameter to throttle mouse position event (default: null, no throttling)
-- callback (function): optional callback function
 
 Returns an object containing:
 - x (int), y (int): the mouse pointer position
 - throttled (boolean): if set, throttling is enabled
 - delay (int): the actual delay in ms, based on fps parameter
-
-A callback can be passed into the hook, which is called when mouse position changes
 
 See the /demo/src/components/mouse-position component for a full usage example.
 
@@ -148,12 +134,9 @@ const { top, left } = useScroll()
 
 Parameters:
 - fps (int): optional frames per second parameter to throttle mouse position event (default: null, no throttling)
-- callback (function): optional callback function
 
 Returns an object containing:
 - top (int), left (int): the current scroll position
-
-A callback can be passed into the hook, which is called when scroll position changes
 
 See the /demo/src/components/scroll component for a full usage example.
 
@@ -174,13 +157,8 @@ const status = useOnline()
 <p>Status: {status.online ? 'online' : 'offline'}<br/>
 ```
 
-Parameters:
-- callback (function): optional callback function
-
 Returns an object containing:
 - online (boolean): the current online status
 - reason (string): the reason for this status
-
-A callback can be passed into the hook, which is called when online status changes
 
 See the /demo/src/components/online component for a full usage example.

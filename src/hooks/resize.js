@@ -1,29 +1,23 @@
 import { useState, useEffect } from 'react'
-import { fpsToMs } from '../utils/fps'
+import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
 
 /**
  * Throttled resize hook
  * @param {number} fps Frames per second
- * @param {function} callback Callback function if size changes
  * @returns {object} The size object with dimensions of window innerWidth and innerHeight
  */
-export function useResize(fps, callback) {
+export function useResize(fps) {
   const [size, setSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth
   })
 
-  const ms = fpsToMs(fps)
-  let resizeTimeout
+  const raf = fps && initRaf(fps)
 
   function handleResizeThrottled() {
-    if(!fps || !ms) return handleResize()
-    if (resizeTimeout) return
+    if(!raf) return handleResize()
 
-    resizeTimeout = setTimeout(function () {
-      resizeTimeout = null
-      handleResize()
-    }, ms)
+    nextRaf(raf, handleResize)
   }
 
   function handleResize() {
@@ -31,10 +25,12 @@ export function useResize(fps, callback) {
       height: window.innerHeight,
       width: window.innerWidth
     }
+
     if (size.width !== newSize.width || size.height !== newSize.height) {
       setSize(newSize)
-      if (callback) callback(newSize) //@todo: async?
     } 
+
+    raf.ticking = false
   }
 
   
@@ -48,7 +44,7 @@ export function useResize(fps, callback) {
     }
 
     return function cleanup() {
-      if (resizeTimeout) clearTimeout(resizeTimeout)
+      cleanupRaf(raf)
       if (window.removeEventListener) {
         window.removeEventListener('resize', handleResizeThrottled)        
       }
@@ -56,11 +52,11 @@ export function useResize(fps, callback) {
         window.detachEvent('onresize', handleResizeThrottled)            
       }
     }
-  }, [fps, size])
+  }, [fps])
 
   return {
     ...size,
-    throttled: fps && ms ? 'yes' : 'no',
-    delay: fps && ms ? ms : 0
+    throttled: raf && raf.ms ? 'yes' : 'no',
+    delay: raf && raf.ms ? raf.ms : 0
   }
 }

@@ -1,30 +1,26 @@
 import { useState, useEffect } from 'react'
-import { fpsToMs } from '../utils/fps'
+import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
 
-export function useScroll(fps, callback) {
+export function useScroll(fps) {
   const [pos, setPos] = useState({
     top: window.scrollY,
     left: window.scrollX
   })
 
+  const raf = fps && initRaf(fps)
+
+  function handleScrollThrottled() {
+    if(!raf) return handleScroll()
+    nextRaf(raf, handleScroll)
+  }
+
   function handleScroll() {
     const newPos = { top: window.scrollY, left: window.scrollX }
     if(newPos.top !== pos.top || newPos.left !== pos.left) {
       setPos(newPos)
-      if (callback) callback (newPos)
     }
-  }
 
-  const ms = fpsToMs(fps)
-  let throttleTimeout
-  function handleScrollThrottled() {
-    if(!fps || !ms) return handleScroll()
-    if (throttleTimeout) return
-
-    throttleTimeout = setTimeout(function () {
-      throttleTimeout = null
-      handleScroll()
-    }, ms)
+    raf.ticking = false
   }
 
   useEffect(() => {
@@ -36,7 +32,7 @@ export function useScroll(fps, callback) {
     }
 
     return function cleanup() {
-      clearTimeout(throttleTimeout)
+      cleanupRaf(raf)
       if (window.removeEventListener) {
         window.removeEventListener('scroll', handleScrollThrottled)        
       }
@@ -46,5 +42,9 @@ export function useScroll(fps, callback) {
     }
   }, [fps])
 
-  return pos
+  return {
+    ...pos,
+    throttled: raf && raf.ms ? 'yes' : 'no',
+    delay: raf && raf.ms ? raf.ms : 0
+  }
 }

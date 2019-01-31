@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 //@todo: perhaps polling approach for older browsers as an option 
 //e.g. favicon polling
-export function useOnline(callback) {
+export function useOnline() {
   const initialState = window.navigator && window.navigator.onLine
   const [online, setOnline] = useState(initialState)
   const [reason, setReason] = useState('initial status')
@@ -11,7 +11,6 @@ export function useOnline(callback) {
     if(!online) {
       setOnline(true)
       setReason('online event')
-      if (callback) callback(true)
     }
   }
 
@@ -19,7 +18,6 @@ export function useOnline(callback) {
     if(online) {
       setOnline(false)
       setReason('offline event')
-      if (callback) callback(false)
     }
   }
 
