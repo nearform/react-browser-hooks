@@ -10,13 +10,13 @@ export default function MediaControls() {
     <div>
       <h2>Media Controls Demo</h2>
       <p>
-        <audio
+        <video
           autoPlay
-          controls
           ref={player}
-          src="https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3">
-          Your browser does not support the <code>audio</code> element.
-        </audio>
+          src="https://interactive-examples.mdn.mozilla.net/media/examples/flower.webm"
+          width="250">
+          Your browser does not support the <code>video</code> element.
+        </video>
       </p>
       <p>
         <button onClick={play}>Play</button>
