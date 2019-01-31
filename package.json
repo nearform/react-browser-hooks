@@ -46,12 +46,23 @@
     "react-dom": "^16.8.0-alpha.1",
     "testcafe": "^0.23.3"
   },
-  "author": "nearForm Ltd.",
+  "author": "NearForm",
   "homepage": "https://github.com/nearform/react-browser-hooks",
   "license": "Apache-2.0",
   "repository": "https://github.com/nearform/react-browser-hooks",
   "keywords": [
-    "react, hooks, browser, events, listeners, fullscreen, resize, scroll, mouse, geolocation"
+    "react",
+    "hooks",
+    "browser",
+    "events",
+    "listeners",
+    "fullscreen",
+    "resize",
+    "scroll",
+    "mouse",
+    "web api",
+    "orientation",
+    "geolocation"
   ],
   "dependencies": {}
 }
