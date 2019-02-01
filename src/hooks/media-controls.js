@@ -8,12 +8,12 @@ export function useMediaControls(element) {
   const [volume, _setVolume] = useState(getAttribute('volume', 1))
 
   function isPaused() {
-    if (!element || !element.current) return true
+    if (!element || !element.current) return false
     return element.current.paused || element.current.ended
   }
 
   function getAttribute(attribute, defaultValue = false) {
-    if (!element || !element.current) return defaultValue
+    if (!element || !element.current) return
     return element.current[attribute]
   }
 

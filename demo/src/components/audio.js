@@ -40,8 +40,10 @@ export default function Audio() {
         </button>
       </p>
       <p>The audio is paused: {paused.toString()}</p>
-      <p>The audio is volume: {volume.toString()}</p>
-      <p>The audio is muted: {muted.toString()}</p>
+      <p>
+        The audio is volume: {volume !== undefined ? volume.toString() : ''}
+      </p>
+      <p>The audio is muted: {muted !== undefined ? muted.toString() : ''}</p>
     </div>
   )
 }
