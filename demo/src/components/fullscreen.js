@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 
 import { useFullScreen, useFullScreenBrowser } from '../../../src'
 
-export default function FullScreen () {
+export default function FullScreen() {
   const fs = useFullScreen()
   const fsb = useFullScreenBrowser()
   const el = useRef(null)
@@ -17,19 +17,21 @@ export default function FullScreen () {
       </p>
       <div>
         <button onClick={fs.toggle}>{'Toggle'}</button>
-        <button onClick={fs.open} disabled={fs.fullScreen}>{'Open'}</button>
-        <button onClick={fs.close} disabled={!fs.fullScreen}>{'Close'}</button>
+        <button onClick={fs.open} disabled={fs.fullScreen}>
+          {'Open'}
+        </button>
+        <button onClick={fs.close} disabled={!fs.fullScreen}>
+          {'Close'}
+        </button>
       </div>
-      <div ref={el} style={{backgroundColor: '#c0c0c0'}}>
-        <p>{fsEl.fullScreen && 'Full Screen on Element Only' }</p>
+      <div ref={el} style={{ backgroundColor: '#c0c0c0' }}>
+        <p>{fsEl.fullScreen && 'Full Screen on Element Only'}</p>
         <button onClick={fsEl.toggle}>{'Toggle (Element)'}</button>
       </div>
       <h3>Fullscreen</h3>
-      <pre>{JSON.stringify(fs, null, 2)}
-      </pre>
+      <pre>{JSON.stringify(fs, null, 2)}</pre>
       <h3>Fullscreen Browser</h3>
-      <pre>{JSON.stringify(fsb, null, 2)}
-      </pre>
+      <pre>{JSON.stringify(fsb, null, 2)}</pre>
     </div>
   )
 }

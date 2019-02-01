@@ -30,7 +30,7 @@ export function isFullScreenElement(doc, el) {
  * @param {object} element The element to be viewed fullscreen, defaults to documentElement
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
-export function useFullScreen(element, callback) {
+export function useFullScreen(element) {
   const docEl = document.documentElement
   const [fullScreen, setFullScreen] = useState(isFullScreenElement(document, element))
   const [lastEvent, setLastEvent] = useState(null)
@@ -155,7 +155,7 @@ export function isFullScreenSize(sizeInfo) {
 
 /**
  * Fullscreen hook baed on browser invoked fullscreen e.g. F11
- * Browsers have inbuilt fullscreen function, which is different than fullscreen of an 
+ * Browsers have inbuilt fullscreen function, which is different than fullscreen of an
  * element. Typically this leaves the browser in a fullscreen mode that retains the address bar.
  * This cannot be invoked via javascript, but we can check and make educated guess as to whether in
  * fullscreen mode, or at least help users of this hook to guess within their level of acceptance

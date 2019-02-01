@@ -1,9 +1,10 @@
 # react-browser-hooks
 React Browser Hooks
 
-[![Travis][build-badge]][build]
+[![CircleCI](https://circleci.com/gh/nearform/react-browser-hooks.svg?style=svg&circle-token=6519ab8ff84d4bf291788588738f2b2000c8fc3a)](https://circleci.com/gh/nearform/react-browser-hooks)
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8855d56c-7b73-4070-92e8-e7c1b2e80d7e/deploy-status)](https://app.netlify.com/sites/react-browser-hooks/deploys)
 
 A simple utility library that provides custom hooks for some common browser events.
 
