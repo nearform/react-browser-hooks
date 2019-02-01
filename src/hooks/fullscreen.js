@@ -5,25 +5,33 @@ import { useResize } from './resize'
 // don't set any state in here as called on init too
 export function isFullScreenElement(doc, el) {
   if (el && el.current) {
-    if (doc.fullscreenElement === el.current) return { open: true, reason: 'fullscreenElement set to element'}
-    if (doc.mozFullScreenElement === el.current) return { open: true, reason: 'mozFullScreenElement set to element'}
-    if (doc.webkitFullscreenElement === el.current) return { open: true, reason: 'webkitFullscreenElement set to element'}
-    if (doc.msFullscreenElement === el.current) return { open: true, reason: 'msFullscreenElement set to element'}
+    if (doc.fullscreenElement === el.current)
+      return { open: true, reason: 'fullscreenElement set to element' }
+    if (doc.mozFullScreenElement === el.current)
+      return { open: true, reason: 'mozFullScreenElement set to element' }
+    if (doc.webkitFullscreenElement === el.current)
+      return { open: true, reason: 'webkitFullscreenElement set to element' }
+    if (doc.msFullscreenElement === el.current)
+      return { open: true, reason: 'msFullscreenElement set to element' }
   } else {
-    if (doc.fullscreenElement) return { open: true, reason: 'fullscreenElement set'}
-    if (doc.mozFullScreenElement) return { open: true, reason: 'mozFullScreenElement set'}
-    if (doc.webkitFullscreenElement) return { open: true, reason: 'webkitFullscreenElement set'}
-    if (doc.msFullscreenElement) return { open: true, reason: 'msFullscreenElement set'}
+    if (doc.fullscreenElement)
+      return { open: true, reason: 'fullscreenElement set' }
+    if (doc.mozFullScreenElement)
+      return { open: true, reason: 'mozFullScreenElement set' }
+    if (doc.webkitFullscreenElement)
+      return { open: true, reason: 'webkitFullscreenElement set' }
+    if (doc.msFullscreenElement)
+      return { open: true, reason: 'msFullscreenElement set' }
 
-    if (doc.fullscreen) return { open: true, reason: 'fullscreen true'}
-    if (doc.mozFullScreen) return { open: true, reason: 'mozFullScreen true'}
-    if (doc.webkitIsFullScreen) return { open: true, reason: 'webkitIsFullScreen true'}
-    if (doc.fullScreenMode) return { open: true, reason: 'fullScreenMode true'}
+    if (doc.fullscreen) return { open: true, reason: 'fullscreen true' }
+    if (doc.mozFullScreen) return { open: true, reason: 'mozFullScreen true' }
+    if (doc.webkitIsFullScreen)
+      return { open: true, reason: 'webkitIsFullScreen true' }
+    if (doc.fullScreenMode) return { open: true, reason: 'fullScreenMode true' }
   }
 
   return { open: false }
 }
-
 
 /**
  * Fullscreen hook based on user invoked request/exitFullScreen and associated triggered events
@@ -32,7 +40,9 @@ export function isFullScreenElement(doc, el) {
  */
 export function useFullScreen(element) {
   const docEl = document.documentElement
-  const [fullScreen, setFullScreen] = useState(isFullScreenElement(document, element))
+  const [fullScreen, setFullScreen] = useState(
+    isFullScreenElement(document, element)
+  )
   const [lastEvent, setLastEvent] = useState(null)
   const [lastRequest, setLastRequest] = useState(null)
 
@@ -98,26 +108,27 @@ export function useFullScreen(element) {
     setLastEvent(eventName)
   }
 
-  useEffect(
-    () => {
-      // add fullscreen change listeners for various browsers
-      document.addEventListener('webkitfullscreenchange', handleWebkitChange, false)
-      document.addEventListener('mozfullscreenchange', handleMozChange, false)
-      document.addEventListener('msfullscreenchange', handleMsChange1, false)
-      document.addEventListener('MSFullscreenChange', handleMsChange2, false) //IE11
-      document.addEventListener('fullscreenchange', handleChange, false)
+  useEffect(() => {
+    // add fullscreen change listeners for various browsers
+    document.addEventListener(
+      'webkitfullscreenchange',
+      handleWebkitChange,
+      false
+    )
+    document.addEventListener('mozfullscreenchange', handleMozChange, false)
+    document.addEventListener('msfullscreenchange', handleMsChange1, false)
+    document.addEventListener('MSFullscreenChange', handleMsChange2, false) //IE11
+    document.addEventListener('fullscreenchange', handleChange, false)
 
-      return () => {
-        // tidy up
-        document.removeEventListener('webkitfullscreenchange', handleWebkitChange)
-        document.removeEventListener('mozfullscreenchange', handleMozChange)
-        document.removeEventListener('msfullscreenchange', handleMsChange1)
-        document.removeEventListener('MSFullscreenChange', handleMsChange2)
-        document.removeEventListener('fullscreenchange', handleChange)
-      }
-    },
-    []
-  )
+    return () => {
+      // tidy up
+      document.removeEventListener('webkitfullscreenchange', handleWebkitChange)
+      document.removeEventListener('mozfullscreenchange', handleMozChange)
+      document.removeEventListener('msfullscreenchange', handleMsChange1)
+      document.removeEventListener('MSFullscreenChange', handleMsChange2)
+      document.removeEventListener('fullscreenchange', handleChange)
+    }
+  }, [])
 
   return {
     fullScreen: fullScreen.open,
@@ -133,7 +144,7 @@ export function useFullScreen(element) {
 }
 
 export function getSizeInfo() {
-  return { 
+  return {
     screenTop: window.screenTop,
     screenY: window.screenY,
     screenWidth: window.screen.width,
@@ -144,10 +155,13 @@ export function getSizeInfo() {
 }
 
 export function isFullScreenSize(sizeInfo) {
-  if (sizeInfo.screenWidth === sizeInfo.innerWidth && sizeInfo.screenHeight === sizeInfo.innerHeight) {
-    return { open: true, reason: 'borderless fullscreen'}
+  if (
+    sizeInfo.screenWidth === sizeInfo.innerWidth &&
+    sizeInfo.screenHeight === sizeInfo.innerHeight
+  ) {
+    return { open: true, reason: 'borderless fullscreen' }
   } else if (!sizeInfo.screenTop && !sizeInfo.screenY) {
-    return { open: true, reason: 'screenTop and screenY are falsy'}
+    return { open: true, reason: 'screenTop and screenY are falsy' }
   }
 
   return { open: false }
@@ -168,7 +182,9 @@ export function useFullScreenBrowser(callback) {
   useResize(1, handleResize)
 
   const initialSizeInfo = getSizeInfo()
-  const [fullScreen, setFullScreen] = useState(isFullScreenSize(initialSizeInfo))
+  const [fullScreen, setFullScreen] = useState(
+    isFullScreenSize(initialSizeInfo)
+  )
   const [sizeInfo, setSizeInfo] = useState(initialSizeInfo)
 
   function handleResize(newSize) {

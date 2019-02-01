@@ -10,13 +10,13 @@ export function useScroll(fps) {
   const raf = fps && initRaf(fps)
 
   function handleScrollThrottled() {
-    if(!raf) return handleScroll()
+    if (!raf) return handleScroll()
     nextRaf(raf, handleScroll)
   }
 
   function handleScroll() {
     const newPos = { top: window.scrollY, left: window.scrollX }
-    if(newPos.top !== pos.top || newPos.left !== pos.left) {
+    if (newPos.top !== pos.top || newPos.left !== pos.left) {
       setPos(newPos)
     }
 
@@ -25,19 +25,18 @@ export function useScroll(fps) {
 
   useEffect(() => {
     if (window.addEventListener) {
-      window.addEventListener('scroll', handleScrollThrottled, false)           
-    }
-    else if (window.attachEvent) { //IE 8
-      window.attachEvent('onscroll', handleScrollThrottled)            
+      window.addEventListener('scroll', handleScrollThrottled, false)
+    } else if (window.attachEvent) {
+      //IE 8
+      window.attachEvent('onscroll', handleScrollThrottled)
     }
 
     return function cleanup() {
       cleanupRaf(raf)
       if (window.removeEventListener) {
-        window.removeEventListener('scroll', handleScrollThrottled)        
-      }
-      else if (window.detachEvent) {
-        window.detachEvent('onscroll', handleScrollThrottled)            
+        window.removeEventListener('scroll', handleScrollThrottled)
+      } else if (window.detachEvent) {
+        window.detachEvent('onscroll', handleScrollThrottled)
       }
     }
   }, [fps])

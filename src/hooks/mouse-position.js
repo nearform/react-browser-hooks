@@ -5,17 +5,17 @@ export function useMousePosition(fps) {
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const raf = fps && initRaf(fps)
 
-  let newPos  // holds the latest position 
+  let newPos // holds the latest position
   function handleMouseMoveThrottled(e) {
     //this is being set contantly and will be last position
     newPos = { x: e.clientX, y: e.clientY }
 
-    if(!raf) return handleMouseMove()
+    if (!raf) return handleMouseMove()
     nextRaf(raf, handleMouseMove)
   }
 
-  function handleMouseMove () {
-    if(position.x !== newPos.x || position.y !== newPos.y) {
+  function handleMouseMove() {
+    if (position.x !== newPos.x || position.y !== newPos.y) {
       setPosition(newPos)
     }
 
@@ -23,22 +23,21 @@ export function useMousePosition(fps) {
     raf.ticking = false
   }
 
-  useEffect(() => {  
+  useEffect(() => {
     if (window.addEventListener) {
-      window.addEventListener('mousemove', handleMouseMoveThrottled, false)           
+      window.addEventListener('mousemove', handleMouseMoveThrottled, false)
+    } else if (window.attachEvent) {
+      //IE 8
+      window.attachEvent('onmousemove', handleMouseMoveThrottled)
     }
-    else if (window.attachEvent) { //IE 8
-      window.attachEvent('onmousemove', handleMouseMoveThrottled)            
-    }
-    
+
     return function cleanUp() {
-      cleanupRaf(raf)   
+      cleanupRaf(raf)
 
       if (window.removeEventListener) {
-        window.removeEventListener('mousemove', handleMouseMoveThrottled)        
-      }
-      else if (window.detachEvent) {
-        window.detachEvent('onmousemove', handleMouseMoveThrottled)            
+        window.removeEventListener('mousemove', handleMouseMoveThrottled)
+      } else if (window.detachEvent) {
+        window.detachEvent('onmousemove', handleMouseMoveThrottled)
       }
     }
   }, [fps]) // only redo listeners if fps changes

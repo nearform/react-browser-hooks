@@ -15,7 +15,7 @@ export function useResize(fps, onResize) {
   const raf = fps && initRaf(fps)
 
   function handleResizeThrottled() {
-    if(!raf) return handleResize()
+    if (!raf) return handleResize()
 
     nextRaf(raf, handleResize)
   }
@@ -28,29 +28,27 @@ export function useResize(fps, onResize) {
 
     if (size.width !== newSize.width || size.height !== newSize.height) {
       setSize(newSize)
-      if(onResize) onResize()
-    } 
+      if (onResize) onResize()
+    }
 
     raf.ticking = false
   }
 
-  
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     if (window.addEventListener) {
-      window.addEventListener('resize', handleResizeThrottled, false)           
-    }
-    else if (window.attachEvent) { //IE 8
-      window.attachEvent('onresize', handleResizeThrottled)            
+      window.addEventListener('resize', handleResizeThrottled, false)
+    } else if (window.attachEvent) {
+      //IE 8
+      window.attachEvent('onresize', handleResizeThrottled)
     }
 
     return function cleanup() {
       cleanupRaf(raf)
       if (window.removeEventListener) {
-        window.removeEventListener('resize', handleResizeThrottled)        
-      }
-      else if (window.detachEvent) {
-        window.detachEvent('onresize', handleResizeThrottled)            
+        window.removeEventListener('resize', handleResizeThrottled)
+      } else if (window.detachEvent) {
+        window.detachEvent('onresize', handleResizeThrottled)
       }
     }
   }, [fps])

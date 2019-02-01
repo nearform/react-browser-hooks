@@ -20,7 +20,7 @@ const Demo = () => (
     <Orientation />
     <Geolocation />
     <PageVisibility />
-    <Online/>
+    <Online />
   </Fragment>
 )
 
