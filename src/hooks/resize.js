@@ -6,7 +6,7 @@ import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
  * @param {number} fps Frames per second
  * @returns {object} The size object with dimensions of window innerWidth and innerHeight
  */
-export function useResize(fps, onResize) {
+export function useResize(fps) {
   const [size, setSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth
@@ -28,7 +28,6 @@ export function useResize(fps, onResize) {
 
     if (size.width !== newSize.width || size.height !== newSize.height) {
       setSize(newSize)
-      if (onResize) onResize()
     }
 
     raf.ticking = false

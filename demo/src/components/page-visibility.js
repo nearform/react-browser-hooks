@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import usePageVisibility from '../../../src/hooks/page-visibility'
+import { usePageVisibility } from '../../../src'
 
-const PageVisibility = () => {
+export default function PageVisibility() {
   const visibility = usePageVisibility()
+
   useEffect(() => {
     document.title = visibility ? 'react-browser-hooks' : 'Hey! Come back!'
   }, [visibility])
@@ -15,5 +16,3 @@ const PageVisibility = () => {
     </div>
   )
 }
-
-export default PageVisibility

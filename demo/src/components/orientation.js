@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useOrientation } from '../../../src'
 
-export default function Resize() {
+export default function Orientation() {
   const { angle, type } = useOrientation()
 
   return (

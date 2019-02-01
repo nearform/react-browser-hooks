@@ -179,7 +179,7 @@ export function isFullScreenSize(sizeInfo) {
 export function useFullScreenBrowser(callback) {
   // reuse the useResizeHook to determine act on screen size changes,
   // 1fps should be enough, doesn't really need to be faster for this event
-  useResize(1, handleResize)
+  const size = useResize(1)
 
   const initialSizeInfo = getSizeInfo()
   const [fullScreen, setFullScreen] = useState(
@@ -187,13 +187,13 @@ export function useFullScreenBrowser(callback) {
   )
   const [sizeInfo, setSizeInfo] = useState(initialSizeInfo)
 
-  function handleResize(newSize) {
-    //something has changed so let's see if in fullscreen mode
+  //only if width or height changes do we update
+  useEffect(() => {
     const sizeInfo = getSizeInfo()
     const result = isFullScreenSize(sizeInfo)
     setFullScreen(result)
     setSizeInfo(sizeInfo)
-  }
+  }, [size.width, size.height])
 
   return {
     fullScreen: fullScreen.open,
