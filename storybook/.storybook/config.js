@@ -9,6 +9,7 @@ function loadStories() {
   require('../stories/resize')
   require('../stories/scroll')
   require('../stories/geolocation')
+  require('../stories/orientation')
 }
 
 addDecorator(

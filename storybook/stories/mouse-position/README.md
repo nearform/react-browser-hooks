@@ -12,7 +12,7 @@ Example of usage:
 
 ```javascript
 const { x, y } = useMousePosition(60)
-<p>X: {x}px, Y: {y}px<br/>
+<p>X: {x}px, Y: {y}px</p>
 ```
 
 Parameters:

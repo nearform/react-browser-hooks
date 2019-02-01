@@ -12,7 +12,7 @@ Example of usage:
 
 ```javascript
 const { width, height } = useResize(5)
-<p>Width: {width}px, Height: {height}px<br/>
+<p>Width: {width}px, Height: {height}px</p>
 ```
 
 Parameters:

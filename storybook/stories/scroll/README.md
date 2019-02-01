@@ -12,7 +12,7 @@ Example of usage:
 
 ```javascript
 const { top, left } = useScroll()
-<p>Top: {top}px, Left: {left}px<br/>
+<p>Top: {top}px, Left: {left}px</p>
 ```
 
 Parameters:
