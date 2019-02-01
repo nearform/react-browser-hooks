@@ -51,7 +51,7 @@
   "license": "Apache-2.0",
   "repository": "https://github.com/nearform/react-browser-hooks",
   "keywords": [
-    "react, hooks, browser, events, listeners, fullscreen, resize, scroll, mouse"
+    "react, hooks, browser, events, listeners, fullscreen, resize, scroll, mouse, geolocation"
   ],
   "dependencies": {}
 }
