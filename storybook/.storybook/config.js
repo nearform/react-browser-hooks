@@ -2,14 +2,10 @@ import React from 'react'
 import { configure, addDecorator } from '@storybook/react'
 import { withOptions } from '@storybook/addon-options'
 
+const req = require.context('../stories', true, /\.stories\.js$/)
+
 function loadStories() {
-  require('../stories/introduction')
-  require('../stories/fullscreen')
-  require('../stories/mouse-position')
-  require('../stories/resize')
-  require('../stories/scroll')
-  require('../stories/geolocation')
-  require('../stories/orientation')
+  req.keys().forEach((filename) => req(filename))
 }
 
 addDecorator(
