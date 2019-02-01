@@ -20,5 +20,3 @@ Parameters:
 
 Returns an object containing:
 - top (int), left (int): the current scroll position
-
-See the /demo/src/components/scroll component for a full usage example.

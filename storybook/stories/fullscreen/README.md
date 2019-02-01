@@ -52,5 +52,3 @@ Returns an object containing:
 - info (object): some information as to why we are in fullScreen mode
     - reason (string): why we are in full screen mode e.g. borderless full screen as innerWidth and innerHeight are the same size as the screen
     - sizeInfo (object): the sizeInfo object used to determine if in full screen, this is returned so that users can make further judgement as to whether in fullscreen mode or not
-
-See the /demo/src/components/fullscreen component for a full usage example.

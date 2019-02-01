@@ -8,6 +8,7 @@ function loadStories() {
   require('../stories/mouse-position')
   require('../stories/resize')
   require('../stories/scroll')
+  require('../stories/geolocation')
 }
 
 addDecorator(

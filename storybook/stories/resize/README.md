@@ -22,5 +22,3 @@ Returns an object containing:
 - width (int), height (int): dimensions of the screen
 - throttled (boolean): if set, throttling is enabled
 - delay (int): the actual delay in ms, based on fps parameter
-
-See the /demo/src/components/resize component for a full usage example.

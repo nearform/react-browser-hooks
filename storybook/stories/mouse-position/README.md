@@ -22,5 +22,3 @@ Returns an object containing:
 - x (int), y (int): the mouse pointer position
 - throttled (boolean): if set, throttling is enabled
 - delay (int): the actual delay in ms, based on fps parameter
-
-See the /demo/src/components/mouse-position component for a full usage example.
