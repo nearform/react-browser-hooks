@@ -1,38 +1,31 @@
 import { useState, useEffect } from 'react'
 
 export function useMediaControls(element) {
-  const [muted, setMuted] = useState(getMuted())
-  const [oldVolume, setOldVolume] = useState(getVolume()) // useful for toggling mute
+  const [currentTime, setCurrentTime] = useState(getAttribute('currentTime', 0))
+  const [muted, setMuted] = useState(getAttribute('muted'))
+  const [oldVolume, setOldVolume] = useState(getAttribute('volume', 1)) // useful for toggling mute
   const [paused, setPaused] = useState(isPaused())
-  const [volume, _setVolume] = useState(getVolume())
+  const [volume, _setVolume] = useState(getAttribute('volume', 1))
 
   function isPaused() {
     if (!element || !element.current) return true
     return element.current.paused || element.current.ended
   }
 
-  function getVolume() {
-    if (!element || !element.current) return 1
-    return element.current.volume
-  }
-
-  function getMuted() {
-    if (!element || !element.current) return false
-    return element.current.muted
+  function getAttribute(attribute, defaultValue = false) {
+    if (!element || !element.current) return defaultValue
+    return element.current[attribute]
   }
 
   function pause() {
-    if (!element || !element.current) return
     element.current.pause()
   }
 
   function play() {
-    if (!element || !element.current) return
     element.current.play()
   }
 
   function setVolume(value) {
-    if (!element || !element.current) return
     setOldVolume(element.current.volume)
     element.current.volume = value
 
@@ -46,13 +39,25 @@ export function useMediaControls(element) {
   }
 
   function mute() {
-    if (!element || !element.current) return
     setVolume(0)
   }
 
   function unmute() {
-    if (!element || !element.current) return
     setVolume(oldVolume)
+  }
+
+  function seek(value) {
+    element.current.currentTime = value
+  }
+
+  function stop() {
+    pause()
+    seek(0)
+  }
+
+  function restart() {
+    play()
+    seek(0)
   }
 
   useEffect(() => {
@@ -62,8 +67,12 @@ export function useMediaControls(element) {
     element.current.addEventListener('pause', playPauseHandler) // fired by pause method
     element.current.addEventListener('waiting', playPauseHandler) // fired by pause due to lack of data
 
-    const volumeHandler = () => _setVolume(getVolume())
+    const volumeHandler = () => _setVolume(getAttribute('volume'))
     element.current.addEventListener('volumechange', volumeHandler) // fired by a change of volume
+
+    const seekHandler = () => setCurrentTime(getAttribute('currentTime'))
+    element.current.addEventListener('seeked', seekHandler) // fired on seek completed
+    element.current.addEventListener('timeupdate', seekHandler) // fired on currentTime update
 
     return () => {
       element.current.removeEventListener('play', playPauseHandler)
@@ -72,18 +81,24 @@ export function useMediaControls(element) {
       element.current.removeEventListener('waiting', playPauseHandler)
 
       element.current.removeEventListener('volumechange', volumeHandler)
+
+      element.current.removeEventListener('seeked', seekHandler)
+      element.current.removeEventListener('timeupdate', seekHandler)
     }
   }, [])
 
   return {
+    currentTime,
     mute,
     muted,
     unmute,
     pause,
     paused,
     play,
+    restart,
+    seek,
     setVolume,
-    toggle: paused ? play : pause,
+    stop,
     volume
   }
 }

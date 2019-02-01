@@ -4,7 +4,9 @@ import { useMediaControls } from '../../../src'
 
 export default function Audio() {
   const player = useRef(null)
-  const { pause, paused, play } = useMediaControls(player)
+  const { currentTime, paused, play, restart, seek, stop } = useMediaControls(
+    player
+  )
 
   return (
     <div>
@@ -19,10 +21,17 @@ export default function Audio() {
         </video>
       </p>
       <p>
-        <button onClick={play}>Play</button>
-        <button onClick={pause}>Pause</button>
+        <button onClick={paused ? play : stop}>Play/Stop</button>
+        <button onClick={restart}>Restart</button>
+        <button onClick={() => seek(Math.round((currentTime - 2) * 10) / 10)}>
+          Seek back
+        </button>
+        <button onClick={() => seek(Math.round((currentTime + 2) * 10) / 10)}>
+          Seek forward
+        </button>
       </p>
-      <p>The video paused: {paused.toString()}</p>
+      <p>The video is paused: {paused.toString()}</p>
+      <p>The video currentTime: {currentTime.toString()}</p>
     </div>
   )
 }
