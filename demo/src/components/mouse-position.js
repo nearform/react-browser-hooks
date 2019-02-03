@@ -17,7 +17,7 @@ export default function MousePosition() {
       <p>
         X: {pos.x}px, Y: {pos.y}px
         <br />
-        Throttled: {pos.throttled}, Delay: {pos.delay}ms
+        Throttled: {pos.throttled ? 'yes' : 'no'}
       </p>
       FPS: <input value={fps} onChange={handleChange} />
       <div
