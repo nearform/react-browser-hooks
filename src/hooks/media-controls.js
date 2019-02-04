@@ -22,7 +22,7 @@ export function useMediaControls(element) {
   }
 
   function play() {
-    element.current.play()
+    return element.current.play()
   }
 
   function setVolume(value) {
@@ -56,8 +56,8 @@ export function useMediaControls(element) {
   }
 
   function restart() {
-    play()
     seek(0)
+    return play()
   }
 
   useEffect(() => {
