@@ -1,6 +1,6 @@
 ## useOrientation Hook
 
-The useScroll hook gives you device orientation.  
+The useOrientation hook gives you device orientation.  
 
 Import as follows:
 

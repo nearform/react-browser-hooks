@@ -42,8 +42,8 @@ Parameters:
 - options (object): see https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions for more info
 
 Returns an array containing:
-- position(object)
-  - cords(object):
+- position(object): https://developer.mozilla.org/en-US/docs/Web/API/Position
+  - coords(object): https://developer.mozilla.org/en-US/docs/Web/API/Coordinates
     - accuracy(double): the accuracy of the latitude and longitude properties, expressed in meters,
     - altitude(double): the position's altitude in meters, relative to sea level.,
     - altitudeAccuracy(double): the accuracy of the altitude expressed in meters,
