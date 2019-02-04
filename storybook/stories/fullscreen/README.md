@@ -16,7 +16,7 @@ const { toggle, fullsceen } = useFullScreen()
 ```
 
 Parameters:
-- element (object): optional useRef() React hook returned object (defaults to document element)
+- optional object: set element property with an element referenced using useRef() hook, defaults to document element
 
 Returns an object containing:
 - toggle (function): toggles full screen mode
@@ -46,6 +46,8 @@ Example of usage:
 const fsb = useFullScreenBrowser()
 <p>Full Screen: {fsb.fullScreen ? 'open' : 'closed'}</p>
 ```
+
+Parameters: none
 
 Returns an object containing:
 - fullScreen (boolean): whether in full screen mode or not
