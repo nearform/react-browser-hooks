@@ -38,17 +38,18 @@ export function isFullScreenElement(doc, el) {
  * @param {object} element The element to be viewed fullscreen, defaults to documentElement
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
-export function useFullScreen(element) {
+export function useFullScreen(options) {
   const docEl = document.documentElement
+  const fsEl = options && options.element
   const [fullScreen, setFullScreen] = useState(
-    isFullScreenElement(document, element)
+    isFullScreenElement(document, fsEl)
   )
   const [lastEvent, setLastEvent] = useState(null)
   const [lastRequest, setLastRequest] = useState(null)
 
   // access various open fullscreen methods
   function openFullScreen() {
-    const el = (element && element.current) || docEl
+    const el = (fsEl && fsEl.current) || docEl
     if (el.requestFullscreen) {
       setLastRequest('requestFullScreen')
       el.requestFullscreen()
@@ -103,7 +104,7 @@ export function useFullScreen(element) {
 
   // various handlers call this so we have the source of event
   function setState(eventName) {
-    const newState = isFullScreenElement(document, element)
+    const newState = isFullScreenElement(document, fsEl)
     setFullScreen(newState)
     setLastEvent(eventName)
   }
@@ -176,7 +177,7 @@ export function isFullScreenSize(sizeInfo) {
  * @param {object} element The element to be viewed fullscreen, defaults to documentElement
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
-export function useFullScreenBrowser(callback) {
+export function useFullScreenBrowser() {
   // reuse the useResizeHook to determine act on screen size changes,
   // 1fps should be enough, doesn't really need to be faster for this event
   const size = useResize(1)

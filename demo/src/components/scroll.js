@@ -4,7 +4,7 @@ import { useScroll } from '../../../src'
 
 export default function Scroll() {
   const [fps, setFps] = useState(3)
-  const scroll = useScroll(fps)
+  const scroll = useScroll({ fps })
 
   function handleChange(e) {
     setFps(e.target.value)

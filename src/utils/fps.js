@@ -68,7 +68,7 @@ export function nextRaf(rafData, handler) {
 }
 
 export function cleanupRaf(rafData) {
-  if (caf && rafData.id) caf(rafData.id)
+  if (caf && rafData && rafData.id) caf(rafData.id)
   if (rafData.lastFrameTimoutId) clearTimeout(rafData.lastFrameTimoutId)
   if (rafData.fallBackTimeoutId) clearTimeout(rafData.fallBackTimeoutId)
 }

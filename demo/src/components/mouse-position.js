@@ -4,7 +4,7 @@ import { useMousePosition } from '../../../src'
 
 export default function MousePosition() {
   const [fps, setFps] = useState(3)
-  const pos = useMousePosition(fps)
+  const pos = useMousePosition({ fps })
 
   function handleChange(e) {
     setFps(e.target.value)

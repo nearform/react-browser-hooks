@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { useFps } from '../../../src'
+import { useRaf } from '../../../src'
 
-export default function Fps() {
+export default function Raf() {
   const [frameRate, setFrameRate] = useState(60)
-  const { frame, second, stopped, tick, actual } = useFps(frameRate)
+  const { frame, second, stopped, tick, actual } = useRaf({ fps: frameRate })
 
   function handleChange(e) {
     setFrameRate(e.target.value)
@@ -11,8 +11,9 @@ export default function Fps() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <h2>FPS Demo</h2>
-      Set Frame Rate: <input value={frameRate} onChange={handleChange} />
+      <h2>Raf Demo</h2>
+      Set Frame Rate (empty means MAX):{' '}
+      <input value={frameRate} onChange={handleChange} />.
       <br />
       Second: {second}, Frame: {frame}, Stopped: {stopped ? 'true' : 'false'},
       Tick: {tick}, Actual Fps: {actual}

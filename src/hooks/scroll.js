@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
 
-export function useScroll(fps) {
+export function useScroll(options) {
   const [pos, setPos] = useState({
     top: window.scrollY,
     left: window.scrollX
   })
 
-  const raf = fps && initRaf(fps)
+  const raf = options && options.fps ? initRaf(options.fps) : null
 
   function handleScrollThrottled() {
     if (!raf) return handleScroll()
@@ -20,7 +20,7 @@ export function useScroll(fps) {
       setPos(newPos)
     }
 
-    raf.ticking = false
+    if (raf) raf.ticking = false
   }
 
   useEffect(() => {
@@ -32,14 +32,14 @@ export function useScroll(fps) {
     }
 
     return function cleanup() {
-      cleanupRaf(raf)
+      if (raf) cleanupRaf(raf)
       if (window.removeEventListener) {
         window.removeEventListener('scroll', handleScrollThrottled)
       } else if (window.detachEvent) {
         window.detachEvent('onscroll', handleScrollThrottled)
       }
     }
-  }, [fps])
+  }, [options])
 
   return {
     ...pos,

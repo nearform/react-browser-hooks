@@ -9,12 +9,12 @@ import Online from './components/online'
 import Scroll from './components/scroll'
 import Orientation from './components/orientation'
 import Geolocation from './components/geolocation'
-import Fps from './components/fps'
+import Raf from './components/raf'
 
 const Demo = () => (
   <Fragment>
     <h1>React Browser Hooks Examples</h1>
-    <Fps />
+    <Raf />
     <FullScreen />
     <Resize />
     <MousePosition />

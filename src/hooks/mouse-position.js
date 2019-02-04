@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
 
-export function useMousePosition(fps) {
+export function useMousePosition(options) {
   const [position, setPosition] = useState({ x: 0, y: 0 })
-  const raf = fps && initRaf(fps)
+  const raf = options && options.fps ? initRaf(options.fps) : null
 
   let newPos // holds the latest position
   function handleMouseMoveThrottled(e) {
@@ -20,7 +20,7 @@ export function useMousePosition(fps) {
     }
 
     // only used for rAF request
-    raf.ticking = false
+    if (raf) raf.ticking = false
   }
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function useMousePosition(fps) {
     }
 
     return function cleanUp() {
-      cleanupRaf(raf)
+      if (raf) cleanupRaf(raf)
 
       if (window.removeEventListener) {
         window.removeEventListener('mousemove', handleMouseMoveThrottled)
@@ -40,7 +40,7 @@ export function useMousePosition(fps) {
         window.detachEvent('onmousemove', handleMouseMoveThrottled)
       }
     }
-  }, [fps]) // only redo listeners if fps changes
+  }, [options.fps]) // only redo listeners if fps changes
 
   return {
     ...position,

@@ -6,7 +6,7 @@ export default function FullScreen() {
   const fs = useFullScreen()
   const fsb = useFullScreenBrowser()
   const el = useRef(null)
-  const fsEl = useFullScreen(el)
+  const fsEl = useFullScreen({ element: el })
   return (
     <div>
       <h2>FullScreen Demo</h2>

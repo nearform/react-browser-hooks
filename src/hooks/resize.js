@@ -6,13 +6,13 @@ import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
  * @param {number} fps Frames per second
  * @returns {object} The size object with dimensions of window innerWidth and innerHeight
  */
-export function useResize(fps) {
+export function useResize(options) {
   const [size, setSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth
   })
 
-  const raf = fps && initRaf(fps)
+  const raf = options && options.fps ? initRaf(options.fps) : null
 
   function handleResizeThrottled() {
     if (!raf) return handleResize()
@@ -30,7 +30,7 @@ export function useResize(fps) {
       setSize(newSize)
     }
 
-    raf.ticking = false
+    if (raf) raf.ticking = false
   }
 
   // Similar to componentDidMount and componentDidUpdate:
@@ -43,14 +43,14 @@ export function useResize(fps) {
     }
 
     return function cleanup() {
-      cleanupRaf(raf)
+      if (raf) cleanupRaf(raf)
       if (window.removeEventListener) {
         window.removeEventListener('resize', handleResizeThrottled)
       } else if (window.detachEvent) {
         window.detachEvent('onresize', handleResizeThrottled)
       }
     }
-  }, [fps])
+  }, [options])
 
   return {
     ...size,

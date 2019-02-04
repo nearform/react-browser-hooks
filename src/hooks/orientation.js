@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 
 export function useOrientation() {
   const currentOrientation =
-    typeof window === 'object' ? window.screen.orientation : null
+    (window && window.screen && window.screen.orientation) || {}
   const [state, setState] = useState(currentOrientation)
 
   useEffect(() => {
-    const handler = () => setState(window.screen.orientation)
+    const handler = () =>
+      setState((window && window.screen && window.screen.orientation) || {})
     if (typeof window !== 'object') return
 
     window.addEventListener('orientationchange', handler)

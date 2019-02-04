@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { raf, caf, fpsToMs } from '../utils/fps'
 
-export function useFps(fps) {
-  const msPerFrame = fpsToMs(fps)
+//experimental
+export function useRaf(options) {
+  const msPerFrame = fpsToMs(options.fps)
   const obj = getSecondAndFrame()
   const [second, setSecond] = useState(obj.second)
   const [frame, setFrame] = useState(obj.frame)
@@ -44,7 +45,7 @@ export function useFps(fps) {
     return function cleanup() {
       caf(rafId)
     }
-  }, [tick, fps])
+  }, [tick, options])
 
   return {
     frame,
