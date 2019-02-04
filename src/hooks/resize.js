@@ -47,6 +47,6 @@ export function useResize(options) {
 
   return {
     ...size,
-    throttled: raf && raf.skip ? true : false
+    throttled: raf ? true : false
   }
 }
