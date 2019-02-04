@@ -16,6 +16,10 @@ A simple utility library that provides custom hooks for some common browser even
 npm install @nearform/react-browser-hooks
 ```
 
+## Documentation & Demo
+
+You can find documentation and demo on https://react-browser-hooks.netlify.com/
+
 ## Example Usage
 
 Eg. The FullScreen hook:
