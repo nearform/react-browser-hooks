@@ -24,6 +24,7 @@ export function useRaf(options) {
   useEffect(() => {
     function handleAf() {
       const obj = getSecondAndFrame()
+      if (!msPerFrame) return
 
       if (frame !== obj.frame && second !== obj.second) {
         setSecond(obj.second)
@@ -39,18 +40,24 @@ export function useRaf(options) {
         setFramesRendered(framesRendered + 1)
       }
 
+      if (second !== obj.second) {
+        setSecond(obj.second)
+        setActual(1)
+      }
+
       setTick(tick + 1)
     }
     const rafId = raf(handleAf)
     return function cleanup() {
       caf(rafId)
     }
-  }, [tick, options])
+  }, [tick, options.fps])
 
   return {
     frame,
     second,
     stopped: !msPerFrame ? true : false,
-    actual
+    actual,
+    tick
   }
 }
