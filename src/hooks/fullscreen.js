@@ -179,8 +179,8 @@ export function isFullScreenSize(sizeInfo) {
  */
 export function useFullScreenBrowser() {
   // reuse the useResizeHook to determine act on screen size changes,
-  // 1fps should be enough, doesn't really need to be faster for this event
-  const size = useResize(1)
+  // 60 should be enough (roughly 1s), doesn't really need to be faster for this event
+  const size = useResize(60)
 
   const initialSizeInfo = getSizeInfo()
   const [fullScreen, setFullScreen] = useState(

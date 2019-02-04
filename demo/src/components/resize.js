@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { useResize } from '../../../src'
 
 export default function Resize() {
-  const [fps, setFps] = useState(3)
-  const size = useResize({ fps })
+  const [skip, setSkip] = useState(20)
+  const size = useResize({ skip })
 
   function handleChange(e) {
-    setFps(e.target.value)
+    setSkip(e.target.value)
   }
 
   return (
@@ -17,9 +17,9 @@ export default function Resize() {
       <p>
         Width: {size.width}px, Height: {size.height}px
         <br />
-        Throttled: {size.throttled}, Delay: {size.delay}ms
+        Throttled: {size.throttled ? 'yes' : 'no'}
       </p>
-      FPS: <input value={fps} onChange={handleChange} />
+      Skip Frames: <input value={skip} onChange={handleChange} />
       <div
         id="follow-cursor"
         style={{

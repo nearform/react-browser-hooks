@@ -3,7 +3,7 @@ import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
 
 export function useMousePosition(options) {
   const [position, setPosition] = useState({ x: 0, y: 0 })
-  const raf = options && options.fps ? initRaf(options.fps) : null
+  let raf = options && options.skip ? initRaf(options.skip) : null
 
   let newPos // holds the latest position
   function handleMouseMoveThrottled(e) {
@@ -40,11 +40,10 @@ export function useMousePosition(options) {
         window.detachEvent('onmousemove', handleMouseMoveThrottled)
       }
     }
-  }, [options.fps]) // only redo listeners if fps changes
+  }, [options.skip]) // only redo listeners if fps changes
 
   return {
     ...position,
-    throttled: raf && raf.ms ? 'yes' : 'no',
-    delay: raf && raf.ms ? raf.ms : 0
+    throttled: raf && raf.skip ? true : false
   }
 }

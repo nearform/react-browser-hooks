@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { useMousePosition } from '../../../src'
 
 export default function MousePosition() {
-  const [fps, setFps] = useState(3)
-  const pos = useMousePosition({ fps })
+  const [skip, setSkip] = useState(5)
+  const pos = useMousePosition({ skip })
 
   function handleChange(e) {
-    setFps(e.target.value)
+    setSkip(e.target.value)
   }
 
   return (
@@ -19,7 +19,7 @@ export default function MousePosition() {
         <br />
         Throttled: {pos.throttled ? 'yes' : 'no'}
       </p>
-      FPS: <input value={fps} onChange={handleChange} />
+      Skip Frames: <input value={skip} onChange={handleChange} />
       <div
         id="follow-cursor"
         style={{

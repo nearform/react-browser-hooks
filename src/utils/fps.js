@@ -34,27 +34,21 @@ export function nextRaf(rafData, handler) {
 
   //if the renderAnimation frame function supported by browser
   if (raf) {
-    const d = new Date()
-    const currentSecond = Math.floor(d.getTime() / 1000)
-    const currentFrame = Math.floor(d.getMilliseconds() / rafData.ms)
-
     // clear last frame timeout if kicked off
     if (rafData.lastFrameTimoutId) clearTimeout(rafData.lastFrameTimoutId)
 
-    if (rafData.frame !== currentFrame || rafData.second !== currentSecond) {
+    if (rafData.tick >= rafData.skip) {
       //don't kick off another rAF request while one is underway
       rafData.ticking = true
       rafData.rafId = raf(handler)
+      rafData.tick = 0
     } else {
+      //get the remainder using optimistic 60fps
+      const remainder = Math.floor((rafData.skip - rafData.tick) * 16.7)
       //kick off a timer to perform last frame, but cancel always first thing
-      //remainder is ms to next frame
-      rafData.lastFrameTimoutId = setTimeout(
-        handler,
-        d.getMilliseconds() % rafData.ms
-      )
+      if (remainder) rafData.lastFrameTimoutId = setTimeout(handler, remainder)
     }
-    rafData.frame = currentFrame
-    rafData.second = currentSecond
+    rafData.tick++
 
     return
   }
@@ -64,7 +58,7 @@ export function nextRaf(rafData, handler) {
   rafData.fallBackTimeoutId = setTimeout(function() {
     rafData.fallBackTimeoutId = null
     handler()
-  }, rafData.ms)
+  }, Math.floor(rafData.skip * 16.7))
 }
 
 export function cleanupRaf(rafData) {
@@ -73,13 +67,14 @@ export function cleanupRaf(rafData) {
   if (rafData.fallBackTimeoutId) clearTimeout(rafData.fallBackTimeoutId)
 }
 
-export function initRaf(fps) {
-  const ms = fpsToMs(fps)
+export function initRaf(skip) {
+  if (!skip) return null
+  if (isNaN(skip)) return null
+
   return {
-    ms,
+    skip: parseInt(skip),
     ticking: false,
-    frame: 0,
-    second: 0,
+    tick: 0,
     rafId: null,
     lastFrameTimoutId: 0,
     fallBackTimeoutId: 0

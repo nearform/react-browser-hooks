@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { useScroll } from '../../../src'
 
 export default function Scroll() {
-  const [fps, setFps] = useState(3)
-  const scroll = useScroll({ fps })
+  const [skip, setSkip] = useState(20)
+  const scroll = useScroll({ skip })
 
   function handleChange(e) {
-    setFps(e.target.value)
+    setSkip(e.target.value)
   }
 
   return (
@@ -15,9 +15,11 @@ export default function Scroll() {
       <h2>Scroll Demo</h2>
       <p>
         Top: {scroll.top}px, Left: {scroll.left}px
+        <br />
+        Throttled: {scroll.throttled ? 'yes' : 'no'}
       </p>
       <p>
-        FPS: <input value={fps} onChange={handleChange} />
+        Skip Frames: <input value={skip} onChange={handleChange} />
       </p>
     </div>
   )

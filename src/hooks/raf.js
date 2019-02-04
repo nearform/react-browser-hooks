@@ -47,9 +47,9 @@ export function useRaf(options) {
 
       setTick(tick + 1)
     }
-    const rafId = raf(handleAf)
+    const rafId = raf && raf(handleAf)
     return function cleanup() {
-      caf(rafId)
+      caf && caf(rafId)
     }
   }, [tick, options.fps])
 

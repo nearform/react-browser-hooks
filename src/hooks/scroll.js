@@ -7,7 +7,7 @@ export function useScroll(options) {
     left: window.scrollX
   })
 
-  const raf = options && options.fps ? initRaf(options.fps) : null
+  const raf = options && options.skip ? initRaf(options.skip) : null
 
   function handleScrollThrottled() {
     if (!raf) return handleScroll()
@@ -39,11 +39,10 @@ export function useScroll(options) {
         window.detachEvent('onscroll', handleScrollThrottled)
       }
     }
-  }, [options.fps])
+  }, [options.skip])
 
   return {
     ...pos,
-    throttled: raf && raf.ms ? 'yes' : 'no',
-    delay: raf && raf.ms ? raf.ms : 0
+    throttled: raf && raf.skip ? true : false
   }
 }
