@@ -50,7 +50,7 @@ export function useResize(options) {
         window.detachEvent('onresize', handleResizeThrottled)
       }
     }
-  }, [options])
+  }, [options.fps])
 
   return {
     ...size,
