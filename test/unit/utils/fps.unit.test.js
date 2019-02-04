@@ -1,7 +1,6 @@
 import expect from 'expect'
 
 import { fpsToMs, initRaf, nextRaf, cleanupRaf } from '../../../src/utils/fps'
-import { isNull } from 'util'
 
 describe('fps tests', () => {
   it('null returns default', () => {
