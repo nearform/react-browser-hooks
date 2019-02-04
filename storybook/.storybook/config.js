@@ -1,6 +1,7 @@
 import React from 'react'
 import { configure, addDecorator } from '@storybook/react'
 import { withOptions } from '@storybook/addon-options'
+import theme from './theme'
 
 const req = require.context('../stories', true, /\.stories\.js$/)
 
@@ -17,7 +18,8 @@ addDecorator(
     showAddonPanel: true,
     showSearchBox: false,
     addonPanelInRight: true,
-    sortStoriesByKind: true
+    sortStoriesByKind: true,
+    theme
   })
 )
 
