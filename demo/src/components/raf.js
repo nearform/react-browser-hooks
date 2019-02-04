@@ -12,7 +12,7 @@ export default function Raf() {
   return (
     <div style={{ position: 'relative' }}>
       <h2>Raf Demo</h2>
-      Set Frame Rate (empty means MAX):{' '}
+      Set Frame Rate (empty means off):{' '}
       <input value={frameRate} onChange={handleChange} />.
       <br />
       Second: {second}, Frame: {frame}, Stopped: {stopped ? 'true' : 'false'},
