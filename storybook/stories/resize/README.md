@@ -1,6 +1,6 @@
-## useResize Hook
+## Resize Hook
 
-The useResize hook listens for changes to browser window size.  Passing an optional 'skip' parameter throttles the rate at which this hook updates based on skipping animation frames.
+The Resize hook listens for changes to browser window size.  Passing an optional 'skip' parameter throttles the rate at which this hook updates based on skipping animation frames.
 
 Import as follows:
 
