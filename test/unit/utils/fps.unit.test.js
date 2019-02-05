@@ -31,7 +31,7 @@ describe('fps tests', () => {
       ticking: false,
       tick: 0,
       rafId: null,
-      lastFrameTimoutId: null,
+      lastFrameTimeoutId: null,
       fallBackTimeoutId: null
     })
 
@@ -42,7 +42,7 @@ describe('fps tests', () => {
       ticking: false,
       tick: 0,
       rafId: null,
-      lastFrameTimoutId: null,
+      lastFrameTimeoutId: null,
       fallBackTimeoutId: null
     })
 
@@ -53,7 +53,7 @@ describe('fps tests', () => {
       ticking: false,
       tick: 0,
       rafId: null,
-      lastFrameTimoutId: null,
+      lastFrameTimeoutId: null,
       fallBackTimeoutId: null
     })
   })
@@ -75,7 +75,7 @@ describe('fps tests', () => {
       ticking: false,
       tick: 0,
       rafId: null,
-      lastFrameTimoutId: null,
+      lastFrameTimeoutId: null,
       fallBackTimeoutId: null
     })
 
