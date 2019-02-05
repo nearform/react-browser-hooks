@@ -1,6 +1,6 @@
 ## useMediaControls Hook
 
-The useMediaControls hook gives you access to common `HTMLMediaElement` controls such as play, pause, volume, and seek.
+The useMediaControls hook gives you access to the `HTMLMediaElement` API. Create custom controls for your media.
 
 Import as follows:
 
@@ -24,7 +24,8 @@ const {
 <button onClick={paused ? play : pause}>Play/Pause</button>
 ```
 
-Accepts a ref to a media element such as `video` or `audio`.
+Accepts a ref to an
+[`HTMLMediaElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement) such as [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) or [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio).
 
 Returns an object containing:
 
