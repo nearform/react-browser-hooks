@@ -5,7 +5,7 @@ import readme from './README.md'
 import { withReadme } from 'storybook-readme'
 
 function CurrentLocation() {
-  const [position, error] = useGeolocation()
+  const { position, error } = useGeolocation()
 
   return error ? (
     <p>There was an error: {error.message}</p>
