@@ -1,23 +1,48 @@
 import { useState, useEffect } from 'react'
+import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
 
-export function useScroll() {
-  const [state, setState] = useState({
+export function useScroll(options) {
+  const [pos, setPos] = useState({
     top: window.scrollY,
     left: window.scrollX
   })
 
-  function handleScroll() {
-    setState({ top: window.scrollY, left: window.scrollX })
+  const raf = options && options.skip ? initRaf(options.skip) : null
+
+  function handleScrollThrottled() {
+    if (!raf) return handleScroll()
+    nextRaf(raf, handleScroll)
   }
 
-  // Similar to componentDidMount and componentDidUpdate:
+  function handleScroll() {
+    const newPos = { top: window.scrollY, left: window.scrollX }
+    if (newPos.top !== pos.top || newPos.left !== pos.left) {
+      setPos(newPos)
+    }
+
+    if (raf) raf.ticking = false
+  }
+
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    if (window.addEventListener) {
+      window.addEventListener('scroll', handleScrollThrottled, false)
+    } else if (window.attachEvent) {
+      //IE 8
+      window.attachEvent('onscroll', handleScrollThrottled)
+    }
 
     return function cleanup() {
-      window.removeEventListener('scroll', handleScroll)
+      if (raf) cleanupRaf(raf)
+      if (window.removeEventListener) {
+        window.removeEventListener('scroll', handleScrollThrottled)
+      } else if (window.detachEvent) {
+        window.detachEvent('onscroll', handleScrollThrottled)
+      }
     }
-  })
+  }, [options.skip])
 
-  return state
+  return {
+    ...pos,
+    throttled: raf && raf.skip ? true : false
+  }
 }

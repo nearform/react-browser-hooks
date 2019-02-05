@@ -1,6 +1,6 @@
-## useScroll Hook
+## Scroll Hook
 
-The useScroll hook listens for changes to the browser window scroll position.  
+The Scroll hook listens for changes to the browser window scroll position.  
 
 Import as follows:
 
@@ -16,7 +16,11 @@ const { top, left } = useScroll()
 ```
 
 Parameters:
-- fps (int): optional frames per second parameter to throttle mouse position event (default: null, no throttling)
+- options (optional): set { skip } property to the amount of animation frames to skip before each update.
+    - null: no throttling (default)
+    - 0: no frames skipped (as fast as renderAnimationFrame)
+    - 1+: skip one or more frames e.g. 1 = 1/2 the render rate, 20 = 3fps if renderAnimationFrame is working at 60fps
 
 Returns an object containing:
 - top (int), left (int): the current scroll position
+- throttled (boolean): whether throttled or not
