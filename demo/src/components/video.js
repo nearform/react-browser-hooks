@@ -23,12 +23,8 @@ export default function Audio() {
       <p>
         <button onClick={paused ? play : stop}>Play/Stop</button>
         <button onClick={restart}>Restart</button>
-        <button onClick={() => seek(Math.round((currentTime - 2) * 10) / 10)}>
-          Seek back
-        </button>
-        <button onClick={() => seek(Math.round((currentTime + 2) * 10) / 10)}>
-          Seek forward
-        </button>
+        <button onClick={() => seek(currentTime - 2)}>Seek back</button>
+        <button onClick={() => seek(currentTime + 2)}>Seek forward</button>
       </p>
       <p>The video is paused: {paused !== null ? paused.toString() : ''}</p>
       <p>
