@@ -1,6 +1,6 @@
-## useFullScreen Hook
+## FullScreen Hook
 
-The useFullScreen hook allows a page or element to occupy the full screen.
+The FullScreen hook allows a page or element to occupy the full screen.
 
 Import as follows:
 

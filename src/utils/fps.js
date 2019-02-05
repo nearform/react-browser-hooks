@@ -73,10 +73,11 @@ export function cleanupRaf(rafData) {
 
 export function initRaf(skip) {
   if (skip === null || skip === undefined) return null
-  if (isNaN(skip)) return null
+  const parsedSkip = parseInt(skip)
+  if (isNaN(parsedSkip)) return null
 
   return {
-    skip: parseInt(skip),
+    skip: parsedSkip,
     ticking: false,
     tick: 0,
     rafId: null,

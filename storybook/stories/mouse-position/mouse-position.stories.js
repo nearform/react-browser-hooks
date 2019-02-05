@@ -5,11 +5,11 @@ import { useMousePosition } from '../../../src'
 import readme from './README.md'
 
 function MousePosition() {
-  const [fps, setFps] = useState(3)
-  const pos = useMousePosition(fps)
+  const [skip, setSkip] = useState(0)
+  const pos = useMousePosition({ skip })
 
   function handleChange(e) {
-    setFps(e.target.value)
+    setSkip(e.target.value)
   }
 
   return (
@@ -19,9 +19,19 @@ function MousePosition() {
       <p>
         X: {pos.x}px, Y: {pos.y}px
         <br />
-        Throttled: {pos.throttled}, Delay: {pos.delay}ms
+        Throttled: {pos.throttled ? 'yes' : 'no'}
       </p>
-      FPS: <input value={fps} onChange={handleChange} />
+      <p>
+        Skip Frames: <input value={skip} onChange={handleChange} />
+      </p>
+      <em>
+        <strong>Note:</strong> When throttled (0 or more), the position will
+        update as fast as renderAnimationFrame (rAF) can execute. Setting to 1
+        or more will skip frames accordingly e.g. setting to 1 one will skip
+        every other frame, and 30 will skip 30 frames before rendering. If rAF
+        runs at 60fps, setting to 59 means updates will occur every second.
+      </em>
+      <p>Try it!</p>
       <div
         id="follow-cursor"
         style={{

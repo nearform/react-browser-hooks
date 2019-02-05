@@ -1,6 +1,6 @@
 ## Resize Hook
 
-The Resize hook listens for changes to browser window size.  Passing an optional 'skip' parameter throttles the rate at which this hook updates based on skipping animation frames.
+The Resize hook listens for changes to browser window size. 
 
 Import as follows:
 
@@ -11,7 +11,7 @@ import { useResize } from '@nearform/react-browser-hooks'
 Example of usage:
 
 ```javascript
-const { width, height } = useResize(20)
+const { width, height } = useResize({ skip: 10 })
 <p>Width: {width}px, Height: {height}px</p>
 ```
 
