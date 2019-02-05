@@ -22,7 +22,7 @@
     "build-storybook": "build-storybook -c storybook/.storybook",
     "test": "npm run test:unit && npm run test:acceptance",
     "test:unit": "nwb test-react",
-    "test:acceptance": "testcafe chrome,firefox test/acceptance/ --app 'npm start'",
+    "test:acceptance": "testcafe >> /dev/null 2>&1 chrome,firefox test/acceptance/ --app 'npm start'",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
