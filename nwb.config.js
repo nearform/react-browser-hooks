@@ -8,8 +8,5 @@ module.exports = {
         react: 'React'
       }
     }
-  },
-  karma: {
-    testFiles: 'test/unit/*.test.js'
   }
 }
