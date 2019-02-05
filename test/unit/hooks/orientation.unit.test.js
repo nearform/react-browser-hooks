@@ -8,7 +8,6 @@ describe('useOrientation', () => {
     let angle, type
     window.screen.orientation = { angle: 0, type: 'portrait-primary' }
     testHook(() => ({ angle, type } = useOrientation()))
-
     expect(angle).toBe(0)
     expect(type).toBe('portrait-primary')
   })

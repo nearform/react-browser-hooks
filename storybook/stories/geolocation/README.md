@@ -1,17 +1,17 @@
 ## useGeolocation Hook
 
-The useGeolocation hook gives you current location.  
+The useGeolocation hook gives you current location.
 
 Import as follows:
 
 ```javascript
-import { useGeolocation } from '@nearform/react-browser-hooks' 
+import { useGeolocation } from '@nearform/react-browser-hooks'
 ```
 
 Example of usage:
 
 ```javascript
-const [position, error] = useGeolocation()
+const { position, error } = useGeolocation()
 if (error) {
   return <p>There was an error: {error.message}</p>
 }
@@ -39,9 +39,11 @@ return (
 ```
 
 Parameters:
+
 - options (object): see https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions for more info
 
-Returns an array containing:
+Returns an object containing:
+
 - position(object): https://developer.mozilla.org/en-US/docs/Web/API/Position
   - coords(object): https://developer.mozilla.org/en-US/docs/Web/API/Coordinates
     - accuracy(double): the accuracy of the latitude and longitude properties, expressed in meters,
