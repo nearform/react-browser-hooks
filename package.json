@@ -21,10 +21,10 @@
     "storybook": "start-storybook -p 9001 -c storybook/.storybook",
     "build-storybook": "build-storybook -c storybook/.storybook",
     "test": "npm run test:unit && npm run test:acceptance",
-    "test:unit": "nwb test-react",
+    "test:unit": "jest",
     "test:acceptance": "testcafe chrome,firefox test/acceptance/ --app 'npm start'",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "peerDependencies": {
     "react": "16.x"
