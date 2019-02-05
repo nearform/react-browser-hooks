@@ -41,5 +41,3 @@ export const usePageVisibility = () => {
   }, [])
   return visible
 }
-
-export default usePageVisibility
