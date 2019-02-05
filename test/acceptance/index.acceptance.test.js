@@ -1,9 +1,9 @@
 import { Selector } from 'testcafe'
 
-fixture('Demo').page('http://localhost:3000/')
+fixture('Storybook').page('http://localhost:3000/')
 
-test('The demo is rendered', async (t) => {
-  const demo = Selector('#demo')
+test('Storybook is rendered', async (t) => {
+  const storybook = Selector('#root')
 
-  await t.expect(demo.exists).ok()
+  await t.expect(storybook.exists).ok()
 })
