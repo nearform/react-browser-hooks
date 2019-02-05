@@ -1,8 +1,13 @@
 import expect from 'expect'
 import React from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
+import { useFullScreen } from '../../src/hooks/fullscreen'
 
-import FullScreen from '../../demo/src/components/fullscreen'
+function FullScreen() {
+  const fs = useFullScreen()
+
+  return <pre>{JSON.stringify(fs)}</pre>
+}
 
 describe('FullScreen', () => {
   let node
@@ -14,9 +19,11 @@ describe('FullScreen', () => {
   afterEach(() => {
     unmountComponentAtNode(node)
   })
-  it('displays a welcome message', () => {
+  it('it renders', () => {
     render(<FullScreen />, node, () => {
-      expect(node.innerHTML).toContain('FullScreen Demo')
+      expect(node.innerHTML).toContain(
+        '<pre>{"fullScreen":false,"info":{"lastEvent":null,"lastRequest":null}}</pre>'
+      )
     })
   })
 })
