@@ -3,7 +3,8 @@ import { Selector } from 'testcafe'
 fixture('Storybook').page('http://localhost:3000/')
 
 test('Storybook is rendered', async (t) => {
-  const storybook = Selector('#storybook-preview-iframe')
+  await t.switchToIframe('#storybook-preview-iframe')
 
-  await t.expect(storybook.exists).ok()
+  const fullScreen = Selector('#fullscreen')
+  await t.expect(fullScreen.exists).ok()
 })

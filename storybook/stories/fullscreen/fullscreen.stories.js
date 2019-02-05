@@ -8,7 +8,7 @@ function BrowserFullScreen() {
   const fs = useFullScreen()
   const fsb = useFullScreenBrowser()
   return (
-    <div>
+    <div id="fullscreen">
       <h2>Browser FullScreen Demo</h2>
       <p>
         {fs.fullScreen && fsb.fullScreen && 'Browser in fullscreen mode'}
