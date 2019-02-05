@@ -30,10 +30,10 @@ export default function Audio() {
           Seek forward
         </button>
       </p>
-      <p>The video is paused: {paused.toString()}</p>
+      <p>The video is paused: {paused !== null ? paused.toString() : ''}</p>
       <p>
         The video currentTime:{' '}
-        {currentTime !== undefined ? currentTime.toString() : ''}
+        {currentTime !== null ? currentTime.toString() : ''}
       </p>
     </div>
   )

@@ -28,7 +28,7 @@ Accepts a ref to a media element such as `video` or `audio`.
 
 Returns an object containing:
 
-- paused(boolean): Tells whether the media element is paused. From [`HTMLMediaElement.paused`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/paused)
+- paused(boolean): Tells whether the media element is paused. From [`HTMLMediaElement.paused`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/paused). Initialises to `null` until the media element has been rendered
 - pause(function): Will pause playback of the media, if the media is already in
   a paused state this method will have no effect. Calls
   [`HTMLMediaElement.pause()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/pause)
@@ -38,18 +38,18 @@ Returns an object containing:
   promise being rejected. Calls [`HTMLMediaElement.play()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/play)
 
 - volume(number): The volume at which the media will be played. From 
-  [`HTMLMediaElement.volume`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/volume)
+  [`HTMLMediaElement.volume`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/volume). Initialises to `null` until the media element has been rendered
 - setVolume(function): Sets the HTMLMediaElement.volume to the passed value (a
   number between 0-1)
 - muted(boolean): Indicates whether the media element muted. From 
-  [`HTMLMediaElement.muted`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/muted)
+  [`HTMLMediaElement.muted`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/muted). Initialises to `null` until the media element has been rendered
 - mute(function): Mutes the media element, if already muted this method will
   have no effect
 - unmute(function): Unmutes the media element, if already muted this method will
   have no effect
 
 - currentTime(number): Gives the current playback time in seconds. From 
-  [`HTMLMediaElement.currentTime`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/currentTime)
+  [`HTMLMediaElement.currentTime`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/currentTime). Initialises to `null` until the media element has been rendered
 - seek(function): Sets the HTMLMediaElement.currentTime to the passed value (a
   number in seconds). If the number is higher than the total length of the
   media, it will skip to the end

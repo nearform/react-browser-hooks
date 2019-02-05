@@ -39,11 +39,9 @@ export default function Audio() {
           Volume up
         </button>
       </p>
-      <p>The audio is paused: {paused.toString()}</p>
-      <p>
-        The audio is volume: {volume !== undefined ? volume.toString() : ''}
-      </p>
-      <p>The audio is muted: {muted !== undefined ? muted.toString() : ''}</p>
+      <p>The audio is paused: {paused !== null ? paused.toString() : ''}</p>
+      <p>The audio is volume: {volume !== null ? volume.toString() : ''}</p>
+      <p>The audio is muted: {muted !== null ? muted.toString() : ''}</p>
     </div>
   )
 }
