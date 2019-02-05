@@ -59,12 +59,6 @@
     "storybook-readme": "^4.0.5",
     "testcafe": "^0.23.3"
   },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/react"
-    ]
-  },
   "author": "NearForm",
   "homepage": "https://github.com/nearform/react-browser-hooks",
   "license": "Apache-2.0",
