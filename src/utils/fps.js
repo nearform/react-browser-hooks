@@ -1,5 +1,6 @@
 const MIN = 1
 const MAX = 1000
+const ONE_FRAME = 16.7
 
 export function fpsToMs(fps) {
   if (!fps) return null
@@ -45,7 +46,9 @@ export function nextRaf(rafData, handler) {
       rafData.tick = 0
     } else {
       //get the remainder using optimistic 60fps
-      const remainder = Math.floor((rafData.skip + 1 - rafData.tick) * 16.7)
+      const remainder = Math.floor(
+        (rafData.skip + 1 - rafData.tick) * ONE_FRAME
+      )
       //kick off a timer to perform last frame, but cancel always first thing
       if (remainder) rafData.lastFrameTimeoutId = setTimeout(handler, remainder)
     }
@@ -58,7 +61,7 @@ export function nextRaf(rafData, handler) {
   rafData.fallBackTimeoutId = setTimeout(function() {
     rafData.fallBackTimeoutId = null
     handler()
-  }, Math.floor(rafData.skip * 16.7))
+  }, Math.floor(rafData.skip * ONE_FRAME))
 }
 
 export function cleanupRaf(rafData) {
