@@ -5,16 +5,13 @@ import { useOnline } from '../../../src'
 import readme from './README.md'
 
 function Online() {
-  const status = useOnline()
-
+  const { status } = useOnline()
   return (
     <div>
       <h2>Online Demo</h2>
-      <p>
-        Status: {status.online ? 'online' : 'offline'}, Reason: {status.reason}{' '}
-      </p>
+      <p>Status: {status ? 'online' : 'offline'}</p>
     </div>
   )
 }
 
-storiesOf('Online', module).add('Online', withReadme(readme, () => <Online />))
+storiesOf('Online', module).add('Default', withReadme(readme, () => <Online />))
