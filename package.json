@@ -20,7 +20,7 @@
     "start": "npm run storybook",
     "storybook": "start-storybook -c storybook/.storybook",
     "build-storybook": "build-storybook -c storybook/.storybook",
-    "test": "npm run test:unit && npm run test:acceptance >> /dev/null 2>&1 ",
+    "test": "npm run test:unit && npm run test:acceptance >> /dev/null 2>&1",
     "test:unit": "nwb test-react",
     "test:acceptance": "testcafe chrome,firefox test/acceptance/ --app 'npm start'",
     "test:coverage": "nwb test-react --coverage",
