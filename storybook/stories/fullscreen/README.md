@@ -1,6 +1,6 @@
-## useFullScreen Hook
+## FullScreen Hook
 
-The useFullScreen hook allows a page or element to occupy the full screen.
+The FullScreen hook allows a page or element to occupy the full screen.
 
 Import as follows:
 
@@ -16,7 +16,7 @@ const { toggle, fullsceen } = useFullScreen()
 ```
 
 Parameters:
-- element (object): optional useRef() React hook returned object (defaults to document element)
+- options (optional): set { element } property to the element you wish to make fullscreen, defaults to document element.  Pass in the returned element from useRef() hook (see Element full screen demo).
 
 Returns an object containing:
 - toggle (function): toggles full screen mode

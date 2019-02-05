@@ -9,7 +9,7 @@ function BrowserFullScreen() {
   const fsb = useFullScreenBrowser()
   return (
     <div>
-      <h2>Browser FullScreen Demo</h2>
+      <h2>FullScreen Demo</h2>
       <p>
         {fs.fullScreen && fsb.fullScreen && 'Browser in fullscreen mode'}
         {!fs.fullScreen && fsb.fullScreen && 'Browser in fullscreen mode (F11)'}
@@ -34,10 +34,10 @@ function BrowserFullScreen() {
 
 function ElementFullScreen() {
   const el = useRef(null)
-  const fsEl = useFullScreen(el)
+  const fsEl = useFullScreen({ element: el })
   return (
     <div>
-      <h2>Element FullScreen Demo</h2>
+      <h2>FullScreen Element Demo</h2>
       <div ref={el} style={{ backgroundColor: '#c0c0c0' }}>
         <p>{fsEl.fullScreen && 'Full Screen on Element Only'}</p>
         <button onClick={fsEl.toggle}>{'Toggle (Element)'}</button>
