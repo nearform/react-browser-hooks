@@ -18,7 +18,7 @@ describe('useResize', () => {
     expect(height).toBe(100)
   })
 
-  it('updates state on "mousemove"', () => {
+  it('updates state on "resize"', () => {
     let width, height
 
     window.innerWidth = 100
