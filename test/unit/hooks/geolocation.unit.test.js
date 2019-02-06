@@ -1,5 +1,6 @@
-import { flushEffects } from 'react-testing-library'
 import { testHook, cleanup } from 'react-proxy-hook'
+import { act } from 'react-dom/test-utils'
+
 import { useGeolocation } from '../../../src'
 
 afterEach(cleanup)
@@ -18,9 +19,9 @@ describe('useGeolocation', () => {
   })
 
   it('calls getCurrentPosition with options', () => {
-    testHook(() => useGeolocation({ foo: 'bar' }))
-
-    flushEffects()
+    act(() => {
+      testHook(() => useGeolocation({ foo: 'bar' }))
+    })
 
     expect(navigator.geolocation.getCurrentPosition).toHaveBeenCalledWith(
       expect.any(Function),
@@ -37,9 +38,9 @@ describe('useGeolocation', () => {
       .mockImplementationOnce((onSuccess) => onSuccess('position'))
 
     let position, error
-    testHook(() => ({ position, error } = useGeolocation()))
-
-    flushEffects()
+    act(() => {
+      testHook(() => ({ position, error } = useGeolocation()))
+    })
 
     expect(position).toBe('position')
     expect(error).toBe(null)
@@ -53,17 +54,17 @@ describe('useGeolocation', () => {
       .mockImplementationOnce((_, onError) => onError(mockError))
 
     let error
-    testHook(() => ({ error } = useGeolocation()))
-
-    flushEffects()
+    act(() => {
+      testHook(() => ({ error } = useGeolocation()))
+    })
 
     expect(error).toBe(mockError)
   })
 
   it('calls watchPosition with options', () => {
-    testHook(() => useGeolocation({ foo: 'bar' }))
-
-    flushEffects()
+    act(() => {
+      testHook(() => useGeolocation({ foo: 'bar' }))
+    })
 
     expect(navigator.geolocation.watchPosition).toHaveBeenCalledWith(
       expect.any(Function),
@@ -80,9 +81,9 @@ describe('useGeolocation', () => {
       .mockImplementationOnce((onSuccess) => onSuccess('position'))
 
     let position, error
-    testHook(() => ({ position, error } = useGeolocation()))
-
-    flushEffects()
+    act(() => {
+      testHook(() => ({ position, error } = useGeolocation()))
+    })
 
     expect(position).toBe('position')
     expect(error).toBe(null)
@@ -96,9 +97,9 @@ describe('useGeolocation', () => {
       .mockImplementationOnce((_, onError) => onError(mockError))
 
     let error
-    testHook(() => ({ error } = useGeolocation()))
-
-    flushEffects()
+    act(() => {
+      testHook(() => ({ error } = useGeolocation()))
+    })
 
     expect(error).toBe(mockError)
   })
