@@ -4,7 +4,7 @@ React Browser Hooks
 
 [![CircleCI](https://circleci.com/gh/nearform/react-browser-hooks.svg?style=svg&circle-token=6519ab8ff84d4bf291788588738f2b2000c8fc3a)](https://circleci.com/gh/nearform/react-browser-hooks)
 [![NPM version](https://img.shields.io/npm/v/@nearform/react-browser-hooks.svg)](https://www.npmjs.com/package/@nearform/react-browser-hooks)
-[![Coveralls][coveralls-badge]][coveralls]
+[![Coverage Status](https://coveralls.io/repos/github/nearform/react-browser-hooks/badge.svg?branch=master&t=TXaVqc)](https://coveralls.io/github/nearform/react-browser-hooks?branch=master)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8855d56c-7b73-4070-92e8-e7c1b2e80d7e/deploy-status)](https://app.netlify.com/sites/react-browser-hooks/deploys)
 
 A simple utility library that provides custom hooks for some common browser events.
