@@ -1,4 +1,4 @@
-import { fireEvent, flushEffects } from 'react-testing-library'
+import { fireEvent } from 'react-testing-library'
 import { testHook, cleanup } from 'react-proxy-hook'
 import { act } from 'react-dom/test-utils'
 
@@ -25,9 +25,9 @@ describe('useScroll', () => {
     window.scrollX = 0
     window.scrollY = 0
 
-    testHook(() => ({ top, left } = useScroll()))
-
-    flushEffects()
+    act(() => {
+      testHook(() => ({ top, left } = useScroll()))
+    })
 
     window.scrollX = 100
     window.scrollY = 100
