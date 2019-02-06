@@ -24,9 +24,6 @@
       "never"
     ]
   },
-  "env": {
-    "mocha": true
-  },
   "globals": {
     "fixture": true,
     "test": true

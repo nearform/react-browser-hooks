@@ -1,5 +1,7 @@
 import { fireEvent, flushEffects } from 'react-testing-library'
 import { testHook, cleanup } from 'react-proxy-hook'
+import { act } from 'react-dom/test-utils'
+
 import { useOrientation } from '../../../src'
 
 afterEach(cleanup)
@@ -23,13 +25,16 @@ describe('useOrientation', () => {
     flushEffects()
 
     window.screen.orientation = { angle: 90, type: 'landscape-primary' }
-    fireEvent(
-      window,
-      new Event('orientationchange', {
-        bubbles: false,
-        cancelable: false
-      })
-    )
+
+    act(() => {
+      fireEvent(
+        window,
+        new Event('orientationchange', {
+          bubbles: false,
+          cancelable: false
+        })
+      )
+    })
 
     expect(angle).toBe(90)
     expect(type).toBe('landscape-primary')
