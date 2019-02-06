@@ -29,7 +29,7 @@ const getVisibilityProps = () => {
  * Hooks into page visibility API
  * @returns {boolean} - whether page is currently visible
  */
-const usePageVisibility = () => {
+export const usePageVisibility = () => {
   const { hidden, visibilityChange } = getVisibilityProps()
   const [visible, setVisible] = useState(!document[hidden])
   const handler = () => setVisible(!document[hidden])

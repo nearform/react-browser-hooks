@@ -17,5 +17,5 @@ export function useGeolocation(options) {
     return () => navigator.geolocation.clearWatch(watchId)
   }, [options])
 
-  return [position, error]
+  return { position, error }
 }
