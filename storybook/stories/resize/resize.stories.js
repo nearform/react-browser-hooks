@@ -18,10 +18,8 @@ function Resize() {
       <em>The red border shows this visually.</em>
       <p>
         Width: {size.width}px, Height: {size.height}px
-        <br />
-        Throttled: {size.throttled}, Delay: {size.delay}ms
       </p>
-      FPS: <input value={fps} onChange={handleChange} />
+      FPS: <input type="number" value={fps} onChange={handleChange} />
       <div
         id="follow-cursor"
         style={{

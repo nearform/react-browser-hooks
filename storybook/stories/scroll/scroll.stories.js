@@ -1,26 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { useScroll } from '../../../src'
-import readme from './README.md'
 import { withReadme } from 'storybook-readme'
 
-function Scroll() {
-  const [fps, setFps] = useState(3)
-  const scroll = useScroll(fps)
+import { useScroll } from '../../../src'
+import readme from './README.md'
 
-  function handleChange(e) {
-    setFps(e.target.value)
-  }
+function Scroll() {
+  const scroll = useScroll()
 
   return (
-    <div style={{ position: 'fixed', bottom: 10, right: 10 }}>
-      <h2>Scroll Demo</h2>
-      <p>
-        Top: {scroll.top}px, Left: {scroll.left}px
-      </p>
-      <p>
-        FPS: <input value={fps} onChange={handleChange} />
-      </p>
+    <div style={{ height: '110vh', width: '110vw' }}>
+      <div style={{ position: 'fixed', top: 10, left: 10 }}>
+        <h2>Scroll Demo</h2>
+        <p>
+          Top: {scroll.top}px, Left: {scroll.left}px
+        </p>
+      </div>
     </div>
   )
 }
