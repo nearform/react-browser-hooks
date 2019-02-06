@@ -1,6 +1,6 @@
 ## Page Visibility Hook
 
-The Page Visibilty hook determines if the current page is visible or not.
+The Page Visibilty hook determines if the current page is the active tab or not.
 
 Import as follows:
 

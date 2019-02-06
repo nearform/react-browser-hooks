@@ -8,7 +8,6 @@ function PageVisibility() {
   const visibility = usePageVisibility()
 
   useEffect(() => {
-    console.log('change title')
     window.parent.document.title = visibility
       ? 'react-browser-hooks'
       : 'Hey! Come back!'
@@ -24,6 +23,6 @@ function PageVisibility() {
 }
 
 storiesOf('PageVisibility', module).add(
-  'Page Visibility',
+  'Default',
   withReadme(readme, () => <PageVisibility />)
 )
