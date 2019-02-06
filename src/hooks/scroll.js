@@ -7,10 +7,7 @@ export function useScroll() {
   })
 
   function handleScroll() {
-    const newPos = { top: window.scrollY, left: window.scrollX }
-    if (newPos.top !== pos.top || newPos.left !== pos.left) {
-      setPos(newPos)
-    }
+    setPos({ top: window.scrollY, left: window.scrollX })
   }
 
   useEffect(() => {

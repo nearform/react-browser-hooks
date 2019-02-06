@@ -4,11 +4,7 @@ export function useResize() {
   const [size, setSize] = useState(getWindowSize())
 
   function handleResize() {
-    const newSize = getWindowSize()
-
-    if (size.width !== newSize.width || size.height !== newSize.height) {
-      setSize(newSize)
-    }
+    setSize(getWindowSize())
   }
 
   function getWindowSize() {
