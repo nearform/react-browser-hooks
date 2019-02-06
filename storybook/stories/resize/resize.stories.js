@@ -1,16 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withReadme } from 'storybook-readme'
 import { useResize } from '../../../src'
 import readme from './README.md'
 
 function Resize() {
-  const [fps, setFps] = useState(3)
-  const size = useResize(fps)
-
-  function handleChange(e) {
-    setFps(e.target.value)
-  }
+  const size = useResize()
 
   return (
     <div>
@@ -19,9 +14,7 @@ function Resize() {
       <p>
         Width: {size.width}px, Height: {size.height}px
         <br />
-        Throttled: {size.throttled}, Delay: {size.delay}ms
       </p>
-      FPS: <input value={fps} onChange={handleChange} />
       <div
         id="follow-cursor"
         style={{

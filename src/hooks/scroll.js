@@ -1,23 +1,34 @@
 import { useState, useEffect } from 'react'
 
 export function useScroll() {
-  const [state, setState] = useState({
+  const [pos, setPos] = useState({
     top: window.scrollY,
     left: window.scrollX
   })
 
   function handleScroll() {
-    setState({ top: window.scrollY, left: window.scrollX })
+    const newPos = { top: window.scrollY, left: window.scrollX }
+    if (newPos.top !== pos.top || newPos.left !== pos.left) {
+      setPos(newPos)
+    }
   }
 
-  // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    if (window.addEventListener) {
+      window.addEventListener('scroll', handleScroll, false)
+    } else if (window.attachEvent) {
+      //IE 8
+      window.attachEvent('onscroll', handleScroll)
+    }
 
     return function cleanup() {
-      window.removeEventListener('scroll', handleScroll)
+      if (window.removeEventListener) {
+        window.removeEventListener('scroll', handleScroll)
+      } else if (window.detachEvent) {
+        window.detachEvent('onscroll', handleScroll)
+      }
     }
-  })
+  }, [])
 
-  return state
+  return pos
 }

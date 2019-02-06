@@ -17,17 +17,17 @@
     "lint": "eslint ./*.js src test",
     "lint-fix": "eslint ./*.js src test --fix",
     "prepublishOnly": "npm run build",
-    "start": "nwb serve-react-demo",
-    "storybook": "start-storybook -p 9001 -c storybook/.storybook",
+    "start": "npm run storybook",
+    "storybook": "start-storybook -p 3000 -c storybook/.storybook",
     "build-storybook": "build-storybook -c storybook/.storybook",
-    "test": "npm run test:unit && npm run test:acceptance",
+    "test": "npm run test:unit",
     "test:unit": "jest",
     "test:acceptance": "testcafe chrome,firefox test/acceptance/ --app \"npm start\"",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "16.8.x"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
