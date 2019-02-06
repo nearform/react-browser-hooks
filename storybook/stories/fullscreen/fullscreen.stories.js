@@ -5,10 +5,11 @@ import { useFullScreen, useFullScreenBrowser } from '../../../src'
 import readme from './README.md'
 
 function BrowserFullScreen() {
-  const fs = useFullScreen()
+  const element = useRef(null)
+  const fs = useFullScreen({ element })
   const fsb = useFullScreenBrowser()
   return (
-    <div>
+    <div ref={element} style={{ backgroundColor: '#f4f4f2' }}>
       <h2>Browser FullScreen Demo</h2>
       <p>
         {fs.fullScreen && fsb.fullScreen && 'Browser in fullscreen mode'}
@@ -32,20 +33,7 @@ function BrowserFullScreen() {
   )
 }
 
-function ElementFullScreen() {
-  const el = useRef(null)
-  const fsEl = useFullScreen(el)
-  return (
-    <div>
-      <h2>Element FullScreen Demo</h2>
-      <div ref={el} style={{ backgroundColor: '#c0c0c0' }}>
-        <p>{fsEl.fullScreen && 'Full Screen on Element Only'}</p>
-        <button onClick={fsEl.toggle}>{'Toggle (Element)'}</button>
-      </div>
-    </div>
-  )
-}
-
-storiesOf('FullScreen', module)
-  .add('Browser Full Screen', withReadme(readme, () => <BrowserFullScreen />))
-  .add('Element Full Screen', withReadme(readme, () => <ElementFullScreen />))
+storiesOf('FullScreen', module).add(
+  'Default',
+  withReadme(readme, () => <BrowserFullScreen />)
+)

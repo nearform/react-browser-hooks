@@ -1,16 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withReadme } from 'storybook-readme'
 import { useResize } from '../../../src'
 import readme from './README.md'
 
 function Resize() {
-  const [fps, setFps] = useState(3)
-  const size = useResize(fps)
-
-  function handleChange(e) {
-    setFps(e.target.value)
-  }
+  const size = useResize()
 
   return (
     <div>
@@ -18,8 +13,8 @@ function Resize() {
       <em>The red border shows this visually.</em>
       <p>
         Width: {size.width}px, Height: {size.height}px
+        <br />
       </p>
-      FPS: <input type="number" value={fps} onChange={handleChange} />
       <div
         id="follow-cursor"
         style={{

@@ -1,6 +1,6 @@
 ## useMousePosition Hook
 
-The useMousePosition hook listens for changes to mouse position.  Passing a parameter throttles the rate at which this hook updates state.
+The useMousePosition hook listens for changes to mouse position.  
 
 Import as follows:
 
@@ -15,10 +15,5 @@ const { x, y } = useMousePosition(60)
 <p>X: {x}px, Y: {y}px</p>
 ```
 
-Parameters:
-- fps (int): optional frames per second parameter to throttle mouse position event (default: null, no throttling)
-
 Returns an object containing:
 - x (int), y (int): the mouse pointer position
-- throttled (boolean): if set, throttling is enabled
-- delay (int): the actual delay in ms, based on fps parameter

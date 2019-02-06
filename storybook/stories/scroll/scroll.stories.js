@@ -9,11 +9,18 @@ function Scroll() {
   const scroll = useScroll()
 
   return (
-    <div style={{ height: '110vh', width: '110vw' }}>
-      <div style={{ position: 'fixed', top: 10, left: 10 }}>
+    <div
+      style={{
+        position: 'relative',
+        width: '2000px',
+        height: '2000px'
+      }}>
+      <div style={{ position: 'fixed', top: '15px', left: '40px' }}>
         <h2>Scroll Demo</h2>
+        <em>Try scrolling within this frame...</em>
         <p>
-          Top: {scroll.top}px, Left: {scroll.left}px
+          Top: {Math.round(scroll.top)}px, Left: {Math.round(scroll.left)}px
+          <br />
         </p>
       </div>
     </div>
