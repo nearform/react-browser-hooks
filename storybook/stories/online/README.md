@@ -16,5 +16,4 @@ const status = useOnline()
 ```
 
 Returns an object containing:
-- online (boolean): the current online status
-- reason (string): the reason for this status
+- status (boolean): whether online or not
