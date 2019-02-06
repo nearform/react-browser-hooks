@@ -1,5 +1,7 @@
 import { fireEvent, flushEffects } from 'react-testing-library'
 import { testHook, cleanup } from 'react-proxy-hook'
+import { act } from 'react-dom/test-utils'
+
 import { usePageVisibility } from '../../../src'
 
 afterEach(cleanup)
@@ -51,13 +53,16 @@ describe('usePageVisibility', () => {
       flushEffects()
 
       document.hidden = true
-      fireEvent(
-        document,
-        new Event('visibilitychange', {
-          bubbles: false,
-          cancelable: false
-        })
-      )
+
+      act(() => {
+        fireEvent(
+          document,
+          new Event('visibilitychange', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
+      })
 
       expect(visible).toBe(false)
     })
@@ -109,13 +114,15 @@ describe('usePageVisibility', () => {
       flushEffects()
 
       document.msHidden = true
-      fireEvent(
-        document,
-        new Event('msvisibilitychange', {
-          bubbles: false,
-          cancelable: false
-        })
-      )
+      act(() => {
+        fireEvent(
+          document,
+          new Event('msvisibilitychange', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
+      })
 
       expect(visible).toBe(false)
     })
@@ -167,13 +174,15 @@ describe('usePageVisibility', () => {
       flushEffects()
 
       document.webkitHidden = true
-      fireEvent(
-        document,
-        new Event('webkitvisibilitychange', {
-          bubbles: false,
-          cancelable: false
-        })
-      )
+      act(() => {
+        fireEvent(
+          document,
+          new Event('webkitvisibilitychange', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
+      })
 
       expect(visible).toBe(false)
     })
