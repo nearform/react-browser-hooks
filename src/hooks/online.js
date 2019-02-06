@@ -14,16 +14,12 @@ export function useOnline() {
   }
 
   useEffect(() => {
-    if (window.addEventListener) {
-      window.addEventListener('offline', handleChange, false)
-      window.addEventListener('online', handleChange, false)
-    }
+    window.addEventListener('offline', handleChange, false)
+    window.addEventListener('online', handleChange, false)
 
     return function cleanup() {
-      if (window.removeEventListener) {
-        window.removeEventListener('online', handleChange)
-        window.removeEventListener('offline', handleChange)
-      }
+      window.removeEventListener('online', handleChange)
+      window.removeEventListener('offline', handleChange)
     }
   }, [])
 
