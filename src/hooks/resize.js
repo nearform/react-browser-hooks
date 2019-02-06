@@ -1,19 +1,10 @@
 import { useState, useEffect } from 'react'
-import { initRaf, nextRaf, cleanupRaf } from '../utils/fps'
 
-export function useResize(options) {
+export function useResize() {
   const [size, setSize] = useState({
     height: window.innerHeight,
     width: window.innerWidth
   })
-
-  const raf = options && options.skip ? initRaf(options.skip) : null
-
-  function handleResizeThrottled() {
-    if (!raf) return handleResize()
-
-    nextRaf(raf, handleResize)
-  }
 
   function handleResize() {
     const newSize = {
@@ -24,29 +15,23 @@ export function useResize(options) {
     if (size.width !== newSize.width || size.height !== newSize.height) {
       setSize(newSize)
     }
-
-    if (raf) raf.ticking = false
   }
 
   useEffect(() => {
     if (window.addEventListener) {
-      window.addEventListener('resize', handleResizeThrottled, false)
+      window.addEventListener('resize', handleResize, false)
     } else if (window.attachEvent) {
-      window.attachEvent('onresize', handleResizeThrottled)
+      window.attachEvent('onresize', handleResize)
     }
 
     return function cleanup() {
-      if (raf) cleanupRaf(raf)
       if (window.removeEventListener) {
-        window.removeEventListener('resize', handleResizeThrottled)
+        window.removeEventListener('resize', handleResize)
       } else if (window.detachEvent) {
-        window.detachEvent('onresize', handleResizeThrottled)
+        window.detachEvent('onresize', handleResize)
       }
     }
-  }, [options.skip])
+  }, [])
 
-  return {
-    ...size,
-    throttled: raf ? true : false
-  }
+  return size
 }

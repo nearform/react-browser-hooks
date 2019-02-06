@@ -1,20 +1,55 @@
 import { useState, useEffect } from 'react'
 import { useResize } from './resize'
 
+// determine if we are in fullscreen mode and why
+// don't set any state in here as called on init too
+export function isFullScreenElement(doc, el) {
+  if (el && el.current) {
+    if (doc.fullscreenElement === el.current)
+      return { open: true, reason: 'fullscreenElement set to element' }
+    if (doc.mozFullScreenElement === el.current)
+      return { open: true, reason: 'mozFullScreenElement set to element' }
+    if (doc.webkitFullscreenElement === el.current)
+      return { open: true, reason: 'webkitFullscreenElement set to element' }
+    if (doc.msFullscreenElement === el.current)
+      return { open: true, reason: 'msFullscreenElement set to element' }
+  } else {
+    if (doc.fullscreenElement)
+      return { open: true, reason: 'fullscreenElement set' }
+    if (doc.mozFullScreenElement)
+      return { open: true, reason: 'mozFullScreenElement set' }
+    if (doc.webkitFullscreenElement)
+      return { open: true, reason: 'webkitFullscreenElement set' }
+    if (doc.msFullscreenElement)
+      return { open: true, reason: 'msFullscreenElement set' }
+
+    if (doc.fullscreen) return { open: true, reason: 'fullscreen true' }
+    if (doc.mozFullScreen) return { open: true, reason: 'mozFullScreen true' }
+    if (doc.webkitIsFullScreen)
+      return { open: true, reason: 'webkitIsFullScreen true' }
+    if (doc.fullScreenMode) return { open: true, reason: 'fullScreenMode true' }
+  }
+
+  return { open: false }
+}
+
 /**
  * Fullscreen hook based on user invoked request/exitFullScreen and associated triggered events
  * @param {object} element The element to be viewed fullscreen, defaults to documentElement
  * @returns {object} The fullscreen object, providing access to current state and functions
  */
-export function useFullScreen(element) {
+export function useFullScreen(options) {
   const docEl = document.documentElement
-  const [fullScreen, setFullScreen] = useState(isFullScreen())
+  const fsEl = options && options.element
+  const [fullScreen, setFullScreen] = useState(
+    isFullScreenElement(document, fsEl)
+  )
   const [lastEvent, setLastEvent] = useState(null)
   const [lastRequest, setLastRequest] = useState(null)
 
   // access various open fullscreen methods
   function openFullScreen() {
-    const el = (element && element.current) || docEl
+    const el = (fsEl && fsEl.current) || docEl
     if (el.requestFullscreen) {
       setLastRequest('requestFullScreen')
       el.requestFullscreen()
@@ -69,42 +104,9 @@ export function useFullScreen(element) {
 
   // various handlers call this so we have the source of event
   function setState(eventName) {
-    setFullScreen(isFullScreen())
+    const newState = isFullScreenElement(document, fsEl)
+    setFullScreen(newState)
     setLastEvent(eventName)
-  }
-
-  // determine if we are in fullscreen mode and why
-  // don't set any state in here as called on init too
-  function isFullScreen() {
-    if (element && element.current) {
-      if (document.fullscreenElement === element.current)
-        return { open: true, reason: 'fullscreenElement set to element' }
-      if (document.mozFullScreenElement === element.current)
-        return { open: true, reason: 'mozFullScreenElement set to element' }
-      if (document.webkitFullscreenElement === element.current)
-        return { open: true, reason: 'webkitFullscreenElement set to element' }
-      if (document.msFullscreenElement === element.current)
-        return { open: true, reason: 'msFullscreenElement set to element' }
-    } else {
-      if (document.fullscreenElement)
-        return { open: true, reason: 'fullscreenElement set' }
-      if (document.mozFullScreenElement)
-        return { open: true, reason: 'mozFullScreenElement set' }
-      if (document.webkitFullscreenElement)
-        return { open: true, reason: 'webkitFullscreenElement set' }
-      if (document.msFullscreenElement)
-        return { open: true, reason: 'msFullscreenElement set' }
-
-      if (document.fullscreen) return { open: true, reason: 'fullscreen true' }
-      if (document.mozFullScreen)
-        return { open: true, reason: 'mozFullScreen true' }
-      if (document.webkitIsFullScreen)
-        return { open: true, reason: 'webkitIsFullScreen true' }
-      if (document.fullScreenMode)
-        return { open: true, reason: 'fullScreenMode true' }
-    }
-
-    return { open: false }
   }
 
   useEffect(() => {
@@ -127,7 +129,7 @@ export function useFullScreen(element) {
       document.removeEventListener('MSFullscreenChange', handleMsChange2)
       document.removeEventListener('fullscreenchange', handleChange)
     }
-  }, [fullScreen.open])
+  }, [])
 
   return {
     fullScreen: fullScreen.open,
@@ -142,58 +144,46 @@ export function useFullScreen(element) {
   }
 }
 
-/**
- * Fullscreen hook baed on browser invoked fullscreen e.g. F11
- * Browsers have inbuilt fullscreen function, which is different than fullscreen of an
- * element. Typically this leaves the browser in a fullscreen mode that retains the address bar.
- * This cannot be invoked via javascript, but we can check and make educated guess as to whether in
- * fullscreen mode, or at least help users of this hook to guess within their level of acceptance
- * @param {object} element The element to be viewed fullscreen, defaults to documentElement
- * @returns {object} The fullscreen object, providing access to current state and functions
- */
+export function getSizeInfo() {
+  return {
+    screenTop: window.screenTop,
+    screenY: window.screenY,
+    screenWidth: window.screen.width,
+    screenHeight: window.screen.height,
+    innerWidth: window.innerWidth,
+    innerHeight: window.innerHeight
+  }
+}
+
+export function isFullScreenSize(sizeInfo) {
+  if (
+    sizeInfo.screenWidth === sizeInfo.innerWidth &&
+    sizeInfo.screenHeight === sizeInfo.innerHeight
+  ) {
+    return { open: true, reason: 'borderless fullscreen' }
+  } else if (!sizeInfo.screenTop && !sizeInfo.screenY) {
+    return { open: true, reason: 'screenTop and screenY are falsy' }
+  }
+
+  return { open: false }
+}
+
 export function useFullScreenBrowser() {
-  // reuse the useResizeHook to determine act on screen size changes,
-  // 5fps should be enough, doesn't really need to be faster for this event
-  useResize(5, handleResize)
+  const size = useResize()
 
-  const [fullScreen, setFullScreen] = useState(isFullScreen())
+  const initialSizeInfo = getSizeInfo()
+  const [fullScreen, setFullScreen] = useState(
+    isFullScreenSize(initialSizeInfo)
+  )
+  const [sizeInfo, setSizeInfo] = useState(initialSizeInfo)
 
-  function getSizeInfo() {
-    return {
-      screenTop: window.screenTop,
-      screenY: window.screenY,
-      screenWidth: window.screen.width,
-      screenHeight: window.screen.height,
-      innerWidth: window.innerWidth,
-      innerHeight: window.innerHeight,
-      browserWidth: window.outerWidth,
-      browserHeight: window.outerHeight
-    }
-  }
-
-  const [sizeInfo, setSizeInfo] = useState(getSizeInfo())
-
-  function handleResize(newSize) {
-    //something has changed so let's see if in fullscreen mode
-    const result = isFullScreen()
-    setFullScreen(result)
-    setSizeInfo(getSizeInfo())
-  }
-
-  function isFullScreen() {
+  //only if width or height changes do we update
+  useEffect(() => {
     const sizeInfo = getSizeInfo()
-
-    if (
-      sizeInfo.screenWidth === sizeInfo.innerWidth &&
-      sizeInfo.screenHeight === sizeInfo.innerHeight
-    ) {
-      return { open: true, reason: 'borderless fullscreen' }
-    } else if (!window.screenTop && !window.screenY) {
-      return { open: true, reason: 'screenTop and screenY are falsy' }
-    }
-
-    return { open: false }
-  }
+    const result = isFullScreenSize(sizeInfo)
+    setFullScreen(result)
+    setSizeInfo(sizeInfo)
+  }, [size.width, size.height])
 
   return {
     fullScreen: fullScreen.open,

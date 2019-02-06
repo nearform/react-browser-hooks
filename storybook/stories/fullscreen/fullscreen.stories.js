@@ -34,7 +34,7 @@ function BrowserFullScreen() {
 
 function ElementFullScreen() {
   const el = useRef(null)
-  const fsEl = useFullScreen(el)
+  const fsEl = useFullScreen({ element: el })
   return (
     <div>
       <h2>Element FullScreen Demo</h2>

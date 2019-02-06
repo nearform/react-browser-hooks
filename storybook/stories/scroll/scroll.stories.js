@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { withReadme } from 'storybook-readme'
 
@@ -6,12 +6,7 @@ import { useScroll } from '../../../src'
 import readme from './README.md'
 
 function Scroll() {
-  const [skip, setSkip] = useState(20)
-  const scroll = useScroll({ skip })
-
-  function handleChange(e) {
-    setSkip(e.target.value)
-  }
+  const scroll = useScroll()
 
   return (
     <div
@@ -26,11 +21,6 @@ function Scroll() {
         <p>
           Top: {Math.round(scroll.top)}px, Left: {Math.round(scroll.left)}px
           <br />
-          Throttled: {scroll.throttled ? 'yes' : 'no'}
-        </p>
-        <p>
-          Skip Frames:{' '}
-          <input type="number" value={skip} onChange={handleChange} />
         </p>
       </div>
     </div>
