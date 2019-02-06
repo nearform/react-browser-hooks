@@ -1,4 +1,4 @@
-import { fireEvent, flushEffects } from 'react-testing-library'
+import { fireEvent } from 'react-testing-library'
 import { testHook, cleanup } from 'react-proxy-hook'
 import { act } from 'react-dom/test-utils'
 
@@ -48,9 +48,10 @@ describe('usePageVisibility', () => {
     it('updates state on the "visibilitychange" event', () => {
       let visible
       document.hidden = false
-      testHook(() => (visible = usePageVisibility()))
 
-      flushEffects()
+      act(() => {
+        testHook(() => (visible = usePageVisibility()))
+      })
 
       document.hidden = true
 
@@ -109,9 +110,10 @@ describe('usePageVisibility', () => {
     it('updates state on the "msvisibilitychange" event', () => {
       let visible
       document.msHidden = false
-      testHook(() => (visible = usePageVisibility()))
 
-      flushEffects()
+      act(() => {
+        testHook(() => (visible = usePageVisibility()))
+      })
 
       document.msHidden = true
       act(() => {
@@ -169,9 +171,10 @@ describe('usePageVisibility', () => {
     it('updates state on the "webkitvisibilitychange" event', () => {
       let visible
       document.webkitHidden = false
-      testHook(() => (visible = usePageVisibility()))
 
-      flushEffects()
+      act(() => {
+        testHook(() => (visible = usePageVisibility()))
+      })
 
       document.webkitHidden = true
       act(() => {
