@@ -26,7 +26,6 @@ Returns an object containing:
 - info (object): some information as to why we are in fullScreen (browser specific)
     - lastRequest (string): the request made to enter/exist fullscreen
     - lastEvent (string): the event raised
-    - reason (string): the reason why, if in fullScreen mode
 
 See the /demo/src/components/fullscreen component for a full usage example.
 
