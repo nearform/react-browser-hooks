@@ -1,4 +1,4 @@
-import { fireEvent, flushEffects } from 'react-testing-library'
+import { fireEvent } from 'react-testing-library'
 import { testHook, cleanup } from 'react-proxy-hook'
 import { act } from 'react-dom/test-utils'
 
@@ -18,9 +18,10 @@ describe('useMousePosition', () => {
 
   it('updates state on "mousemove"', () => {
     let x, y
-    testHook(() => ({ x, y } = useMousePosition()))
 
-    flushEffects()
+    act(() => {
+      testHook(() => ({ x, y } = useMousePosition()))
+    })
 
     act(() => {
       fireEvent.mouseMove(document.body, { clientX: 100, clientY: 100 })

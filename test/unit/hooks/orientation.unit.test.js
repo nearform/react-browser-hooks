@@ -1,4 +1,4 @@
-import { fireEvent, flushEffects } from 'react-testing-library'
+import { fireEvent } from 'react-testing-library'
 import { testHook, cleanup } from 'react-proxy-hook'
 import { act } from 'react-dom/test-utils'
 
@@ -20,9 +20,10 @@ describe('useOrientation', () => {
   it('updates state on "orientationchange"', () => {
     let angle, type
     window.screen.orientation = { angle: 0, type: 'portrait-primary' }
-    testHook(() => ({ angle, type } = useOrientation()))
 
-    flushEffects()
+    act(() => {
+      testHook(() => ({ angle, type } = useOrientation()))
+    })
 
     window.screen.orientation = { angle: 90, type: 'landscape-primary' }
 
