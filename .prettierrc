@@ -1,6 +1,6 @@
 {
-  jsxBracketSameLine: true,
-  arrowParens: 'always',
-  singleQuote: true,
-  semi: false
+  "jsxBracketSameLine": true,
+  "arrowParens": "always",
+  "singleQuote": true,
+  "semi": false
 }
