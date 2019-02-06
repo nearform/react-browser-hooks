@@ -16,7 +16,7 @@ const { toggle, fullsceen } = useFullScreen()
 ```
 
 Parameters:
-- element (object): optional useRef() React hook returned object (defaults to document element)
+- options (object): set { element } property using object returned from the useRef() React hook (if options not set, fullscreen defaults to root document element)
 
 Returns an object containing:
 - toggle (function): toggles full screen mode
@@ -32,7 +32,7 @@ See the /demo/src/components/fullscreen component for a full usage example.
 
 ## useFullScreenBrowser Hook
 
-The useFullScreenBrowser Hook detects if the user has entered fullscreen using the browser menu.  As this does not trigger any browser events internally, the component must listen for resize events (limited to 1 frame per second), and evaluate whether in full screen mode or not. Both useFullScreenBrowser and useFullScreen can be used together to detect these modes (see the FullScreen demo component for an example).
+The useFullScreenBrowser Hook detects if the user has entered fullscreen using the browser menu.
 
 Import as follows:
 
