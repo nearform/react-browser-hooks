@@ -5,32 +5,21 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/react-browser-hooks
     docker:
       - image: circleci/node:10.15-browsers
-
-    working_directory: ~/react-browser-hooks
-
     steps:
       - checkout
-
       # Download and cache dependencies
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
+          key: dependency-cache-{{ checksum "package.json" }}
       - run: npm install
-
       - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run lint
       - run: npm run lint
-
-      # run tests!
-      - run: npm test
-
-
+      - run: npm run test:coverage
+      - run: |
+          npm install codecov.io coveralls
+          cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
