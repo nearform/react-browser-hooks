@@ -1,5 +1,4 @@
-import { fireEvent } from 'react-testing-library'
-import { testHook, cleanup } from 'react-proxy-hook'
+import { testHook, cleanup, fireEvent } from 'react-testing-library'
 import { act } from 'react-dom/test-utils'
 
 import { usePageVisibility } from '../../../src'
