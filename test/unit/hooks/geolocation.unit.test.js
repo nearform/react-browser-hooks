@@ -1,4 +1,4 @@
-import { testHook, cleanup } from 'react-proxy-hook'
+import { testHook, cleanup } from 'react-testing-library'
 import { act } from 'react-dom/test-utils'
 
 import { useGeolocation } from '../../../src'
