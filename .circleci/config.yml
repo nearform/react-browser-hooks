@@ -10,7 +10,6 @@ jobs:
       - image: circleci/node:10.15-browsers
     steps:
       - checkout
-      # Download and cache dependencies
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run: npm install
@@ -21,5 +20,5 @@ jobs:
       - run: npm run lint
       - run: npm run test:coverage
       - run: |
-          npm install codecov.io coveralls
+          npm install coveralls
           cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
