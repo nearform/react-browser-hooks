@@ -23,7 +23,7 @@ You can find documentation and demo on https://react-browser-hooks.netlify.com/
 
 ## Example Usage
 
-Eg. The FullScreen hook:
+E.g. The FullScreen hook:
 
 ```javascript
 import { useFullScreen } from '@nearform/react-browser-hooks'
