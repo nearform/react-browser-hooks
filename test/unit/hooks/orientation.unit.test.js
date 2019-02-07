@@ -6,6 +6,16 @@ import { useOrientation } from '../../../src'
 afterEach(cleanup)
 
 describe('useOrientation', () => {
+  it('sets initial state to the default state if window.screen.orientation is falsy', () => {
+    let angle, type
+    window.screen.orientation = null
+
+    testHook(() => ({ angle, type } = useOrientation()))
+
+    expect(angle).toBe(0)
+    expect(type).toBe('landscape-primary')
+  })
+
   it('sets initial state to window.screen.orientation', () => {
     let angle, type
     window.screen.orientation = { angle: 0, type: 'portrait-primary' }
