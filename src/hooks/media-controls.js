@@ -88,6 +88,7 @@ export function useMediaControls(element) {
 
   return {
     currentTime,
+    media: element.current,
     mute,
     muted,
     unmute,
