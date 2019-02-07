@@ -26,10 +26,8 @@ You can find documentation and demo on https://react-browser-hooks.netlify.com/
 Eg. The FullScreen hook:
 
 ```javascript
-import { FullScreen } from '@nearform/react-browser-hooks'
-```
+import { useFullScreen } from '@nearform/react-browser-hooks'
 
-```javascript
 const fs = useFullScreen()
 <button onClick={fs.toggle}>{fs.fullScreen ? 'Close' : 'Open'}</button>
 ```
