@@ -1,12 +1,14 @@
 import React, { useRef } from 'react'
-import { render, cleanup, fireEvent } from 'react-testing-library'
+import { cleanup, fireEvent, render } from 'react-testing-library'
 import { act } from 'react-dom/test-utils'
 
 import { useMediaControls } from '../../../src'
 
+// ref
+let mediaElementRef
+
 // hook state
 let currentTime,
-  media,
   mute,
   muted,
   unmute,
@@ -28,10 +30,9 @@ let pausedGetter
 beforeEach(() => {
   act(() => {
     testMediaControlsHook(
-      (player) =>
+      () =>
         ({
           currentTime,
-          media,
           mute,
           muted,
           unmute,
@@ -43,17 +44,36 @@ beforeEach(() => {
           setVolume,
           stop,
           volume
-        } = useMediaControls(player))
+        } = useMediaControls(mediaElementRef))
     )
   })
 
-  mediaElementPlaySpy = jest.spyOn(media, 'play').mockImplementation(() => {})
-  mediaElementPauseSpy = jest.spyOn(media, 'pause').mockImplementation(() => {})
+  mediaElementPlaySpy = jest
+    .spyOn(mediaElementRef.current, 'play')
+    .mockImplementation(() => {})
+  mediaElementPauseSpy = jest
+    .spyOn(mediaElementRef.current, 'pause')
+    .mockImplementation(() => {})
 
-  pausedGetter = jest.spyOn(media, 'paused', 'get')
+  pausedGetter = jest.spyOn(mediaElementRef.current, 'paused', 'get')
 })
 
 afterEach(cleanup)
+
+function TestMediaControlsHook({ callback }) {
+  mediaElementRef = useRef(null)
+  callback()
+  return (
+    <audio
+      ref={mediaElementRef}
+      src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/00/ea/65/00ea65de-25f1-3217-7a2b-097e989dd884/mzaf_5030465069226935473.plus.aac.p.m4a"
+    />
+  )
+}
+
+function testMediaControlsHook(callback) {
+  render(<TestMediaControlsHook callback={callback} />)
+}
 
 describe('useMediaControls', () => {
   it('sets initial state to match the media element', () => {
@@ -74,7 +94,7 @@ describe('useMediaControls', () => {
 
       act(() => {
         fireEvent(
-          media,
+          mediaElementRef.current,
           new Event('play', {
             bubbles: false,
             cancelable: false
@@ -90,7 +110,7 @@ describe('useMediaControls', () => {
 
       act(() => {
         fireEvent(
-          media,
+          mediaElementRef.current,
           new Event('playing', {
             bubbles: false,
             cancelable: false
@@ -109,7 +129,7 @@ describe('useMediaControls', () => {
 
       act(() => {
         fireEvent(
-          media,
+          mediaElementRef.current,
           new Event('play', {
             bubbles: false,
             cancelable: false
@@ -128,7 +148,7 @@ describe('useMediaControls', () => {
 
       act(() => {
         fireEvent(
-          media,
+          mediaElementRef.current,
           new Event('pause', {
             bubbles: false,
             cancelable: false
@@ -144,7 +164,7 @@ describe('useMediaControls', () => {
 
       act(() => {
         fireEvent(
-          media,
+          mediaElementRef.current,
           new Event('waiting', {
             bubbles: false,
             cancelable: false
@@ -171,7 +191,7 @@ describe('useMediaControls', () => {
       expect(volume).toBe(1)
 
       act(() => {
-        media.volume = 0.2 // triggers "volumechange" event
+        mediaElementRef.current.volume = 0.2 // triggers "volumechange" event
       })
 
       expect(volume).toBe(0.2)
@@ -230,22 +250,24 @@ describe('useMediaControls', () => {
   })
 
   describe('seeks', () => {
-    // it('when seek() is called', () => {
-    //   expect(currentTime).toBe(0)
+    it('when seek() is called', () => {
+      expect(currentTime).toBe(0)
 
-    //   act(() => {
-    //     seek(2) //todo: not firing seeked event as expected, possible bug in jsdom
-    //   })
+      act(() => {
+        seek(2)
+      })
 
-    //   expect(currentTime).toBe(2)
-    // })
+      mediaElementRef.current.addEventListener('seeked', () => {
+        expect(currentTime).toBe(2)
+      })
+    })
 
     it('when a "seeked" event is triggered', () => {
-      media.currentTime = 2
+      mediaElementRef.current.currentTime = 2
 
       act(() => {
         fireEvent(
-          media,
+          mediaElementRef.current,
           new Event('seeked', {
             bubbles: false,
             cancelable: false
@@ -257,11 +279,11 @@ describe('useMediaControls', () => {
     })
 
     it('when a "timeupdate" event is triggered', () => {
-      media.currentTime = 2
+      mediaElementRef.current.currentTime = 2
 
       act(() => {
         fireEvent(
-          media,
+          mediaElementRef.current,
           new Event('timeupdate', {
             bubbles: false,
             cancelable: false
@@ -273,60 +295,77 @@ describe('useMediaControls', () => {
     })
   })
 
-  // todo: seek method not working in tests - test using spys instead
-  // describe('stops', () => {
-  //   // play the media before stopping it
-  //   beforeEach(() => {
-  //     pausedGetter.mockReturnValue(false)
+  describe('stops', () => {
+    // play the media before stopping it
+    beforeEach(() => {
+      pausedGetter.mockReturnValue(false)
 
-  //     act(() => {
-  //       fireEvent(
-  //         media,
-  //         new Event('play', {
-  //           bubbles: false,
-  //           cancelable: false
-  //         })
-  //       )
-  //     })
+      act(() => {
+        fireEvent(
+          mediaElementRef.current,
+          new Event('play', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
+      })
 
-  //     media.currentTime = 2
+      mediaElementRef.current.currentTime = 2
 
-  //     act(() => {
-  //       fireEvent(
-  //         media,
-  //         new Event('seeked', {
-  //           bubbles: false,
-  //           cancelable: false
-  //         })
-  //       )
-  //     })
-  //   })
+      act(() => {
+        fireEvent(
+          mediaElementRef.current,
+          new Event('seeked', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
+      })
+    })
 
-  //   it('when stop() is called', () => {
-  //     expect(paused).toBe(false)
-  //     expect(currentTime).toBeGreaterThan(0)
+    it('when stop() is called', () => {
+      expect(paused).toBe(false)
+      expect(currentTime).toBeGreaterThan(0)
 
-  //     act(() => {
-  //       stop()
-  //     })
+      act(() => {
+        stop()
+      })
 
-  //     // expect(paused).toBe(true)
-  //     expect(currentTime).toBe(0)
-  //   })
-  // })
+      mediaElementRef.current.addEventListener('seeked', () => {
+        expect(paused).toBe(true)
+        expect(currentTime).toBe(0)
+      })
+    })
+  })
+
+  describe('restarts', () => {
+    // end the media before restarting it
+    beforeEach(() => {
+      mediaElementRef.current.currentTime = 30
+
+      act(() => {
+        fireEvent(
+          mediaElementRef.current,
+          new Event('seeked', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
+      })
+    })
+
+    it('when restart() is called', () => {
+      expect(paused).toBe(true)
+      expect(currentTime).toBe(30)
+
+      act(() => {
+        restart()
+      })
+
+      mediaElementRef.current.addEventListener('seeked', () => {
+        expect(paused).toBe(false)
+        expect(currentTime).toBeGreaterThan(0)
+      })
+    })
+  })
 })
-
-function TestMediaControlsHook({ callback }) {
-  const player = useRef(null)
-  callback(player)
-  return (
-    <audio
-      ref={player}
-      src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/00/ea/65/00ea65de-25f1-3217-7a2b-097e989dd884/mzaf_5030465069226935473.plus.aac.p.m4a"
-    />
-  )
-}
-
-function testMediaControlsHook(callback) {
-  render(<TestMediaControlsHook callback={callback} />)
-}

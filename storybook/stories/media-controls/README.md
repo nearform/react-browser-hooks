@@ -29,8 +29,6 @@ Accepts a ref to an
 
 Returns an object containing:
 
-- media(element): The HTMLMediaElement that is bound to the hook
-
 - paused(boolean): Tells whether the media element is paused. From [`HTMLMediaElement.paused`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/paused). Initialises to `null` until the media element has been rendered
 - pause(function): Will pause playback of the media, if the media is already in
   a paused state this method will have no effect. Calls

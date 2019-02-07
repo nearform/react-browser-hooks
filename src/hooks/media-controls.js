@@ -51,8 +51,6 @@ export function useMediaControls(element) {
   }
 
   useEffect(() => {
-    if (!element || !element.current) return
-
     const isPaused = () => element.current.paused || element.current.ended
 
     setCurrentTime(element.current.currentTime)
@@ -88,7 +86,6 @@ export function useMediaControls(element) {
 
   return {
     currentTime,
-    media: element.current,
     mute,
     muted,
     unmute,
