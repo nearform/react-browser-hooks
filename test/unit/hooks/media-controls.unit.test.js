@@ -179,44 +179,52 @@ describe('useMediaControls', () => {
   describe('sets volume', () => {
     it('when setVolume() is called', () => {
       expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
 
       act(() => {
         setVolume(0.5)
       })
 
       expect(volume).toBe(0.5)
+      expect(mediaElementRef.current.volume).toBe(0.5)
     })
 
     it('when a "volumechange" event is triggered', () => {
       expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
 
       act(() => {
         mediaElementRef.current.volume = 0.2 // triggers "volumechange" event
       })
 
       expect(volume).toBe(0.2)
+      expect(mediaElementRef.current.volume).toBe(0.2)
     })
   })
 
   describe('mutes', () => {
     it('when mute() is called', () => {
       expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
 
       act(() => {
         mute()
       })
 
       expect(volume).toBe(0)
+      expect(mediaElementRef.current.volume).toBe(0)
     })
 
     it('when setVolume() is called with 0', () => {
       expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
 
       act(() => {
         setVolume(0)
       })
 
       expect(volume).toBe(0)
+      expect(mediaElementRef.current.volume).toBe(0)
     })
   })
 
@@ -230,28 +238,33 @@ describe('useMediaControls', () => {
 
     it('when unmute() is called', () => {
       expect(volume).toBe(0)
+      expect(mediaElementRef.current.volume).toBe(0)
 
       act(() => {
         unmute()
       })
 
       expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
     })
 
     it('when setVolume() is called with >0', () => {
       expect(volume).toBe(0)
+      expect(mediaElementRef.current.volume).toBe(0)
 
       act(() => {
         setVolume(1)
       })
 
       expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
     })
   })
 
   describe('seeks', () => {
     it('when seek() is called', () => {
       expect(currentTime).toBe(0)
+      expect(mediaElementRef.current.currentTime).toBe(0)
 
       act(() => {
         seek(2)
@@ -259,6 +272,7 @@ describe('useMediaControls', () => {
 
       mediaElementRef.current.addEventListener('seeked', () => {
         expect(currentTime).toBe(2)
+        expect(mediaElementRef.current.currentTime).toBe(2)
       })
     })
 
@@ -276,6 +290,7 @@ describe('useMediaControls', () => {
       })
 
       expect(currentTime).toBe(2)
+      expect(mediaElementRef.current.currentTime).toBe(2)
     })
 
     it('when a "timeupdate" event is triggered', () => {
@@ -292,6 +307,7 @@ describe('useMediaControls', () => {
       })
 
       expect(currentTime).toBe(2)
+      expect(mediaElementRef.current.currentTime).toBe(2)
     })
   })
 
@@ -326,6 +342,7 @@ describe('useMediaControls', () => {
     it('when stop() is called', () => {
       expect(paused).toBe(false)
       expect(currentTime).toBeGreaterThan(0)
+      expect(mediaElementRef.current.currentTime).toBeGreaterThan(0)
 
       act(() => {
         stop()
@@ -334,6 +351,7 @@ describe('useMediaControls', () => {
       mediaElementRef.current.addEventListener('seeked', () => {
         expect(paused).toBe(true)
         expect(currentTime).toBe(0)
+        expect(mediaElementRef.current.currentTime).toBe(0)
       })
     })
   })
@@ -357,6 +375,7 @@ describe('useMediaControls', () => {
     it('when restart() is called', () => {
       expect(paused).toBe(true)
       expect(currentTime).toBe(30)
+      expect(mediaElementRef.current.currentTime).toBe(30)
 
       act(() => {
         restart()
@@ -365,6 +384,7 @@ describe('useMediaControls', () => {
       mediaElementRef.current.addEventListener('seeked', () => {
         expect(paused).toBe(false)
         expect(currentTime).toBeGreaterThan(0)
+        expect(mediaElementRef.current.currentTime).toBeGreaterThan(0)
       })
     })
   })
