@@ -1,6 +1,6 @@
-## useMediaControls Hook
+## MediaControls Hook
 
-The useMediaControls hook gives you access to the `HTMLMediaElement` API. Create custom controls for your media.
+The MediaControls hook gives you access to the `HTMLMediaElement` API. Create custom controls for your media.
 
 Import as follows:
 

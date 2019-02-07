@@ -1,6 +1,6 @@
-## useOrientation Hook
+## Orientation Hook
 
-The useOrientation hook gives you device orientation.  
+The Orientation hook gives you device orientation.  
 
 Import as follows:
 
