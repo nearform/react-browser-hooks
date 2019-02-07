@@ -137,108 +137,108 @@ describe('useFullScreen', () => {
         expect(fullScreen).toBe(false)
       })
     })
+  })
 
-    describe('change events', () => {
-      it('updates state when "webkitfullscreenchange" fires', () => {
-        let fullScreen
-        document.webkitIsFullScreen = false
-        testHook(() => ({ fullScreen } = useFullScreen()))
+  describe('change events', () => {
+    it('updates state when "webkitfullscreenchange" fires', () => {
+      let fullScreen
+      document.webkitIsFullScreen = false
+      testHook(() => ({ fullScreen } = useFullScreen()))
 
-        document.webkitIsFullScreen = true
+      document.webkitIsFullScreen = true
 
-        act(() => {
-          fireEvent(
-            document,
-            new Event('webkitfullscreenchange', {
-              bubbles: false,
-              cancelable: false
-            })
-          )
-        })
-
-        expect(fullScreen).toBe(true)
+      act(() => {
+        fireEvent(
+          document,
+          new Event('webkitfullscreenchange', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
       })
 
-      it('updates state when "mozfullscreenchange" fires', () => {
-        let fullScreen
-        document.mozFullScreen = false
-        testHook(() => ({ fullScreen } = useFullScreen()))
+      expect(fullScreen).toBe(true)
+    })
 
-        document.mozFullScreen = true
+    it('updates state when "mozfullscreenchange" fires', () => {
+      let fullScreen
+      document.mozFullScreen = false
+      testHook(() => ({ fullScreen } = useFullScreen()))
 
-        act(() => {
-          fireEvent(
-            document,
-            new Event('mozfullscreenchange', {
-              bubbles: false,
-              cancelable: false
-            })
-          )
-        })
+      document.mozFullScreen = true
 
-        expect(fullScreen).toBe(true)
+      act(() => {
+        fireEvent(
+          document,
+          new Event('mozfullscreenchange', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
       })
 
-      it('updates state when "msfullscreenchange" fires', () => {
-        let fullScreen
-        document.fullScreenMode = false
-        testHook(() => ({ fullScreen } = useFullScreen()))
+      expect(fullScreen).toBe(true)
+    })
 
-        document.fullScreenMode = true
+    it('updates state when "msfullscreenchange" fires', () => {
+      let fullScreen
+      document.fullScreenMode = false
+      testHook(() => ({ fullScreen } = useFullScreen()))
 
-        act(() => {
-          fireEvent(
-            document,
-            new Event('msfullscreenchange', {
-              bubbles: false,
-              cancelable: false
-            })
-          )
-        })
+      document.fullScreenMode = true
 
-        expect(fullScreen).toBe(true)
+      act(() => {
+        fireEvent(
+          document,
+          new Event('msfullscreenchange', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
       })
 
-      it('updates state when "MSFullscreenChange" fires', () => {
-        let fullScreen
-        document.fullScreenMode = false
-        testHook(() => ({ fullScreen } = useFullScreen()))
+      expect(fullScreen).toBe(true)
+    })
 
-        document.fullScreenMode = true
+    it('updates state when "MSFullscreenChange" fires', () => {
+      let fullScreen
+      document.fullScreenMode = false
+      testHook(() => ({ fullScreen } = useFullScreen()))
 
-        act(() => {
-          fireEvent(
-            document,
-            new Event('MSFullscreenChange', {
-              bubbles: false,
-              cancelable: false
-            })
-          )
-        })
+      document.fullScreenMode = true
 
-        expect(fullScreen).toBe(true)
+      act(() => {
+        fireEvent(
+          document,
+          new Event('MSFullscreenChange', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
       })
 
-      it('updates state when "fullscreenchange" fires', () => {
-        let fullScreen
-        document.fullscreen = false
+      expect(fullScreen).toBe(true)
+    })
 
-        testHook(() => ({ fullScreen } = useFullScreen()))
+    it('updates state when "fullscreenchange" fires', () => {
+      let fullScreen
+      document.fullscreen = false
 
-        document.fullscreen = true
+      testHook(() => ({ fullScreen } = useFullScreen()))
 
-        act(() => {
-          fireEvent(
-            document,
-            new Event('fullscreenchange', {
-              bubbles: false,
-              cancelable: false
-            })
-          )
-        })
+      document.fullscreen = true
 
-        expect(fullScreen).toBe(true)
+      act(() => {
+        fireEvent(
+          document,
+          new Event('fullscreenchange', {
+            bubbles: false,
+            cancelable: false
+          })
+        )
       })
+
+      expect(fullScreen).toBe(true)
     })
   })
 
