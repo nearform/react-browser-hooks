@@ -57,7 +57,7 @@
     "react-dom": "16.8.1",
     "react-testing-library": "5.5.3",
     "storybook-readme": "4.0.5",
-    "testcafe": "0.23.3"
+    "testcafe": "1.0.0"
   },
   "author": "NearForm",
   "homepage": "https://github.com/nearform/react-browser-hooks",
