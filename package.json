@@ -22,7 +22,7 @@
     "build-storybook": "build-storybook -c storybook/.storybook",
     "test": "npm run test:unit",
     "test:unit": "jest",
-    "test:acceptance": "testcafe chrome,firefox test/acceptance/ --app \"npm start\"",
+    "test:acceptance": "testcafe chrome,firefox test/acceptance/",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
