@@ -51,8 +51,6 @@ export function useMediaControls(element) {
   }
 
   useEffect(() => {
-    if (!element || !element.current) return
-
     const isPaused = () => element.current.paused || element.current.ended
 
     setCurrentTime(element.current.currentTime)
