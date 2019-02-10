@@ -1,3 +1,4 @@
+export * from './hooks/click-outside'
 export * from './hooks/fullscreen'
 export * from './hooks/geolocation'
 export * from './hooks/mouse-position'
