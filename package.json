@@ -57,7 +57,6 @@
     "react": "16.8.1",
     "react-dom": "16.8.1",
     "react-testing-library": "5.6.0",
-    "shelljs": "^0.8.3",
     "storybook-readme": "4.0.5",
     "testcafe": "1.0.0"
   },
