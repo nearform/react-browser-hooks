@@ -33,7 +33,7 @@ beforeEach(() => {
 afterEach(cleanup)
 
 describe('useClickOutside', () => {
-  it('fires a click event on clicking outside the component', () => {
+  it('calls callback with click event on clicking outside the component', () => {
     act(() => {
       fireEvent(
         document.body,
@@ -50,7 +50,7 @@ describe('useClickOutside', () => {
     expect(callback.mock.calls[0][0].type).toBe('click')
   })
 
-  it('does not fire a click event when the component itself receives a click', () => {
+  it('does not call callback when the component itself receives a click', () => {
     act(() => {
       fireEvent(
         testElementRef.current,
@@ -64,7 +64,7 @@ describe('useClickOutside', () => {
     expect(callback).toBeCalledTimes(0)
   })
 
-  it('does not fire a click event when a child receives a click', () => {
+  it('does not call callback when a child receives a click', () => {
     act(() => {
       fireEvent(
         childElementRef.current,
