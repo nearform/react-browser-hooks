@@ -6,11 +6,20 @@ import { useClickOutside } from '../../../src'
 
 let callback
 let testElementRef = createRef()
+let childElementRef = createRef()
 
 beforeEach(() => {
+  const TestChildComponent = forwardRef((props, ref) => {
+    return <div ref={ref} />
+  })
+
   const TestClickOutsideHook = forwardRef(({ callback }, ref) => {
     useClickOutside(ref, callback)
-    return <div ref={ref} />
+    return (
+      <div ref={ref}>
+        <TestChildComponent ref={childElementRef} />
+      </div>
+    )
   })
 
   const testClickOutsideHook = (callback) => {
@@ -45,6 +54,20 @@ describe('useClickOutside', () => {
     act(() => {
       fireEvent(
         testElementRef.current,
+        new Event('click', {
+          bubbles: true,
+          cancelable: false
+        })
+      )
+    })
+
+    expect(callback).toBeCalledTimes(0)
+  })
+
+  it('does not fire a click event when a child receives a click', () => {
+    act(() => {
+      fireEvent(
+        childElementRef.current,
         new Event('click', {
           bubbles: true,
           cancelable: false
