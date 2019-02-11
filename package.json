@@ -11,6 +11,7 @@
     "umd"
   ],
   "scripts": {
+    "acceptance": "testcafe chrome,firefox test/acceptance/",
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
     "format": "prettier --write **/*.js",
@@ -18,11 +19,11 @@
     "lint-fix": "eslint ./*.js src test --fix",
     "prepublishOnly": "npm run build",
     "start": "npm run storybook",
-    "storybook": "start-storybook -p 3000 -c storybook/.storybook",
+    "storybook": "start-storybook -p 3000 -c storybook/.storybook --ci",
     "build-storybook": "build-storybook -c storybook/.storybook",
     "test": "npm run test:unit",
     "test:unit": "jest",
-    "test:acceptance": "testcafe chrome,firefox test/acceptance/ --app \"npm start\"",
+    "test:acceptance": "./bin/acceptance.js",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
@@ -57,7 +58,7 @@
     "react-dom": "16.8.1",
     "react-testing-library": "5.6.0",
     "storybook-readme": "4.0.5",
-    "testcafe": "0.23.3"
+    "testcafe": "1.0.0"
   },
   "author": "NearForm",
   "homepage": "https://github.com/nearform/react-browser-hooks",
