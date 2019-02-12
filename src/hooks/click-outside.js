@@ -1,25 +1,17 @@
 import { useEffect } from 'react'
 
 export function useClickOutside(el, onClick) {
+  const els = [].concat(el)
+
   const handler = (ev) => {
-    let target = ev.target
-
-    if (target === el.current) {
-      return
+    const target = ev.target
+    if (els.every((ref) => !ref.current.contains(target))) {
+      onClick(ev)
     }
-
-    while (target != null) {
-      target = target.parentElement
-      if (target === el.current) {
-        return
-      }
-    }
-
-    onClick(ev)
   }
 
   useEffect(() => {
     window.addEventListener('click', handler)
     return () => window.removeEventListener('click', handler)
-  }, [el.current])
+  }, [el])
 }
