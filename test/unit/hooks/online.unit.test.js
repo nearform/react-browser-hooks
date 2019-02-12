@@ -13,22 +13,22 @@ afterEach(cleanup)
 
 describe('useOnline', () => {
   it('sets initial state to window.navigator.onLine', () => {
-    let status
+    let online
 
     onLineGetter.mockReturnValue(true)
 
-    testHook(() => ({ status } = useOnline()))
+    testHook(() => (online = useOnline()))
 
-    expect(status).toBe(true)
+    expect(online).toBe(true)
   })
 
   it('updates state on "online"', () => {
-    let status
+    let online
 
     onLineGetter.mockReturnValue(false)
 
     act(() => {
-      testHook(() => ({ status } = useOnline()))
+      testHook(() => (online = useOnline()))
     })
 
     onLineGetter.mockReturnValue(true)
@@ -43,17 +43,17 @@ describe('useOnline', () => {
       )
     })
 
-    expect(status).toBe(true)
+    expect(online).toBe(true)
   })
 })
 
 it('updates state on "offline"', () => {
-  let status
+  let online
 
   onLineGetter.mockReturnValue(true)
 
   act(() => {
-    testHook(() => ({ status } = useOnline()))
+    testHook(() => (online = useOnline()))
   })
 
   onLineGetter.mockReturnValue(false)
@@ -68,5 +68,5 @@ it('updates state on "offline"', () => {
     )
   })
 
-  expect(status).toBe(false)
+  expect(online).toBe(false)
 })
