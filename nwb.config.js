@@ -4,6 +4,7 @@ module.exports = {
     esModules: true,
     umd: {
       global: 'ReactBrowserHooks',
+      entry: './umd.js',
       externals: {
         react: 'React'
       }
