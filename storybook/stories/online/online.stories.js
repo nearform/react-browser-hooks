@@ -5,7 +5,7 @@ import { useOnline } from '../../../src'
 import readme from './README.md'
 
 function Online() {
-  const { online } = useOnline()
+  const online = useOnline()
   return (
     <div>
       <h2>Online Demo</h2>

@@ -17,7 +17,7 @@ describe('useOnline', () => {
 
     onLineGetter.mockReturnValue(true)
 
-    testHook(() => ({ online } = useOnline()))
+    testHook(() => (online = useOnline()))
 
     expect(online).toBe(true)
   })
@@ -28,7 +28,7 @@ describe('useOnline', () => {
     onLineGetter.mockReturnValue(false)
 
     act(() => {
-      testHook(() => ({ online } = useOnline()))
+      testHook(() => (online = useOnline()))
     })
 
     onLineGetter.mockReturnValue(true)
@@ -53,7 +53,7 @@ it('updates state on "offline"', () => {
   onLineGetter.mockReturnValue(true)
 
   act(() => {
-    testHook(() => ({ online } = useOnline()))
+    testHook(() => (online = useOnline()))
   })
 
   onLineGetter.mockReturnValue(false)

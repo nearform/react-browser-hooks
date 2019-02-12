@@ -23,7 +23,5 @@ export function useOnline() {
     }
   }, [])
 
-  return {
-    online
-  }
+  return online
 }

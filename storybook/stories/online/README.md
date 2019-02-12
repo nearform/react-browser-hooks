@@ -11,10 +11,10 @@ import { useOnline } from '@nearform/react-browser-hooks'
 Example of usage:
 
 ```javascript
-const { online } = useOnline()
+const online = useOnline()
 <p>Status: {online ? 'online' : 'offline'}</p>
 ```
 
-Returns an object containing:
+Returns:
 
-- status (boolean): whether online or not
+- online (boolean): whether online or not
