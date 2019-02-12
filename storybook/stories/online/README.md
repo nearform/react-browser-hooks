@@ -5,15 +5,16 @@ The Online hook listens for browser online/offline events to determine if there 
 Import as follows:
 
 ```javascript
-import { useOnline } from '@nearform/react-browser-hooks' 
+import { useOnline } from '@nearform/react-browser-hooks'
 ```
 
 Example of usage:
 
 ```javascript
-const status = useOnline()
-<p>Status: {status.online ? 'online' : 'offline'}<br/>
+const online = useOnline()
+<p>Status: {online.status ? 'online' : 'offline'}</p>
 ```
 
 Returns an object containing:
+
 - status (boolean): whether online or not
