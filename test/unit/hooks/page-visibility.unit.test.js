@@ -2,10 +2,28 @@ import { testHook, cleanup, fireEvent } from 'react-testing-library'
 import { act } from 'react-dom/test-utils'
 
 import { usePageVisibility } from '../../../src'
+import * as constants from '../../../src/constants'
 
 afterEach(cleanup)
 
 describe('usePageVisibility', () => {
+  describe('when rendered on the server', () => {
+    beforeAll(() => {
+      constants.IS_SERVER = true
+    })
+
+    afterAll(() => {
+      constants.IS_SERVER = false
+    })
+
+    it('defaults to visible', () => {
+      let visible
+      testHook(() => (visible = usePageVisibility()))
+
+      expect(visible).toBe(true)
+    })
+  })
+
   describe('document.hidden', () => {
     beforeEach(() => {
       let hidden = false
