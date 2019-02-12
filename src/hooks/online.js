@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react'
 //@todo: perhaps polling approach for older browsers as an option
 //e.g. favicon polling
 export function useOnline() {
-  const [status, setStatus] = useState(getOnlineStatus())
+  const [online, setOnline] = useState(getOnlineStatus())
 
   function handleChange() {
-    setStatus(getOnlineStatus())
+    setOnline(getOnlineStatus())
   }
 
   function getOnlineStatus() {
@@ -23,7 +23,5 @@ export function useOnline() {
     }
   }, [])
 
-  return {
-    status
-  }
+  return online
 }
