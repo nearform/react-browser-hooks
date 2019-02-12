@@ -11,7 +11,7 @@
     "umd"
   ],
   "scripts": {
-    "acceptance": "testcafe chrome,firefox test/acceptance/",
+    "acceptance": "testcafe 'browserstack:ie@11.0:Windows 10' test/acceptance/",
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
     "format": "prettier --write **/*.js",
@@ -58,7 +58,8 @@
     "react-dom": "16.8.1",
     "react-testing-library": "5.6.0",
     "storybook-readme": "4.0.5",
-    "testcafe": "1.0.0"
+    "testcafe": "1.0.0",
+    "testcafe-browser-provider-browserstack": "^1.8.0"
   },
   "author": "NearForm",
   "homepage": "https://github.com/nearform/react-browser-hooks",
