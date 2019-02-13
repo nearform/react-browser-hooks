@@ -22,7 +22,7 @@
     "start": "npm run storybook",
     "storybook": "start-storybook -p 3000 -c storybook/.storybook --ci",
     "build-storybook": "build-storybook -c storybook/.storybook",
-    "test": "npm run test:unit",
+    "test": "npm run test:unit && npm run test:acceptance",
     "test:unit": "jest",
     "test:acceptance": "./bin/acceptance.js",
     "test:acceptance-ci": "./bin/acceptance.js --ci",
