@@ -1,0 +1,6 @@
+browserstack:ie@11.0:Windows 10
+browserstack:safari@12.0:OS X Mojave
+browserstack:firefox@65.0:Windows 10
+browserstack:firefox@65.0:OS X Mojave
+browserstack:chrome@71.0:Windows 10
+browserstack:chrome@71.0:OS X Mojave
