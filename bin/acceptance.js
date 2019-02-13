@@ -7,7 +7,10 @@ const app = ChildProcess.spawn('npm', ['start'], {
   stdio: 'inherit'
 })
 
-const test = ChildProcess.spawn('npm', ['run', 'acceptance'], {
+const [, , ci] = process.argv
+const acceptanceScript = ci === '--ci' ? 'acceptance-ci' : 'acceptance'
+
+const test = ChildProcess.spawn('npm', ['run', acceptanceScript], {
   detach: true,
   stdio: 'inherit'
 })
