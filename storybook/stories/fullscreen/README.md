@@ -11,7 +11,7 @@ import { useFullScreen } from '@nearform/react-browser-hooks'
 Example of usage:
 
 ```javascript
-const { toggle, fullsceen } = useFullScreen()
+const { toggle, fullScreen } = useFullScreen()
 <button onClick={toggle}>{fullScreen ? 'Close' : 'Open'}</button>
 ```
 
