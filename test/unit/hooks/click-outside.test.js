@@ -5,13 +5,16 @@ import { act } from 'react-dom/test-utils'
 import { useClickOutside } from '../../../src'
 
 let callback
-let testElementRef = createRef()
-let childElementRef = createRef()
-let siblingRef = React.createRef()
+let testElementRef
+let childElementRef
+let siblingRef
 let testClickOutsideHook
 let testClickOutsideHookWithSibling
 
 beforeEach(() => {
+  testElementRef = createRef()
+  childElementRef = createRef()
+  siblingRef = createRef()
   const TestChildComponent = forwardRef((props, ref) => {
     return <div ref={ref} />
   })
@@ -105,6 +108,25 @@ describe('useClickOutside', () => {
   })
 
   it('supports array of refs, and will call callback if target is not contained by any', () => {
+    testClickOutsideHookWithSibling(callback)
+    act(() => {
+      fireEvent(
+        document.body,
+        new Event('click', {
+          bubbles: true,
+          cancelable: false
+        })
+      )
+    })
+
+    expect(callback).toBeCalledTimes(1)
+    expect(callback.mock.calls[0].length).toBe(1)
+    expect(callback.mock.calls[0][0] instanceof Event).toBe(true)
+    expect(callback.mock.calls[0][0].type).toBe('click')
+  })
+
+  it('handles null ref.current', () => {
+    siblingRef.current = null
     testClickOutsideHookWithSibling(callback)
     act(() => {
       fireEvent(
