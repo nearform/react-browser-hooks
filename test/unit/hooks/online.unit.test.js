@@ -23,10 +23,10 @@ describe('useOnline', () => {
     })
 
     it('defaults to true', () => {
-      let status
-      testHook(() => ({ status } = useOnline()))
+      let online
+      testHook(() => (online = useOnline()))
 
-      expect(status).toBe(true)
+      expect(online).toBe(true)
     })
   })
 
