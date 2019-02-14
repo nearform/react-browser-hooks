@@ -54,8 +54,8 @@
     "lint-staged": "8.1.4",
     "nwb": "0.23.0",
     "prettier": "1.16.4",
-    "react": "16.8.1",
-    "react-dom": "16.8.1",
+    "react": "16.8.2",
+    "react-dom": "16.8.2",
     "react-testing-library": "5.8.0",
     "storybook-readme": "4.0.5",
     "testcafe": "1.0.0"
