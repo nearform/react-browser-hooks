@@ -32,6 +32,10 @@ const fs = useFullScreen()
 <button onClick={fs.toggle}>{fs.fullScreen ? 'Close' : 'Open'}</button>
 ```
 
+### Server-side rendering
+
+Sensible defaults are provided to allow each hook to be safely used when rendering on the server.
+
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo
 [npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
