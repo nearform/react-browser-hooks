@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
 
-export function useClickOutside(el, onClick) {
+export function useClickOutside(el, predicate = true, onClick) {
   const els = [].concat(el)
+
+  if (!onClick && typeof predicate === 'function') {
+    onClick = predicate
+  }
 
   const handler = (ev) => {
     const target = ev.target
@@ -11,8 +15,15 @@ export function useClickOutside(el, onClick) {
     }
   }
 
+  const cleanup = () => window.removeEventListener('click', handler)
+
   useEffect(() => {
-    window.addEventListener('click', handler)
-    return () => window.removeEventListener('click', handler)
-  }, [])
+    if (predicate) {
+      window.addEventListener('click', handler)
+    } else {
+      cleanup()
+    }
+
+    return cleanup
+  })
 }
