@@ -14,11 +14,11 @@ function DeviceOrientation() {
         {deviceOrientation ? (
           <pre>
             <code>{`{
-  alpha: ${deviceOrientation.alpha.toFixed(2)},
-  beta: ${deviceOrientation.beta.toFixed(2)},
-  gamma: ${deviceOrientation.gamma.toFixed(2)},
+  alpha: ${deviceOrientation.alpha},
+  beta: ${deviceOrientation.beta},
+  gamma: ${deviceOrientation.gamma},
   absolute: ${deviceOrientation.absolute},
-  webkitCompassHeading: ${deviceOrientation.webkitCompassHeading.toFixed(2)}
+  webkitCompassHeading: ${deviceOrientation.webkitCompassHeading}
 }`}</code>
           </pre>
         ) : (
