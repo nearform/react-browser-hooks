@@ -14,5 +14,5 @@ export function useClickOutside(el, onClick) {
   useEffect(() => {
     window.addEventListener('click', handler)
     return () => window.removeEventListener('click', handler)
-  }, [el])
+  }, [])
 }
