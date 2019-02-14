@@ -3,6 +3,7 @@ import { testHook, cleanup, fireEvent, render } from 'react-testing-library'
 import { act } from 'react-dom/test-utils'
 
 import { useFullScreen, useFullScreenBrowser } from '../../../src'
+import * as constants from '../../../src/constants'
 
 afterEach(cleanup)
 
@@ -23,6 +24,26 @@ beforeEach(() => {
 
 describe('useFullScreen', () => {
   describe('initial state', () => {
+    describe('when rendered on the server', () => {
+      beforeAll(() => {
+        constants.IS_SERVER = true
+      })
+
+      afterAll(() => {
+        constants.IS_SERVER = false
+      })
+
+      it('defaults to false', () => {
+        let fullScreen
+        document.fullscreenElement = testElementRef.current
+        testHook(
+          () => ({ fullScreen } = useFullScreen({ element: testElementRef }))
+        )
+
+        expect(fullScreen).toBe(false)
+      })
+    })
+
     describe('with options and element ref', () => {
       it('uses document.fullscreenElement', () => {
         let fullScreen

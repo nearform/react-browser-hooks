@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { IS_SERVER } from '../constants'
 
 const defaultState = {
   angle: 0,
@@ -7,7 +8,7 @@ const defaultState = {
 
 export function useOrientation() {
   const currentOrientation =
-    typeof window === 'object' && window.screen.orientation
+    !IS_SERVER && window.screen.orientation
       ? window.screen.orientation
       : defaultState
 
@@ -15,7 +16,6 @@ export function useOrientation() {
 
   useEffect(() => {
     const handler = () => setState(window.screen.orientation)
-    if (typeof window !== 'object') return
 
     window.addEventListener('orientationchange', handler)
     return () => window.removeEventListener('orientationchange', handler)

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { IS_SERVER } from '../constants'
 
 /**
  * Function to grab the visibility prop strings
@@ -8,8 +9,11 @@ import { useEffect, useState } from 'react'
  *  and visibilityChange properties
  */
 const getVisibilityProps = () => {
+  if (IS_SERVER) return {}
+
   let hidden
   let visibilityChange
+
   if (typeof document.hidden !== 'undefined') {
     // Opera 12.10 and Firefox 18 and later support
     hidden = 'hidden'
@@ -31,7 +35,7 @@ const getVisibilityProps = () => {
  */
 export const usePageVisibility = () => {
   const { hidden, visibilityChange } = getVisibilityProps()
-  const [visible, setVisible] = useState(!document[hidden])
+  const [visible, setVisible] = useState(IS_SERVER ? true : !document[hidden])
   const handler = () => setVisible(!document[hidden])
   useEffect(() => {
     document.addEventListener(visibilityChange, handler)
