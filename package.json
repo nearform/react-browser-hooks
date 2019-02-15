@@ -25,7 +25,6 @@
     "test": "npm run test:unit && npm run test:acceptance",
     "test:unit": "jest",
     "test:acceptance": "./bin/acceptance.js",
-    "test:acceptance-ci": "./bin/acceptance.js --ci",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
