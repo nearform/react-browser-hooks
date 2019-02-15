@@ -21,3 +21,15 @@ Also supported is passing an array of refs, where `onClick` will only be called 
 ```javascript
 useClickOutside([ref, siblingRef], onClick)
 ```
+
+Avoiding unnecessary callbacks:
+
+If you have a large app with many components using this hook, you may wish to avoid calling the callback when not necessary. In this situation you can pass a boolean as the second argument, and the callback will not be invoked if it is falsey. For example, if you you had a dropdown where you are only interested in receiving a callback if the options are visible, you might use like:
+
+```javascript
+const [optionsVisible, setOptionsVisible] = useState(false)
+const hideOptions = () => setOptionsVisible(false)
+useClickOutside(ref, optionsVisible, hideOptions)
+```
+
+In this example, `hideOptions` will never be called if `optionsVisible` is already `false`.

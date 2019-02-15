@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 
-export function useClickOutside(el, predicate = true, onClick) {
+export function useClickOutside(el, active = true, onClick) {
   const els = [].concat(el)
 
-  if (!onClick && typeof predicate === 'function') {
-    onClick = predicate
+  if (!onClick && typeof active === 'function') {
+    onClick = active
   }
 
   const handler = (ev) => {
@@ -18,7 +18,7 @@ export function useClickOutside(el, predicate = true, onClick) {
   const cleanup = () => window.removeEventListener('click', handler)
 
   useEffect(() => {
-    if (predicate) {
+    if (active) {
       window.addEventListener('click', handler)
     } else {
       cleanup()
