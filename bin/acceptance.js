@@ -7,7 +7,8 @@ const app = ChildProcess.spawn('npm', ['start'], {
   stdio: 'inherit'
 })
 
-const acceptanceScript = process.env.CI ? 'acceptance-ci' : 'acceptance'
+const acceptanceScript =
+  process.env.CI === 'true' ? 'acceptance-ci' : 'acceptance'
 
 const test = ChildProcess.spawn('npm', ['run', acceptanceScript], {
   detach: true,
