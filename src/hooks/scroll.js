@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
+import { IS_SERVER } from '../constants'
 
 export function useScroll() {
   const [pos, setPos] = useState({
-    top: window.scrollY,
-    left: window.scrollX
+    top: IS_SERVER ? 0 : window.scrollY,
+    left: IS_SERVER ? 0 : window.scrollX
   })
 
   function handleScroll() {

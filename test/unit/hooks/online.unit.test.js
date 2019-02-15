@@ -2,6 +2,7 @@ import { testHook, cleanup, fireEvent } from 'react-testing-library'
 import { act } from 'react-dom/test-utils'
 
 import { useOnline } from '../../../src'
+import * as constants from '../../../src/constants'
 
 let onLineGetter
 
@@ -12,6 +13,23 @@ beforeEach(() => {
 afterEach(cleanup)
 
 describe('useOnline', () => {
+  describe('when rendered on the server', () => {
+    beforeAll(() => {
+      constants.IS_SERVER = true
+    })
+
+    afterAll(() => {
+      constants.IS_SERVER = false
+    })
+
+    it('defaults to true', () => {
+      let online
+      testHook(() => (online = useOnline()))
+
+      expect(online).toBe(true)
+    })
+  })
+
   it('sets initial state to window.navigator.onLine', () => {
     let online
 
