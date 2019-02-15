@@ -2,10 +2,30 @@ import { testHook, cleanup, fireEvent } from 'react-testing-library'
 import { act } from 'react-dom/test-utils'
 
 import { useResize } from '../../../src'
+import * as constants from '../../../src/constants'
 
 afterEach(cleanup)
 
 describe('useResize', () => {
+  describe('when rendered on the server', () => {
+    beforeAll(() => {
+      constants.IS_SERVER = true
+    })
+
+    afterAll(() => {
+      constants.IS_SERVER = false
+    })
+
+    it('defaults to null, null', () => {
+      let width, height
+
+      testHook(() => ({ width, height } = useResize()))
+
+      expect(width).toBe(null)
+      expect(height).toBe(null)
+    })
+  })
+
   it('sets initial state to window.inner* values', () => {
     let width, height
 
