@@ -1,4 +1,4 @@
-import { act, Selector } from 'testcafe'
+import { Selector } from 'testcafe'
 import globals from '../globals'
 
 fixture('Mouse Position Hook').page(
@@ -36,8 +36,14 @@ test('The mouse position updates when the mouse moves', async (t) => {
   const numbers = /\d+/g
   const [x, y] = dimensions.match(numbers)
 
+  const { offsetHeight, offsetWidth } = await html()
+  const expectedX = Math.round(offsetWidth / 2)
+  const expectedY = Math.round(offsetHeight / 2)
+
   await t
-    .expect(description.textContent)
-    .contains(`X: ${x}px, Y: ${y}px`)
+    .expect(parseInt(x))
+    .eql(expectedX)
+    .expect(parseInt(y))
+    .eql(expectedY)
     .switchToMainWindow()
 })
