@@ -24,7 +24,7 @@
     "build-storybook": "build-storybook -c storybook/.storybook",
     "test": "npm run test:unit && npm run test:acceptance",
     "test:unit": "jest",
-    "test:acceptance": "./bin/acceptance.js",
+    "test:acceptance": "node bin/acceptance.js",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
   },
