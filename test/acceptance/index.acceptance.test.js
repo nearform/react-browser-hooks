@@ -1,6 +1,7 @@
 import { Selector } from 'testcafe'
+import globals from './globals'
 
-fixture('Storybook').page('http://localhost:3000/')
+fixture('Storybook').page(globals.url)
 
 test('The storybook demo is rendered', async (t) => {
   const demo = Selector('#root')
