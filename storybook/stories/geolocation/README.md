@@ -1,6 +1,6 @@
-## useGeolocation Hook
+## Geolocation Hook
 
-The useGeolocation hook gives you current location.
+The Geolocation hook gives you current location.
 
 Import as follows:
 

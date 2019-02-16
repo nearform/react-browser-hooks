@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
+import { IS_SERVER } from '../constants'
 
 //@todo: perhaps polling approach for older browsers as an option
 //e.g. favicon polling
 export function useOnline() {
-  const [status, setStatus] = useState(getOnlineStatus())
+  const [online, setOnline] = useState(getOnlineStatus())
 
   function handleChange() {
-    setStatus(getOnlineStatus())
+    setOnline(getOnlineStatus())
   }
 
   function getOnlineStatus() {
-    return window.navigator && window.navigator.onLine ? true : false
+    return IS_SERVER || (window.navigator && window.navigator.onLine)
+      ? true
+      : false
   }
 
   useEffect(() => {
@@ -23,7 +26,5 @@ export function useOnline() {
     }
   }, [])
 
-  return {
-    status
-  }
+  return online
 }

@@ -2,10 +2,30 @@ import { testHook, cleanup, fireEvent } from 'react-testing-library'
 import { act } from 'react-dom/test-utils'
 
 import { useScroll } from '../../../src'
+import * as constants from '../../../src/constants'
 
 afterEach(cleanup)
 
 describe('useScroll', () => {
+  describe('when rendered on the server', () => {
+    beforeAll(() => {
+      constants.IS_SERVER = true
+    })
+
+    afterAll(() => {
+      constants.IS_SERVER = false
+    })
+
+    it('defaults to 0, 0', () => {
+      let top, left
+
+      testHook(() => ({ top, left } = useScroll()))
+
+      expect(top).toBe(0)
+      expect(left).toBe(0)
+    })
+  })
+
   it('sets initial state to window.scroll values', () => {
     let top, left
 

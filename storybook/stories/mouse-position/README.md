@@ -1,6 +1,6 @@
-## useMousePosition Hook
+## MousePosition Hook
 
-The useMousePosition hook listens for changes to mouse position.  
+The MousePosition hook listens for changes to mouse position.  
 
 Import as follows:
 

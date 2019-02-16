@@ -6,6 +6,7 @@ React Browser Hooks
 [![NPM version](https://img.shields.io/npm/v/@nearform/react-browser-hooks.svg)](https://www.npmjs.com/package/@nearform/react-browser-hooks)
 [![Coverage Status](https://coveralls.io/repos/github/nearform/react-browser-hooks/badge.svg?branch=master)](https://coveralls.io/github/nearform/react-browser-hooks?branch=master)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8855d56c-7b73-4070-92e8-e7c1b2e80d7e/deploy-status)](https://app.netlify.com/sites/react-browser-hooks/deploys)
+[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=U1lJa0NDeis1VFRXYXpvMHdGMHdpd2RXVXBIRlQ2eDNQZmJNdlkrN3F2Zz0tLXlmRDdXcTl5YVFMOG1sUXZSeDRCMFE9PQ==--32bc4ac80987fe0aa1d5fdaa3c08607be6f3f2a8)](https://www.browserstack.com/automate/public-build/U1lJa0NDeis1VFRXYXpvMHdGMHdpd2RXVXBIRlQ2eDNQZmJNdlkrN3F2Zz0tLXlmRDdXcTl5YVFMOG1sUXZSeDRCMFE9PQ==--32bc4ac80987fe0aa1d5fdaa3c08607be6f3f2a8)
 
 A simple utility library that provides custom hooks for some common browser events.
 
@@ -31,6 +32,10 @@ import { useFullScreen } from '@nearform/react-browser-hooks'
 const fs = useFullScreen()
 <button onClick={fs.toggle}>{fs.fullScreen ? 'Close' : 'Open'}</button>
 ```
+
+### Server-side rendering
+
+Sensible defaults are provided to allow each hook to be safely used when rendering on the server.
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo

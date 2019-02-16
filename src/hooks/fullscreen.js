@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { IS_SERVER } from '../constants'
 import { useResize } from './resize'
 
 // determine if we are in fullscreen mode and why
@@ -26,13 +27,13 @@ export function isFullScreenElement(el) {
 }
 
 export function useFullScreen(options = {}) {
-  const docEl = document.documentElement
   const fsEl = options && options.element
-  const [fullScreen, setFullScreen] = useState(isFullScreenElement(fsEl))
+  const initialState = IS_SERVER ? false : isFullScreenElement(fsEl)
+  const [fullScreen, setFullScreen] = useState(initialState)
 
   // access various open fullscreen methods
   function openFullScreen() {
-    const el = (fsEl && fsEl.current) || docEl
+    const el = (fsEl && fsEl.current) || document.documentElement
 
     if (el.requestFullscreen) return el.requestFullscreen()
     if (el.mozRequestFullScreen) return el.mozRequestFullScreen()
@@ -77,6 +78,7 @@ export function useFullScreen(options = {}) {
 }
 
 export function getSizeInfo() {
+  if (IS_SERVER) return {}
   return {
     screenTop: window.screenTop,
     screenY: window.screenY,
@@ -102,11 +104,10 @@ export function isFullScreenSize(sizeInfo) {
 
 export function useFullScreenBrowser() {
   const size = useResize()
-
   const initialSizeInfo = getSizeInfo()
 
   const [fullScreen, setFullScreen] = useState(
-    isFullScreenSize(initialSizeInfo)
+    IS_SERVER ? false : isFullScreenSize(initialSizeInfo)
   )
   const [sizeInfo, setSizeInfo] = useState(initialSizeInfo)
 

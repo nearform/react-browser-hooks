@@ -1,6 +1,6 @@
-## useFullScreen Hook
+## FullScreen Hook
 
-The useFullScreen hook allows a page or element to occupy the full screen.
+The FullScreen hook allows a page or element to occupy the full screen.
 
 Import as follows:
 
@@ -11,7 +11,7 @@ import { useFullScreen } from '@nearform/react-browser-hooks'
 Example of usage:
 
 ```javascript
-const { toggle, fullsceen } = useFullScreen()
+const { toggle, fullScreen } = useFullScreen()
 <button onClick={toggle}>{fullScreen ? 'Close' : 'Open'}</button>
 ```
 
