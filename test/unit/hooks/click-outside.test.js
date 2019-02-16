@@ -31,7 +31,7 @@ beforeEach(() => {
   })
 
   const TestHookWithActiveState = forwardRef(({ callback }, ref) => {
-    useClickOutside(ref, active, callback)
+    useClickOutside(ref, { active }, callback)
     return (
       <div ref={ref}>
         <TestChildComponent ref={childElementRef} />

@@ -1,10 +1,13 @@
 import { useEffect } from 'react'
 
-export function useClickOutside(el, active = true, onClick) {
+export function useClickOutside(el, options = {}, onClick) {
   const els = [].concat(el)
+  let active = true
 
-  if (!onClick && typeof active === 'function') {
-    onClick = active
+  if (!onClick && typeof options === 'function') {
+    onClick = options
+  } else {
+    active = options.active
   }
 
   const handler = (ev) => {
