@@ -8,7 +8,7 @@ function MousePosition() {
   const pos = useMousePosition()
 
   return (
-    <div>
+    <div className="mouse-position-demo">
       <h2>Mouse Position Demo</h2>
       <em>The red dot shows this visually (offset by 5px)</em>
       <p>
