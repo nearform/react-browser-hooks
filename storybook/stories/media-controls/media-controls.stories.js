@@ -58,8 +58,8 @@ function Video() {
       <h3>Video</h3>
       <p>
         <video
-          autoPlay
           ref={player}
+          muted
           src="https://ak4.picdn.net/shutterstock/videos/17565994/preview/stock-footage-cute-jack-russell-dog-with-crystal-covered-sunglasses-in-a-disco-setting.webm"
           width="250">
           Your browser does not support the <code>video</code> element.
@@ -82,7 +82,7 @@ function Video() {
 
 function MediaControls() {
   return (
-    <div>
+    <div className="media-controls-demo">
       <h2>Media Controls Demo</h2>
       <Video />
       <Audio />
