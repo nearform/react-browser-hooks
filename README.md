@@ -12,7 +12,7 @@ A simple utility library that provides custom hooks for some common browser even
 
 ## Installation
 
-[npm][]:
+[npm](https://www.npmjs.com/package/@nearform/react-browser-hooks):
 
 ```bash
 npm install @nearform/react-browser-hooks
