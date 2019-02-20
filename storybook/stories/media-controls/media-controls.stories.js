@@ -60,7 +60,7 @@ function Video() {
         <video
           ref={player}
           muted
-          src="https://ak4.picdn.net/shutterstock/videos/17565994/preview/stock-footage-cute-jack-russell-dog-with-crystal-covered-sunglasses-in-a-disco-setting.webm"
+          src="https://gcs-vimeo.akamaized.net/exp=1550703888~acl=%2A%2F842961659.mp4%2A~hmac=9a17c8b67f0e0f06e9594180990b0b0802adb2a922baf198f79181b0a2e36e85/vimeo-prod-skyfire-std-us/01/2327/9/236638531/842961659.mp4"
           width="250">
           Your browser does not support the <code>video</code> element.
         </video>
