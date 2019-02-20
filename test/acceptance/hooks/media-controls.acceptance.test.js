@@ -91,3 +91,108 @@ test('The restart button should play the video from the beginning', async (t) =>
     .expect(videoPausedState.textContent)
     .contains('The video is paused: false')
 })
+
+test('The audio should initialize in the correct state', async (t) => {
+  const {
+    audioPausedState,
+    mutedState,
+    volumeState
+  } = storybook.hooks.mediaControls
+
+  await t
+    .expect(audioPausedState.textContent)
+    .contains('The audio is paused: true')
+    .expect(volumeState.textContent)
+    .contains('The audio is volume: 1')
+    .expect(mutedState.textContent)
+    .contains('The audio is muted: false')
+})
+
+test('The play button (play/pause) should play the audio', async (t) => {
+  const { playPauseButton, audioPausedState } = storybook.hooks.mediaControls
+
+  await t
+    .click(playPauseButton)
+    .expect(audioPausedState.textContent)
+    .contains('The audio is paused: false')
+})
+
+test('The pause button (play/pause) should pause the audio', async (t) => {
+  const { playPauseButton, audioPausedState } = storybook.hooks.mediaControls
+
+  await t
+    .click(playPauseButton)
+    .click(playPauseButton)
+    .expect(audioPausedState.textContent)
+    .contains('The audio is paused: true')
+})
+
+test('The mute button should mute the audio if muted === false', async (t) => {
+  const { muteButton, mutedState, volumeState } = storybook.hooks.mediaControls
+
+  await t
+    .click(muteButton)
+    .expect(mutedState.textContent)
+    .contains('The audio is muted: true')
+    .expect(volumeState.textContent)
+    .contains('The audio is volume: 0')
+})
+
+test('The mute button should unmute the audio if muted === true', async (t) => {
+  const { muteButton, mutedState, volumeState } = storybook.hooks.mediaControls
+
+  await t
+    .click(muteButton)
+    .click(muteButton)
+    .expect(mutedState.textContent)
+    .contains('The audio is muted: false')
+    .expect(volumeState.textContent)
+    .contains('The audio is volume: 1')
+})
+
+test('The mute button should unmute the audio if muted === true (restoring previous volume)', async (t) => {
+  const {
+    muteButton,
+    mutedState,
+    volumeDownButton,
+    volumeState
+  } = storybook.hooks.mediaControls
+
+  await t
+    .click(volumeDownButton)
+    .click(muteButton)
+    .click(muteButton)
+    .expect(mutedState.textContent)
+    .contains('The audio is muted: false')
+    .expect(volumeState.textContent)
+    .contains('The audio is volume: 0.9')
+})
+
+test('The volume down button should decrease the volume by 0.1', async (t) => {
+  const { volumeDownButton, volumeState } = storybook.hooks.mediaControls
+
+  await t
+    .click(volumeDownButton)
+    .expect(volumeState.textContent)
+    .contains('The audio is volume: 0.9')
+    .click(volumeDownButton)
+    .expect(volumeState.textContent)
+    .contains('The audio is volume: 0.8')
+})
+
+test('The volume up button should increase the volume by 0.1', async (t) => {
+  const {
+    muteButton,
+    volumeUpButton,
+    volumeState
+  } = storybook.hooks.mediaControls
+
+  await t
+    .click(muteButton)
+    .click(volumeUpButton)
+    .expect(volumeState.textContent)
+    .contains('The audio is volume: 0.1')
+    .click(volumeUpButton)
+    .expect(volumeState.textContent)
+    .contains('The audio is volume: 0.2')
+})
