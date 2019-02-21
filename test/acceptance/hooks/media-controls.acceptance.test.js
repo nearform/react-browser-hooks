@@ -112,15 +112,23 @@ test('The play button (play/pause) should play the audio', async (t) => {
   const { playPauseButton, audioPausedState } = storybook.hooks.mediaControls
 
   await t
+    .expect(playPauseButton.textContent)
+    .contains('Play')
     .click(playPauseButton)
     .expect(audioPausedState.textContent)
     .contains('The audio is paused: false')
 })
 
 test('The pause button (play/pause) should pause the audio', async (t) => {
-  const { playPauseButton, audioPausedState } = storybook.hooks.mediaControls
+  const {
+    muteButton,
+    playPauseButton,
+    audioPausedState
+  } = storybook.hooks.mediaControls
 
   await t
+    .expect(muteButton.textContent)
+    .contains('Unmute')
     .click(playPauseButton)
     .click(playPauseButton)
     .expect(audioPausedState.textContent)
@@ -131,6 +139,8 @@ test('The mute button should mute the audio if muted === false', async (t) => {
   const { muteButton, mutedState, volumeState } = storybook.hooks.mediaControls
 
   await t
+    .expect(muteButton.textContent)
+    .contains('Unmute')
     .click(muteButton)
     .click(muteButton)
     .expect(mutedState.textContent)
@@ -143,6 +153,8 @@ test('The mute button should unmute the audio if muted === true', async (t) => {
   const { muteButton, mutedState, volumeState } = storybook.hooks.mediaControls
 
   await t
+    .expect(muteButton.textContent)
+    .contains('Unmute')
     .click(muteButton)
     .expect(mutedState.textContent)
     .contains('The audio is muted: false')
@@ -159,6 +171,8 @@ test('The mute button should unmute the audio if muted === true (restoring previ
   } = storybook.hooks.mediaControls
 
   await t
+    .expect(muteButton.textContent)
+    .contains('Unmute')
     .click(muteButton)
     .click(volumeDownButton)
     .click(muteButton)
@@ -177,6 +191,8 @@ test('The volume down button should decrease the volume by 0.1', async (t) => {
   } = storybook.hooks.mediaControls
 
   await t
+    .expect(muteButton.textContent)
+    .contains('Unmute')
     .click(muteButton)
     .click(volumeDownButton)
     .expect(volumeState.textContent)
@@ -187,9 +203,15 @@ test('The volume down button should decrease the volume by 0.1', async (t) => {
 })
 
 test('The volume up button should increase the volume by 0.1', async (t) => {
-  const { volumeUpButton, volumeState } = storybook.hooks.mediaControls
+  const {
+    muteButton,
+    volumeUpButton,
+    volumeState
+  } = storybook.hooks.mediaControls
 
   await t
+    .expect(muteButton.textContent)
+    .contains('Unmute')
     .click(volumeUpButton)
     .expect(volumeState.textContent)
     .contains('The audio is volume: 0.1')
