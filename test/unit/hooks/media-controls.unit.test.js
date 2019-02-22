@@ -65,6 +65,7 @@ function TestMediaControlsHook({ callback }) {
   callback()
   return (
     <audio
+      muted
       ref={mediaElementRef}
       src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/00/ea/65/00ea65de-25f1-3217-7a2b-097e989dd884/mzaf_5030465069226935473.plus.aac.p.m4a"
     />
@@ -78,9 +79,9 @@ function testMediaControlsHook(callback) {
 describe('useMediaControls', () => {
   it('sets initial state to match the media element', () => {
     expect(currentTime).toBe(0)
-    expect(muted).toBe(false)
+    expect(muted).toBe(true)
     expect(paused).toBe(true)
-    expect(volume).toBe(1)
+    expect(volume).toBe(0)
   })
 
   describe('plays', () => {
@@ -177,6 +178,12 @@ describe('useMediaControls', () => {
   })
 
   describe('sets volume', () => {
+    beforeEach(() => {
+      act(() => {
+        unmute()
+      })
+    })
+
     it('when setVolume() is called', () => {
       expect(volume).toBe(1)
       expect(mediaElementRef.current.volume).toBe(1)
@@ -203,6 +210,12 @@ describe('useMediaControls', () => {
   })
 
   describe('mutes', () => {
+    beforeEach(() => {
+      act(() => {
+        unmute()
+      })
+    })
+
     it('when mute() is called', () => {
       expect(volume).toBe(1)
       expect(mediaElementRef.current.volume).toBe(1)
@@ -229,7 +242,6 @@ describe('useMediaControls', () => {
   })
 
   describe('unmutes', () => {
-    // mute the media before unmuting
     beforeEach(() => {
       act(() => {
         mute()
