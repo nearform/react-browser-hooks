@@ -97,7 +97,7 @@ function Video() {
         <video
           ref={player}
           muted
-          src="https://gcs-vimeo.akamaized.net/exp=1550784817~acl=%2A%2F1217035652.mp4%2A~hmac=59ec76788a14d6f8bc42806cb86d48a7f6f09a9c8b47e6dbee8ae5ccf6610037/vimeo-prod-skyfire-std-us/01/3027/12/315137069/1217035652.mp4"
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
           width="250">
           Your browser does not support the <code>video</code> element.
         </video>
