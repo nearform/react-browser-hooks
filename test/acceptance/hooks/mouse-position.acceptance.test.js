@@ -24,16 +24,20 @@ test('The mouse position defaults to 0,0', async (t) => {
 test('The mouse position updates when the mouse moves', async (t) => {
   const { description, html } = storybook.hooks.mousePosition
 
+  // move mouse to center of html element (fires mousemove event)
   await t.hover(html)
 
+  // get reported mouse position from the hook
   const dimensions = await description.textContent
   const numbers = /\d+/g
   const [x, y] = dimensions.match(numbers)
 
+  // get true mouse position (center of html element)
   const { offsetHeight, offsetWidth } = await html()
   const expectedX = Math.round(offsetWidth / 2)
   const expectedY = Math.round(offsetHeight / 2)
 
+  // assert that the reported mouse position is the true mouse position
   await t
     .expect(parseInt(x))
     .eql(expectedX)
