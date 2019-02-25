@@ -34,6 +34,7 @@ test('The play button (play/stop) should play the video', async (t) => {
   const { playStopButton, videoPausedState } = storybook.hooks.mediaControls
 
   await t
+    .hover(playStopButton)
     .click(playStopButton)
     .expect(videoPausedState.textContent)
     .contains('The video is paused: false')
@@ -47,6 +48,7 @@ test('The stop button (play/stop) should stop the video', async (t) => {
   } = storybook.hooks.mediaControls
 
   await t
+    .hover(playStopButton)
     .click(playStopButton)
     .click(playStopButton)
     .expect(videoPausedState.textContent)
@@ -59,6 +61,7 @@ test('The seek forward button should seek forward by 2 seconds', async (t) => {
   const { currentTimeState, seekForwardButton } = storybook.hooks.mediaControls
 
   await t
+    .hover(seekForwardButton)
     .click(seekForwardButton)
     .expect(currentTimeState.textContent)
     .contains('The video currentTime: 2')
@@ -72,8 +75,14 @@ test('The seek backward button should seek backward by 2 seconds', async (t) => 
   } = storybook.hooks.mediaControls
 
   await t
+    .hover(seekForwardButton)
     .click(seekForwardButton)
+    .expect(currentTimeState.textContent)
+    .contains('The video currentTime: 2')
     .click(seekForwardButton)
+    .expect(currentTimeState.textContent)
+    .contains('The video currentTime: 4')
+    .hover(seekBackButton)
     .click(seekBackButton)
     .expect(currentTimeState.textContent)
     .contains('The video currentTime: 2')
@@ -88,7 +97,9 @@ test('The restart button should play the video from the beginning', async (t) =>
   } = storybook.hooks.mediaControls
 
   await t
+    .hover(seekForwardButton)
     .click(seekForwardButton)
+    .hover(restartButton)
     .click(restartButton)
     .expect(currentTimeState.textContent)
     .contains('The video currentTime: 0')
@@ -118,6 +129,7 @@ test('The play button (play/pause) should play the audio', async (t) => {
   await t
     .expect(playPauseButton.textContent)
     .contains('Play')
+    .hover(playPauseButton)
     .click(playPauseButton)
     .expect(audioPausedState.textContent)
     .contains('The audio is paused: false')
@@ -133,6 +145,7 @@ test('The pause button (play/pause) should pause the audio', async (t) => {
   await t
     .expect(muteButton.textContent)
     .contains('Unmute')
+    .hover(playPauseButton)
     .click(playPauseButton)
     .click(playPauseButton)
     .expect(audioPausedState.textContent)
@@ -145,6 +158,7 @@ test('The mute button should mute the audio if muted === false', async (t) => {
   await t
     .expect(muteButton.textContent)
     .contains('Unmute')
+    .hover(muteButton)
     .click(muteButton)
     .click(muteButton)
     .expect(mutedState.textContent)
@@ -159,6 +173,7 @@ test('The mute button should unmute the audio if muted === true', async (t) => {
   await t
     .expect(muteButton.textContent)
     .contains('Unmute')
+    .hover(muteButton)
     .click(muteButton)
     .expect(mutedState.textContent)
     .contains('The audio is muted: false')
@@ -177,8 +192,11 @@ test('The mute button should unmute the audio if muted === true (restoring previ
   await t
     .expect(muteButton.textContent)
     .contains('Unmute')
+    .hover(muteButton)
     .click(muteButton)
+    .hover(volumeDownButton)
     .click(volumeDownButton)
+    .hover(muteButton)
     .click(muteButton)
     .click(muteButton)
     .expect(mutedState.textContent)
@@ -197,10 +215,13 @@ test('The volume down button should decrease the volume by 0.1', async (t) => {
   await t
     .expect(muteButton.textContent)
     .contains('Unmute')
+    .hover(muteButton)
     .click(muteButton)
+    .hover(volumeDownButton)
     .click(volumeDownButton)
     .expect(volumeState.textContent)
     .contains('The audio is volume: 0.9')
+    .hover(volumeDownButton)
     .click(volumeDownButton)
     .expect(volumeState.textContent)
     .contains('The audio is volume: 0.8')
@@ -216,9 +237,11 @@ test('The volume up button should increase the volume by 0.1', async (t) => {
   await t
     .expect(muteButton.textContent)
     .contains('Unmute')
+    .hover(volumeUpButton)
     .click(volumeUpButton)
     .expect(volumeState.textContent)
     .contains('The audio is volume: 0.1')
+    .hover(volumeUpButton)
     .click(volumeUpButton)
     .expect(volumeState.textContent)
     .contains('The audio is volume: 0.2')
