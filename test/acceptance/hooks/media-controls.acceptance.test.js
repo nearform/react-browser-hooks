@@ -58,9 +58,18 @@ test('The stop button (play/stop) should stop the video', async (t) => {
 })
 
 test('The seek forward button should seek forward by 2 seconds', async (t) => {
-  const { currentTimeState, seekForwardButton } = storybook.hooks.mediaControls
+  const {
+    currentTimeState,
+    playStopButton,
+    restartButton,
+    seekForwardButton
+  } = storybook.hooks.mediaControls
 
   await t
+    .hover(restartButton)
+    .click(restartButton)
+    .hover(playStopButton)
+    .click(playStopButton)
     .hover(seekForwardButton)
     .click(seekForwardButton)
     .expect(currentTimeState.textContent)
@@ -70,11 +79,17 @@ test('The seek forward button should seek forward by 2 seconds', async (t) => {
 test('The seek backward button should seek backward by 2 seconds', async (t) => {
   const {
     currentTimeState,
+    playStopButton,
+    restartButton,
     seekBackButton,
     seekForwardButton
   } = storybook.hooks.mediaControls
 
   await t
+    .hover(restartButton)
+    .click(restartButton)
+    .hover(playStopButton)
+    .click(playStopButton)
     .hover(seekForwardButton)
     .click(seekForwardButton)
     .expect(currentTimeState.textContent)
