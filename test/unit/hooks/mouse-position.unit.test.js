@@ -1,6 +1,5 @@
-import { testHook, cleanup, fireEvent } from 'react-testing-library'
-import { act } from 'react-dom/test-utils'
-
+import { act, cleanup, renderHook } from 'react-hooks-testing-library'
+import { fireEvent } from 'react-testing-library'
 import { useMousePosition } from '../../../src'
 
 afterEach(cleanup)
@@ -9,7 +8,7 @@ describe('useMousePosition', () => {
   it('sets initial state to 0, 0', () => {
     let x, y
 
-    testHook(() => ({ x, y } = useMousePosition()))
+    renderHook(() => ({ x, y } = useMousePosition()))
 
     expect(x).toBe(0)
     expect(y).toBe(0)
@@ -19,7 +18,7 @@ describe('useMousePosition', () => {
     let x, y
 
     act(() => {
-      testHook(() => ({ x, y } = useMousePosition()))
+      renderHook(() => ({ x, y } = useMousePosition()))
     })
 
     act(() => {

@@ -1,5 +1,5 @@
-import { testHook, cleanup, fireEvent } from 'react-testing-library'
-import { act } from 'react-dom/test-utils'
+import { act, cleanup, renderHook } from 'react-hooks-testing-library'
+import { fireEvent } from 'react-testing-library'
 
 import { useOrientation } from '../../../src'
 
@@ -10,7 +10,7 @@ describe('useOrientation', () => {
     let angle, type
     window.screen.orientation = null
 
-    testHook(() => ({ angle, type } = useOrientation()))
+    renderHook(() => ({ angle, type } = useOrientation()))
 
     expect(angle).toBe(0)
     expect(type).toBe('landscape-primary')
@@ -20,7 +20,7 @@ describe('useOrientation', () => {
     let angle, type
     window.screen.orientation = { angle: 0, type: 'portrait-primary' }
 
-    testHook(() => ({ angle, type } = useOrientation()))
+    renderHook(() => ({ angle, type } = useOrientation()))
 
     expect(angle).toBe(0)
     expect(type).toBe('portrait-primary')
@@ -31,7 +31,7 @@ describe('useOrientation', () => {
     window.screen.orientation = { angle: 0, type: 'portrait-primary' }
 
     act(() => {
-      testHook(() => ({ angle, type } = useOrientation()))
+      renderHook(() => ({ angle, type } = useOrientation()))
     })
 
     window.screen.orientation = { angle: 90, type: 'landscape-primary' }
