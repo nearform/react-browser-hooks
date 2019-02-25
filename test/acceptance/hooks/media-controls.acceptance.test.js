@@ -8,8 +8,12 @@ fixture('Media Controls Hook')
     globals.url +
       '/?selectedKind=MediaControls&selectedStory=Default&full=0&addons=1&stories=1&panelRight=1&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel'
   )
-  .beforeEach((t) => t.switchToIframe(storybook.iframe))
-  .afterEach((t) => t.switchToMainWindow())
+  .beforeEach(async (t) => {
+    await t.switchToIframe(storybook.iframe)
+  })
+  .afterEach(async (t) => {
+    await t.switchToMainWindow()
+  })
 
 test('The media controls demo is rendered', async (t) => {
   const { title } = storybook.hooks.mediaControls
