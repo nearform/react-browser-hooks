@@ -20,29 +20,66 @@ export default function Audio() {
   return (
     <div>
       <h3>Audio</h3>
-      <p>
-        <audio
-          ref={player}
-          src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/00/ea/65/00ea65de-25f1-3217-7a2b-097e989dd884/mzaf_5030465069226935473.plus.aac.p.m4a"
-          width="250">
-          Your browser does not support the <code>audio</code> element.
-        </audio>
-      </p>
-      <p>
-        <button onClick={paused ? play : pause}>Play/Pause</button>
-        <button onClick={muted ? unmute : mute}>
-          {muted ? 'Unmute' : 'Mute'}
-        </button>
-        <button onClick={() => setVolume(Math.round((volume - 0.1) * 10) / 10)}>
-          Volume down
-        </button>
-        <button onClick={() => setVolume(Math.round((volume + 0.1) * 10) / 10)}>
-          Volume up
-        </button>
-      </p>
-      <p>The audio is paused: {paused !== null ? paused.toString() : ''}</p>
-      <p>The audio is volume: {volume !== null ? volume.toString() : ''}</p>
-      <p>The audio is muted: {muted !== null ? muted.toString() : ''}</p>
+      <div>
+        <p>
+          <audio
+            ref={player}
+            muted
+            src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/00/ea/65/00ea65de-25f1-3217-7a2b-097e989dd884/mzaf_5030465069226935473.plus.aac.p.m4a"
+            width="250">
+            Your browser does not support the <code>audio</code> element.
+          </audio>
+        </p>
+        <p>
+          <button onClick={paused ? play : pause}>
+            {paused ? 'Play' : 'Pause'}
+          </button>
+          <button onClick={muted ? unmute : mute}>
+            {muted ? 'Unmute' : 'Mute'}
+          </button>
+          <button
+            onClick={() => setVolume(Math.round((volume - 0.1) * 10) / 10)}>
+            Volume down
+          </button>
+          <button
+            onClick={() => setVolume(Math.round((volume + 0.1) * 10) / 10)}>
+            Volume up
+          </button>
+        </p>
+        <p>The audio is paused: {paused !== null ? paused.toString() : ''}</p>
+        <p>The audio is volume: {volume !== null ? volume.toString() : ''}</p>
+        <p>The audio is muted: {muted !== null ? muted.toString() : ''}</p>
+      </div>
+      <div style={{ display: 'none' }}>
+        <p>
+          <video
+            ref={player}
+            muted
+            src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/00/ea/65/00ea65de-25f1-3217-7a2b-097e989dd884/mzaf_5030465069226935473.plus.aac.p.m4a"
+            width="250">
+            Your browser does not support the <code>audio</code> element.
+          </video>
+        </p>
+        <p>
+          <button onClick={paused ? play : pause}>
+            {paused ? 'Play' : 'Pause'}
+          </button>
+          <button onClick={muted ? unmute : mute}>
+            {muted ? 'Unmute' : 'Mute'}
+          </button>
+          <button
+            onClick={() => setVolume(Math.round((volume - 0.1) * 10) / 10)}>
+            Volume down
+          </button>
+          <button
+            onClick={() => setVolume(Math.round((volume + 0.1) * 10) / 10)}>
+            Volume up
+          </button>
+        </p>
+        <p>The audio is paused: {paused !== null ? paused.toString() : ''}</p>
+        <p>The audio is volume: {volume !== null ? volume.toString() : ''}</p>
+        <p>The audio is muted: {muted !== null ? muted.toString() : ''}</p>
+      </div>
     </div>
   )
 }
@@ -58,9 +95,9 @@ function Video() {
       <h3>Video</h3>
       <p>
         <video
-          autoPlay
           ref={player}
-          src="https://ak4.picdn.net/shutterstock/videos/17565994/preview/stock-footage-cute-jack-russell-dog-with-crystal-covered-sunglasses-in-a-disco-setting.webm"
+          muted
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
           width="250">
           Your browser does not support the <code>video</code> element.
         </video>
@@ -82,7 +119,7 @@ function Video() {
 
 function MediaControls() {
   return (
-    <div>
+    <div className="media-controls-demo">
       <h2>Media Controls Demo</h2>
       <Video />
       <Audio />

@@ -54,9 +54,15 @@ export function useMediaControls(element) {
     const isPaused = () => element.current.paused || element.current.ended
 
     setCurrentTime(element.current.currentTime)
-    setMuted(element.current.muted)
     setPaused(isPaused())
-    _setVolume(element.current.volume)
+
+    setMuted(element.current.muted)
+    if (muted) {
+      setOldVolume(element.current.volume)
+      _setVolume(0)
+    } else {
+      _setVolume(element.current.volume)
+    }
 
     const playPauseHandler = () => setPaused(isPaused())
     element.current.addEventListener('play', playPauseHandler) // fired by play method or autoplay attribute
