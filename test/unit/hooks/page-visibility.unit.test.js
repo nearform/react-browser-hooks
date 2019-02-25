@@ -1,5 +1,5 @@
-import { testHook, cleanup, fireEvent } from 'react-testing-library'
-import { act } from 'react-dom/test-utils'
+import { act, cleanup, renderHook } from 'react-hooks-testing-library'
+import { fireEvent } from 'react-testing-library'
 
 import { usePageVisibility } from '../../../src'
 import * as constants from '../../../src/constants'
@@ -18,7 +18,7 @@ describe('usePageVisibility', () => {
 
     it('defaults to visible', () => {
       let visible
-      testHook(() => (visible = usePageVisibility()))
+      renderHook(() => (visible = usePageVisibility()))
 
       expect(visible).toBe(true)
     })
@@ -49,7 +49,7 @@ describe('usePageVisibility', () => {
     it('is true if document is not initially hidden', () => {
       let visible
       document.hidden = false
-      testHook(() => (visible = usePageVisibility()))
+      renderHook(() => (visible = usePageVisibility()))
 
       expect(visible).toBe(true)
     })
@@ -57,7 +57,7 @@ describe('usePageVisibility', () => {
     it('is false if document is initially hidden', () => {
       let visible
       document.hidden = true
-      testHook(() => (visible = usePageVisibility()))
+      renderHook(() => (visible = usePageVisibility()))
 
       expect(visible).toBe(false)
     })
@@ -67,7 +67,7 @@ describe('usePageVisibility', () => {
       document.hidden = false
 
       act(() => {
-        testHook(() => (visible = usePageVisibility()))
+        renderHook(() => (visible = usePageVisibility()))
       })
 
       document.hidden = true
@@ -111,7 +111,7 @@ describe('usePageVisibility', () => {
     it('is true if document is not initially hidden', () => {
       let visible
       document.msHidden = false
-      testHook(() => (visible = usePageVisibility()))
+      renderHook(() => (visible = usePageVisibility()))
 
       expect(visible).toBe(true)
     })
@@ -119,7 +119,7 @@ describe('usePageVisibility', () => {
     it('is false if document is initially hidden', () => {
       let visible
       document.msHidden = true
-      testHook(() => (visible = usePageVisibility()))
+      renderHook(() => (visible = usePageVisibility()))
 
       expect(visible).toBe(false)
     })
@@ -129,7 +129,7 @@ describe('usePageVisibility', () => {
       document.msHidden = false
 
       act(() => {
-        testHook(() => (visible = usePageVisibility()))
+        renderHook(() => (visible = usePageVisibility()))
       })
 
       document.msHidden = true
@@ -172,7 +172,7 @@ describe('usePageVisibility', () => {
     it('is true if document is not initially hidden', () => {
       let visible
       document.webkitHidden = false
-      testHook(() => (visible = usePageVisibility()))
+      renderHook(() => (visible = usePageVisibility()))
 
       expect(visible).toBe(true)
     })
@@ -180,7 +180,7 @@ describe('usePageVisibility', () => {
     it('is false if document is initially hidden', () => {
       let visible
       document.webkitHidden = true
-      testHook(() => (visible = usePageVisibility()))
+      renderHook(() => (visible = usePageVisibility()))
 
       expect(visible).toBe(false)
     })
@@ -190,7 +190,7 @@ describe('usePageVisibility', () => {
       document.webkitHidden = false
 
       act(() => {
-        testHook(() => (visible = usePageVisibility()))
+        renderHook(() => (visible = usePageVisibility()))
       })
 
       document.webkitHidden = true

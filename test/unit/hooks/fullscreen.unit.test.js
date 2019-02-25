@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
-import { testHook, cleanup, fireEvent, render } from 'react-testing-library'
-import { act } from 'react-dom/test-utils'
+import { act, cleanup, renderHook } from 'react-hooks-testing-library'
+import { fireEvent, render } from 'react-testing-library'
 
 import { useFullScreen, useFullScreenBrowser } from '../../../src'
 import * as constants from '../../../src/constants'
@@ -36,7 +36,7 @@ describe('useFullScreen', () => {
       it('defaults to false', () => {
         let fullScreen
         document.fullscreenElement = testElementRef.current
-        testHook(
+        renderHook(
           () => ({ fullScreen } = useFullScreen({ element: testElementRef }))
         )
 
@@ -48,7 +48,7 @@ describe('useFullScreen', () => {
       it('uses document.fullscreenElement', () => {
         let fullScreen
         document.fullscreenElement = testElementRef.current
-        testHook(
+        renderHook(
           () => ({ fullScreen } = useFullScreen({ element: testElementRef }))
         )
 
@@ -58,7 +58,7 @@ describe('useFullScreen', () => {
       it('uses document.mozFullScreenElement', () => {
         let fullScreen
         document.mozFullScreenElement = testElementRef.current
-        testHook(
+        renderHook(
           () => ({ fullScreen } = useFullScreen({ element: testElementRef }))
         )
 
@@ -68,7 +68,7 @@ describe('useFullScreen', () => {
       it('uses document.webkitFullscreenElement', () => {
         let fullScreen
         document.webkitFullscreenElement = testElementRef.current
-        testHook(
+        renderHook(
           () => ({ fullScreen } = useFullScreen({ element: testElementRef }))
         )
 
@@ -78,7 +78,7 @@ describe('useFullScreen', () => {
       it('uses document.msFullscreenElement', () => {
         let fullScreen
         document.msFullscreenElement = testElementRef.current
-        testHook(
+        renderHook(
           () => ({ fullScreen } = useFullScreen({ element: testElementRef }))
         )
 
@@ -90,7 +90,7 @@ describe('useFullScreen', () => {
       it('uses document.fullscreenElement', () => {
         let fullScreen
         document.fullscreenElement = true
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(true)
       })
@@ -98,7 +98,7 @@ describe('useFullScreen', () => {
       it('uses document.mozFullScreenElement', () => {
         let fullScreen
         document.mozFullScreenElement = true
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(true)
       })
@@ -106,7 +106,7 @@ describe('useFullScreen', () => {
       it('uses document.webkitFullscreenElement', () => {
         let fullScreen
         document.webkitFullscreenElement = true
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(true)
       })
@@ -114,7 +114,7 @@ describe('useFullScreen', () => {
       it('uses document.msFullscreenElement', () => {
         let fullScreen
         document.msFullscreenElement = true
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(true)
       })
@@ -122,7 +122,7 @@ describe('useFullScreen', () => {
       it('uses document.fullscreen', () => {
         let fullScreen
         document.fullscreen = true
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(true)
       })
@@ -130,7 +130,7 @@ describe('useFullScreen', () => {
       it('uses document.mozFullScreen', () => {
         let fullScreen
         document.mozFullScreen = true
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(true)
       })
@@ -138,7 +138,7 @@ describe('useFullScreen', () => {
       it('uses document.webkitIsFullScreen', () => {
         let fullScreen
         document.webkitIsFullScreen = true
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(true)
       })
@@ -146,14 +146,14 @@ describe('useFullScreen', () => {
       it('uses document.fullScreenMode', () => {
         let fullScreen
         document.fullScreenMode = true
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(true)
       })
 
       it('defaults initial state to false', () => {
         let fullScreen
-        testHook(() => ({ fullScreen } = useFullScreen()))
+        renderHook(() => ({ fullScreen } = useFullScreen()))
 
         expect(fullScreen).toBe(false)
       })
@@ -164,7 +164,7 @@ describe('useFullScreen', () => {
     it('updates state when "webkitfullscreenchange" fires', () => {
       let fullScreen
       document.webkitIsFullScreen = false
-      testHook(() => ({ fullScreen } = useFullScreen()))
+      renderHook(() => ({ fullScreen } = useFullScreen()))
 
       document.webkitIsFullScreen = true
 
@@ -184,7 +184,7 @@ describe('useFullScreen', () => {
     it('updates state when "mozfullscreenchange" fires', () => {
       let fullScreen
       document.mozFullScreen = false
-      testHook(() => ({ fullScreen } = useFullScreen()))
+      renderHook(() => ({ fullScreen } = useFullScreen()))
 
       document.mozFullScreen = true
 
@@ -204,7 +204,7 @@ describe('useFullScreen', () => {
     it('updates state when "msfullscreenchange" fires', () => {
       let fullScreen
       document.fullScreenMode = false
-      testHook(() => ({ fullScreen } = useFullScreen()))
+      renderHook(() => ({ fullScreen } = useFullScreen()))
 
       document.fullScreenMode = true
 
@@ -224,7 +224,7 @@ describe('useFullScreen', () => {
     it('updates state when "MSFullscreenChange" fires', () => {
       let fullScreen
       document.fullScreenMode = false
-      testHook(() => ({ fullScreen } = useFullScreen()))
+      renderHook(() => ({ fullScreen } = useFullScreen()))
 
       document.fullScreenMode = true
 
@@ -245,7 +245,7 @@ describe('useFullScreen', () => {
       let fullScreen
       document.fullscreen = false
 
-      testHook(() => ({ fullScreen } = useFullScreen()))
+      renderHook(() => ({ fullScreen } = useFullScreen()))
 
       document.fullscreen = true
 
@@ -267,7 +267,7 @@ describe('useFullScreen', () => {
     it('calls requestFullScreen', () => {
       let open
       testElementRef.current.requestFullscreen = jest.fn()
-      testHook(() => ({ open } = useFullScreen({ element: testElementRef })))
+      renderHook(() => ({ open } = useFullScreen({ element: testElementRef })))
 
       open()
 
@@ -277,7 +277,7 @@ describe('useFullScreen', () => {
     it('calls mozRequestFullScreen', () => {
       let open
       testElementRef.current.mozRequestFullScreen = jest.fn()
-      testHook(() => ({ open } = useFullScreen({ element: testElementRef })))
+      renderHook(() => ({ open } = useFullScreen({ element: testElementRef })))
 
       open()
 
@@ -287,7 +287,7 @@ describe('useFullScreen', () => {
     it('calls webkitRequestFullscreen', () => {
       let open
       testElementRef.current.webkitRequestFullscreen = jest.fn()
-      testHook(() => ({ open } = useFullScreen({ element: testElementRef })))
+      renderHook(() => ({ open } = useFullScreen({ element: testElementRef })))
 
       open()
 
@@ -297,7 +297,7 @@ describe('useFullScreen', () => {
     it('calls msRequestFullscreen', () => {
       let open
       testElementRef.current.msRequestFullscreen = jest.fn()
-      testHook(() => ({ open } = useFullScreen({ element: testElementRef })))
+      renderHook(() => ({ open } = useFullScreen({ element: testElementRef })))
 
       open()
 
@@ -316,7 +316,7 @@ describe('useFullScreen', () => {
     it('calls exitFullscreen', () => {
       let close
       document.exitFullscreen = jest.fn()
-      testHook(() => ({ close } = useFullScreen()))
+      renderHook(() => ({ close } = useFullScreen()))
 
       close()
 
@@ -326,7 +326,7 @@ describe('useFullScreen', () => {
     it('calls mozCancelFullScreen', () => {
       let close
       document.mozCancelFullScreen = jest.fn()
-      testHook(() => ({ close } = useFullScreen()))
+      renderHook(() => ({ close } = useFullScreen()))
 
       close()
 
@@ -336,7 +336,7 @@ describe('useFullScreen', () => {
     it('calls webkitExitFullscreen', () => {
       let close
       document.webkitExitFullscreen = jest.fn()
-      testHook(() => ({ close } = useFullScreen()))
+      renderHook(() => ({ close } = useFullScreen()))
 
       close()
 
@@ -346,7 +346,7 @@ describe('useFullScreen', () => {
     it('calls msExitFullscreen', () => {
       let close
       document.msExitFullscreen = jest.fn()
-      testHook(() => ({ close } = useFullScreen()))
+      renderHook(() => ({ close } = useFullScreen()))
 
       close()
 
@@ -365,7 +365,7 @@ describe('useFullScreenBrowser', () => {
     window.innerHeight = 500
 
     let fullScreen
-    testHook(() => ({ fullScreen } = useFullScreenBrowser()))
+    renderHook(() => ({ fullScreen } = useFullScreenBrowser()))
 
     expect(fullScreen).toBe(false)
   })
@@ -379,7 +379,7 @@ describe('useFullScreenBrowser', () => {
     window.innerHeight = 500
 
     let fullScreen
-    testHook(() => ({ fullScreen } = useFullScreenBrowser()))
+    renderHook(() => ({ fullScreen } = useFullScreenBrowser()))
 
     expect(fullScreen).toBe(true)
   })
@@ -393,7 +393,7 @@ describe('useFullScreenBrowser', () => {
     window.innerHeight = 500
 
     let fullScreen
-    testHook(() => ({ fullScreen } = useFullScreenBrowser()))
+    renderHook(() => ({ fullScreen } = useFullScreenBrowser()))
 
     expect(fullScreen).toBe(true)
   })

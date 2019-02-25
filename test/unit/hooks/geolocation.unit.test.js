@@ -1,5 +1,4 @@
-import { testHook, cleanup } from 'react-testing-library'
-import { act } from 'react-dom/test-utils'
+import { act, renderHook, cleanup } from 'react-hooks-testing-library'
 
 import { useGeolocation } from '../../../src'
 
@@ -8,7 +7,7 @@ afterEach(cleanup)
 describe('useGeolocation', () => {
   it('sets initial state to mock Position', () => {
     let position, error
-    testHook(() => ({ position, error } = useGeolocation()))
+    renderHook(() => ({ position, error } = useGeolocation()))
 
     expect(position).toEqual({
       coords: {},
@@ -20,7 +19,7 @@ describe('useGeolocation', () => {
 
   it('calls getCurrentPosition with options', () => {
     act(() => {
-      testHook(() => useGeolocation({ foo: 'bar' }))
+      renderHook(() => useGeolocation({ foo: 'bar' }))
     })
 
     expect(navigator.geolocation.getCurrentPosition).toHaveBeenCalledWith(
@@ -39,7 +38,7 @@ describe('useGeolocation', () => {
 
     let position, error
     act(() => {
-      testHook(() => ({ position, error } = useGeolocation()))
+      renderHook(() => ({ position, error } = useGeolocation()))
     })
 
     expect(position).toBe('position')
@@ -55,7 +54,7 @@ describe('useGeolocation', () => {
 
     let error
     act(() => {
-      testHook(() => ({ error } = useGeolocation()))
+      renderHook(() => ({ error } = useGeolocation()))
     })
 
     expect(error).toBe(mockError)
@@ -63,7 +62,7 @@ describe('useGeolocation', () => {
 
   it('calls watchPosition with options', () => {
     act(() => {
-      testHook(() => useGeolocation({ foo: 'bar' }))
+      renderHook(() => useGeolocation({ foo: 'bar' }))
     })
 
     expect(navigator.geolocation.watchPosition).toHaveBeenCalledWith(
@@ -82,7 +81,7 @@ describe('useGeolocation', () => {
 
     let position, error
     act(() => {
-      testHook(() => ({ position, error } = useGeolocation()))
+      renderHook(() => ({ position, error } = useGeolocation()))
     })
 
     expect(position).toBe('position')
@@ -98,7 +97,7 @@ describe('useGeolocation', () => {
 
     let error
     act(() => {
-      testHook(() => ({ error } = useGeolocation()))
+      renderHook(() => ({ error } = useGeolocation()))
     })
 
     expect(error).toBe(mockError)

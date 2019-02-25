@@ -1,5 +1,5 @@
-import { testHook, cleanup, fireEvent } from 'react-testing-library'
-import { act } from 'react-dom/test-utils'
+import { act, cleanup, renderHook } from 'react-hooks-testing-library'
+import { fireEvent } from 'react-testing-library'
 
 import { useResize } from '../../../src'
 import * as constants from '../../../src/constants'
@@ -19,7 +19,7 @@ describe('useResize', () => {
     it('defaults to null, null', () => {
       let width, height
 
-      testHook(() => ({ width, height } = useResize()))
+      renderHook(() => ({ width, height } = useResize()))
 
       expect(width).toBe(null)
       expect(height).toBe(null)
@@ -32,7 +32,7 @@ describe('useResize', () => {
     window.innerWidth = 100
     window.innerHeight = 100
 
-    testHook(() => ({ width, height } = useResize()))
+    renderHook(() => ({ width, height } = useResize()))
 
     expect(width).toBe(100)
     expect(height).toBe(100)
@@ -45,7 +45,7 @@ describe('useResize', () => {
     window.innerHeight = 100
 
     act(() => {
-      testHook(() => ({ width, height } = useResize()))
+      renderHook(() => ({ width, height } = useResize()))
     })
 
     window.innerWidth = 200

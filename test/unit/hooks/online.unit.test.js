@@ -1,5 +1,5 @@
-import { testHook, cleanup, fireEvent } from 'react-testing-library'
-import { act } from 'react-dom/test-utils'
+import { act, cleanup, renderHook } from 'react-hooks-testing-library'
+import { fireEvent } from 'react-testing-library'
 
 import { useOnline } from '../../../src'
 import * as constants from '../../../src/constants'
@@ -24,7 +24,7 @@ describe('useOnline', () => {
 
     it('defaults to true', () => {
       let online
-      testHook(() => (online = useOnline()))
+      renderHook(() => (online = useOnline()))
 
       expect(online).toBe(true)
     })
@@ -35,7 +35,7 @@ describe('useOnline', () => {
 
     onLineGetter.mockReturnValue(true)
 
-    testHook(() => (online = useOnline()))
+    renderHook(() => (online = useOnline()))
 
     expect(online).toBe(true)
   })
@@ -46,7 +46,7 @@ describe('useOnline', () => {
     onLineGetter.mockReturnValue(false)
 
     act(() => {
-      testHook(() => (online = useOnline()))
+      renderHook(() => (online = useOnline()))
     })
 
     onLineGetter.mockReturnValue(true)
@@ -71,7 +71,7 @@ it('updates state on "offline"', () => {
   onLineGetter.mockReturnValue(true)
 
   act(() => {
-    testHook(() => (online = useOnline()))
+    renderHook(() => (online = useOnline()))
   })
 
   onLineGetter.mockReturnValue(false)

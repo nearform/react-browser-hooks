@@ -1,5 +1,5 @@
-import { testHook, cleanup, fireEvent } from 'react-testing-library'
-import { act } from 'react-dom/test-utils'
+import { act, cleanup, renderHook } from 'react-hooks-testing-library'
+import { fireEvent } from 'react-testing-library'
 
 import { useScroll } from '../../../src'
 import * as constants from '../../../src/constants'
@@ -19,7 +19,7 @@ describe('useScroll', () => {
     it('defaults to 0, 0', () => {
       let top, left
 
-      testHook(() => ({ top, left } = useScroll()))
+      renderHook(() => ({ top, left } = useScroll()))
 
       expect(top).toBe(0)
       expect(left).toBe(0)
@@ -32,7 +32,7 @@ describe('useScroll', () => {
     window.scrollX = 0
     window.scrollY = 0
 
-    testHook(() => ({ top, left } = useScroll()))
+    renderHook(() => ({ top, left } = useScroll()))
 
     expect(top).toBe(0)
     expect(left).toBe(0)
@@ -45,7 +45,7 @@ describe('useScroll', () => {
     window.scrollY = 0
 
     act(() => {
-      testHook(() => ({ top, left } = useScroll()))
+      renderHook(() => ({ top, left } = useScroll()))
     })
 
     window.scrollX = 100
