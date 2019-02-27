@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { act, cleanup, renderHook } from 'react-hooks-testing-library'
+import { act, cleanup } from 'react-hooks-testing-library'
 import { fireEvent, render } from 'react-testing-library'
 
 import { useMediaControls } from '../../../src'
