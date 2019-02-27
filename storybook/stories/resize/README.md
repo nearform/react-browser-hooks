@@ -5,7 +5,7 @@ The Resize hook listens for changes to browser window size.
 Import as follows:
 
 ```javascript
-import { useResize } from '@nearform/react-browser-hooks' 
+import { useResize } from 'react-browser-hooks' 
 ```
 
 Example of usage:

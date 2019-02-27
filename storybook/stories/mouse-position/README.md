@@ -5,7 +5,7 @@ The MousePosition hook listens for changes to mouse position.
 Import as follows:
 
 ```javascript
-import { useMousePosition } from '@nearform/react-browser-hooks' 
+import { useMousePosition } from 'react-browser-hooks' 
 ```
 
 Example of usage:

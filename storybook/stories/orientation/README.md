@@ -5,7 +5,7 @@ The Orientation hook gives you device orientation.
 Import as follows:
 
 ```javascript
-import { useOrientation } from '@nearform/react-browser-hooks' 
+import { useOrientation } from 'react-browser-hooks' 
 ```
 
 Example of usage:
