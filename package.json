@@ -1,5 +1,5 @@
 {
-  "name": "@nearform/react-browser-hooks",
+  "name": "react-browser-hooks",
   "version": "2.2.1",
   "description": "react-browser-hooks React component",
   "main": "lib/index.js",
