@@ -1,6 +1,6 @@
 {
   "name": "react-browser-hooks",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "react-browser-hooks React component",
   "main": "lib/index.js",
   "module": "es/index.js",
