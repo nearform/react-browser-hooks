@@ -5,7 +5,7 @@ The Scroll hook listens for changes to the browser window scroll position.
 Import as follows:
 
 ```javascript
-import { useScroll } from '@nearform/react-browser-hooks' 
+import { useScroll } from 'react-browser-hooks' 
 ```
 
 Example of usage:

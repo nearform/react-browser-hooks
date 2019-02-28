@@ -5,7 +5,7 @@ The Click Outside Hook attaches a listener which will callback the target compon
 Import as follows:
 
 ```javascript
-import { useClickOutside } from '@nearform/react-browser-hooks'
+import { useClickOutside } from 'react-browser-hooks'
 ```
 
 Example of usage:

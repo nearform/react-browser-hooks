@@ -5,7 +5,7 @@ The FullScreen hook allows a page or element to occupy the full screen.
 Import as follows:
 
 ```javascript
-import { useFullScreen } from '@nearform/react-browser-hooks'
+import { useFullScreen } from 'react-browser-hooks'
 ```
 
 Example of usage:
@@ -35,7 +35,7 @@ The useFullScreenBrowser Hook detects if the user has entered fullscreen using t
 Import as follows:
 
 ```javascript
-import { useFullScreenBrowser } from '@nearform/react-browser-hooks'
+import { useFullScreenBrowser } from 'react-browser-hooks'
 ```
 
 Example of usage:

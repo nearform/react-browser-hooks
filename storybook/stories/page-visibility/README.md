@@ -5,7 +5,7 @@ The Page Visibilty hook determines if the current page is the active tab or not.
 Import as follows:
 
 ```javascript
-import { usePageVisibility } from '@nearform/react-browser-hooks' 
+import { usePageVisibility } from 'react-browser-hooks' 
 ```
 
 Example of usage:

@@ -5,7 +5,7 @@ The Geolocation hook gives you current location.
 Import as follows:
 
 ```javascript
-import { useGeolocation } from '@nearform/react-browser-hooks'
+import { useGeolocation } from 'react-browser-hooks'
 ```
 
 Example of usage:

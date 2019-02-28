@@ -5,7 +5,7 @@ The MediaControls hook gives you access to the `HTMLMediaElement` API. Create cu
 Import as follows:
 
 ```javascript
-import { useMediaControls } from '@nearform/react-browser-hooks' 
+import { useMediaControls } from 'react-browser-hooks' 
 ```
 
 Example of usage:

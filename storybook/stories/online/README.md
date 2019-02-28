@@ -5,7 +5,7 @@ The Online hook listens for browser online/offline events to determine if there 
 Import as follows:
 
 ```javascript
-import { useOnline } from '@nearform/react-browser-hooks'
+import { useOnline } from 'react-browser-hooks'
 ```
 
 Example of usage:
