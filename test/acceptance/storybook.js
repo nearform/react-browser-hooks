@@ -8,6 +8,20 @@ class Hook {
   }
 }
 
+class FullscreenHook extends Hook {
+  constructor(className) {
+    super(className)
+
+    const buttons = this.demo.find('button')
+    this.toggleButton = buttons.nth(0)
+    this.openButton = buttons.nth(1)
+    this.closeButton = buttons.nth(2)
+
+    this.description = this.demo.find('p')
+    this.fullscreen = this.demo.find('pre')
+  }
+}
+
 class MediaControlsHook extends Hook {
   constructor(className) {
     super(className)
@@ -41,6 +55,7 @@ export default class Storybook {
   constructor() {
     this.iframe = Selector('iframe#storybook-preview-iframe')
     this.hooks = {
+      fullscreen: new FullscreenHook('.fullscreen-demo'),
       mediaControls: new MediaControlsHook('.media-controls-demo'),
       mousePosition: new MousePositionHook('.mouse-position-demo')
     }
