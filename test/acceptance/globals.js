@@ -1,5 +1,5 @@
 const globals = {
-  url: 'http://localhost:3000'
+  url: process.env.ACCEPTANCE_URL || 'http://localhost:3000'
 }
 
 export default globals
