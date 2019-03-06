@@ -43,7 +43,7 @@ async function main() {
 
     async function waitForNetlifyDeploy(deployId, options = {}) {
       options.rate = options.rate || 30000 // 30s default
-      options.timeout = options.timeout || 300000 // 5m default
+      options.timeout = options.timeout || 600000 // 10m default
       options.total = options.total || 0
 
       const { summary } = await netlify
