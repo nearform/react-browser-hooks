@@ -51,13 +51,23 @@ class MousePositionHook extends Hook {
     this.description = this.demo.child('p')
   }
 }
+
+class ResizeHook extends Hook {
+  constructor(className) {
+    super(className)
+    this.description = this.demo.find('p')
+    this.border = this.demo.find('#follow-cursor')
+  }
+}
+
 export default class Storybook {
   constructor() {
     this.iframe = Selector('iframe#storybook-preview-iframe')
     this.hooks = {
       fullscreen: new FullscreenHook('.fullscreen-demo'),
       mediaControls: new MediaControlsHook('.media-controls-demo'),
-      mousePosition: new MousePositionHook('.mouse-position-demo')
+      mousePosition: new MousePositionHook('.mouse-position-demo'),
+      resize: new ResizeHook('.resize-demo')
     }
   }
 }
