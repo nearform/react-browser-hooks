@@ -11,6 +11,8 @@ jobs:
     environment:
       BROWSERSTACK_PARALLEL_RUNS: '5'
       BROWSERSTACK_USE_AUTOMATE: '1'
+      BROWSERSTACK_PROJECT_NAME: 'react-browser-hooks'
+      BROWSERSTACK_BUILD_ID: '$CIRCLE_BRANCH'
     steps:
       - checkout
       - restore_cache:
