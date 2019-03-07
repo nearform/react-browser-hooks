@@ -12,8 +12,11 @@ jobs:
       BROWSERSTACK_PARALLEL_RUNS: '5'
       BROWSERSTACK_USE_AUTOMATE: '1'
       BROWSERSTACK_PROJECT_NAME: 'react-browser-hooks'
-      BROWSERSTACK_BUILD_ID: '$CIRCLE_BRANCH'
     steps:
+      - run:
+          name: setup dynamic environment variables
+          command: |
+              echo 'export BROWSERSTACK_BUILD_ID="$CIRCLE_BRANCH"' >> $BASH_ENV
       - checkout
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
