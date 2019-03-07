@@ -8,7 +8,7 @@ function Resize() {
   const size = useResize()
 
   return (
-    <div>
+    <div className="resize-demo">
       <h2>Resize Demo</h2>
       <em>The red border shows this visually.</em>
       <p>
