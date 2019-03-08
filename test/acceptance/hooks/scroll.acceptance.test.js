@@ -18,14 +18,14 @@ test('The scroll demo is rendered', async (t) => {
 })
 
 test('The scroll demo defaults to window.scroll* values', async (t) => {
-  const scrollX = await getWindowAttribute('scrollX')
-  const scrollY = await getWindowAttribute('scrollY')
+  const pageXOffset = await getWindowAttribute('pageXOffset')
+  const pageYOffset = await getWindowAttribute('pageYOffset')
 
   const { description } = storybook.hooks.scroll
 
   await t
     .expect(description.textContent)
-    .contains(`Top: ${scrollY}px, Left: ${scrollX}px`)
+    .contains(`Top: ${pageYOffset}px, Left: ${pageXOffset}px`)
 })
 
 test('The scroll demo updates state on scroll', async (t) => {
