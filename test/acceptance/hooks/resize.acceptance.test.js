@@ -16,7 +16,7 @@ test('The resize demo is rendered', async (t) => {
   await t.expect(title.textContent).contains('Resize Demo')
 })
 
-test('The resize demo defaults to window.offset* values', async (t) => {
+test('The resize demo defaults to element.offset* values', async (t) => {
   const { description, border } = storybook.hooks.resize
   const { offsetHeight, offsetWidth } = await border()
   await t
