@@ -60,6 +60,13 @@ class ResizeHook extends Hook {
   }
 }
 
+class ScrollHook extends Hook {
+  constructor(className) {
+    super(className)
+    this.description = this.demo.find('p')
+  }
+}
+
 export default class Storybook {
   constructor() {
     this.iframe = Selector('iframe#storybook-preview-iframe')
@@ -67,7 +74,8 @@ export default class Storybook {
       fullscreen: new FullscreenHook('.fullscreen-demo'),
       mediaControls: new MediaControlsHook('.media-controls-demo'),
       mousePosition: new MousePositionHook('.mouse-position-demo'),
-      resize: new ResizeHook('.resize-demo')
+      resize: new ResizeHook('.resize-demo'),
+      scroll: new ScrollHook('.scroll-demo')
     }
   }
 }

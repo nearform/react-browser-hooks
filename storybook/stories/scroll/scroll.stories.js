@@ -16,12 +16,14 @@ function Scroll() {
         height: '2000px'
       }}>
       <div style={{ position: 'fixed', top: '15px', left: '40px' }}>
-        <h2>Scroll Demo</h2>
-        <em>Try scrolling within this frame...</em>
-        <p>
-          Top: {Math.round(scroll.top)}px, Left: {Math.round(scroll.left)}px
-          <br />
-        </p>
+        <div className="scroll-demo">
+          <h2>Scroll Demo</h2>
+          <em>Try scrolling within this frame...</em>
+          <p>
+            Top: {Math.round(scroll.top)}px, Left: {Math.round(scroll.left)}px
+            <br />
+          </p>
+        </div>
       </div>
     </div>
   )
