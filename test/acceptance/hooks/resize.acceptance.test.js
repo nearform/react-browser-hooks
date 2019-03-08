@@ -43,4 +43,5 @@ test('The dimensions update when the browser is resized', async (t) => {
     .lte(700)
     .expect(description.textContent)
     .contains(`Width: ${offsetWidth}px, Height: ${offsetHeight}px`)
+    .resizeWindow(1024, 768)
 })
