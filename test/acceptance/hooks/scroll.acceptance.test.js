@@ -1,12 +1,16 @@
 import globals from '../globals'
 import Storybook from '../storybook'
-import { getWindowAttribute } from '../util'
+import { getWindowAttribute, scrollWindow } from '../util'
 
 const storybook = new Storybook()
 
-fixture('Scroll Hook').page(
-  globals.url + '/iframe.html?selectedKind=Scroll&selectedStory=Default'
-)
+fixture('Scroll Hook')
+  .page(
+    globals.url +
+      '?selectedKind=Scroll&selectedStory=Default&full=0&addons=1&stories=1&panelRight=1&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel'
+  )
+  .beforeEach((t) => t.switchToIframe(storybook.iframe))
+  .afterEach((t) => t.switchToMainWindow())
 
 test('The scroll demo is rendered', async (t) => {
   const { title } = storybook.hooks.scroll
@@ -27,13 +31,7 @@ test('The scroll demo defaults to window.scroll* values', async (t) => {
 test('The scroll demo updates state on scroll', async (t) => {
   const { description } = storybook.hooks.scroll
 
-  await t
-    .expect(description.textContent)
-    .contains('Top: 0px, Left: 0px')
-    .navigateTo(
-      globals.url +
-        '/iframe.html?selectedKind=Scroll&selectedStory=Default#scroll-to-me'
-    )
-    .expect(description.textContent)
-    .contains('Top: 1035px')
+  await t.expect(description.textContent).contains('Top: 0px, Left: 0px')
+  await scrollWindow(100, 100)
+  await t.expect(description.textContent).contains('Top: 100px, Left: 100px')
 })

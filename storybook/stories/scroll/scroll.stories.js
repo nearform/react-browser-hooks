@@ -25,7 +25,6 @@ function Scroll() {
           </p>
         </div>
       </div>
-      <div id="scroll-to-me" style={{ position: 'absolute', top: '1000px' }} />
     </div>
   )
 }
