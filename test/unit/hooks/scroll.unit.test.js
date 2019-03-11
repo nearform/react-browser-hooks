@@ -29,8 +29,8 @@ describe('useScroll', () => {
   it('sets initial state to window.scroll values', () => {
     let top, left
 
-    window.scrollX = 0
-    window.scrollY = 0
+    window.pageXOffset = 0
+    window.pageYOffset = 0
 
     renderHook(() => ({ top, left } = useScroll()))
 
@@ -41,15 +41,15 @@ describe('useScroll', () => {
   it('updates state on "scroll" event', () => {
     let top, left
 
-    window.scrollX = 0
-    window.scrollY = 0
+    window.pageXOffset = 0
+    window.pageYOffset = 0
 
     act(() => {
       renderHook(() => ({ top, left } = useScroll()))
     })
 
-    window.scrollX = 100
-    window.scrollY = 100
+    window.pageXOffset = 100
+    window.pageYOffset = 100
 
     act(() => {
       fireEvent(
