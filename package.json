@@ -38,7 +38,7 @@
     "@storybook/addon-options": "4.1.16",
     "@storybook/addons": "4.1.16",
     "@storybook/react": "4.1.16",
-    "axios": "0.18.0",
+    "axios": "0.19.0",
     "babel-eslint": "10.0.1",
     "babel-loader": "8.0.5",
     "eslint": "5.16.0",
