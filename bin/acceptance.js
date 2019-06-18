@@ -71,8 +71,8 @@ async function main() {
 
     await waitForNetlifyDeploy(deploy.id)
     console.log(`netlify deployed: ${deploy.deploy_ssl_url}`)
-    console.log('starting acceptance')
 
+    console.log('starting acceptance')
     const test = ChildProcess.spawn('npm', ['run', 'acceptance-ci'], {
       env: Object.assign({}, process.env, {
         ACCEPTANCE_URL: deploy.deploy_ssl_url
