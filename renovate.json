@@ -1,5 +1,7 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "bumpVersion": "major",
+  "rangeStrategy": "replace"
 }
