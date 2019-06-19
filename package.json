@@ -59,7 +59,7 @@
     "react": "16.8.6",
     "react-hooks-testing-library": "0.4.0",
     "storybook-readme": "4.0.5",
-    "testcafe": "1.1.1",
+    "testcafe": "1.2.1",
     "testcafe-browser-provider-browserstack": "1.8.0"
   },
   "author": "NearForm",
