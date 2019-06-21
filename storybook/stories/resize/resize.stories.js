@@ -1,6 +1,5 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withReadme } from 'storybook-readme'
 import { useResize } from '../../../src'
 import readme from './README.md'
 
@@ -32,4 +31,6 @@ function Resize() {
   )
 }
 
-storiesOf('Resize', module).add('Default', withReadme(readme, () => <Resize />))
+storiesOf('Resize', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <Resize />)
