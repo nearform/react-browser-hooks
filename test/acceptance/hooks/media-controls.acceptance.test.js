@@ -4,10 +4,7 @@ import Storybook from '../storybook'
 const storybook = new Storybook()
 
 fixture('Media Controls Hook')
-  .page(
-    globals.url +
-      '/?selectedKind=MediaControls&selectedStory=Default&full=0&addons=1&stories=1&panelRight=1&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel'
-  )
+  .page(globals.url + '/?path=/story/mediacontrols--default')
   .beforeEach(async (t) => {
     await t.switchToIframe(storybook.iframe)
   })
