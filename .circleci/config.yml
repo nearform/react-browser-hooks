@@ -30,4 +30,4 @@ jobs:
       - run: |
           npm install coveralls
           cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-- run: npm run test:acceptance
+      - run: npm run test:acceptance
