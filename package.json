@@ -29,7 +29,7 @@
     "test:watch": "jest --watch"
   },
   "peerDependencies": {
-    "react": "16.8.x"
+    "react": "16.12.x"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
