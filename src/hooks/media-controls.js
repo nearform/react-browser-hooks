@@ -51,44 +51,45 @@ export function useMediaControls(element) {
   }
 
   useEffect(() => {
-    const isPaused = () => element.current.paused || element.current.ended
+    const currEl = element.current
+    const isPaused = () => currEl.paused || currEl.ended
 
-    setCurrentTime(element.current.currentTime)
+    setCurrentTime(currEl.currentTime)
     setPaused(isPaused())
 
-    setMuted(element.current.muted)
+    setMuted(currEl.muted)
     if (muted) {
-      setOldVolume(element.current.volume)
+      setOldVolume(currEl.volume)
       _setVolume(0)
     } else {
-      _setVolume(element.current.volume)
+      _setVolume(currEl.volume)
     }
 
     const playPauseHandler = () => setPaused(isPaused())
-    element.current.addEventListener('play', playPauseHandler) // fired by play method or autoplay attribute
-    element.current.addEventListener('playing', playPauseHandler) // fired by resume after being paused due to lack of data
-    element.current.addEventListener('pause', playPauseHandler) // fired by pause method
-    element.current.addEventListener('waiting', playPauseHandler) // fired by pause due to lack of data
+    currEl.addEventListener('play', playPauseHandler) // fired by play method or autoplay attribute
+    currEl.addEventListener('playing', playPauseHandler) // fired by resume after being paused due to lack of data
+    currEl.addEventListener('pause', playPauseHandler) // fired by pause method
+    currEl.addEventListener('waiting', playPauseHandler) // fired by pause due to lack of data
 
-    const volumeHandler = () => _setVolume(element.current.volume)
-    element.current.addEventListener('volumechange', volumeHandler) // fired by a change of volume
+    const volumeHandler = () => _setVolume(currEl.volume)
+    currEl.addEventListener('volumechange', volumeHandler) // fired by a change of volume
 
-    const seekHandler = () => setCurrentTime(element.current.currentTime)
-    element.current.addEventListener('seeked', seekHandler) // fired on seek completed
-    element.current.addEventListener('timeupdate', seekHandler) // fired on currentTime update
+    const seekHandler = () => setCurrentTime(currEl.currentTime)
+    currEl.addEventListener('seeked', seekHandler) // fired on seek completed
+    currEl.addEventListener('timeupdate', seekHandler) // fired on currentTime update
 
     return () => {
-      element.current.removeEventListener('play', playPauseHandler)
-      element.current.removeEventListener('playing', playPauseHandler)
-      element.current.removeEventListener('pause', playPauseHandler)
-      element.current.removeEventListener('waiting', playPauseHandler)
+      currEl.removeEventListener('play', playPauseHandler)
+      currEl.removeEventListener('playing', playPauseHandler)
+      currEl.removeEventListener('pause', playPauseHandler)
+      currEl.removeEventListener('waiting', playPauseHandler)
 
-      element.current.removeEventListener('volumechange', volumeHandler)
+      currEl.removeEventListener('volumechange', volumeHandler)
 
-      element.current.removeEventListener('seeked', seekHandler)
-      element.current.removeEventListener('timeupdate', seekHandler)
+      currEl.removeEventListener('seeked', seekHandler)
+      currEl.removeEventListener('timeupdate', seekHandler)
     }
-  }, [element.current])
+  }, [element, muted])
 
   return {
     currentTime,

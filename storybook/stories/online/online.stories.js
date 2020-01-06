@@ -14,4 +14,7 @@ function Online() {
   )
 }
 
-storiesOf('Online', module).add('Default', withReadme(readme, () => <Online />))
+storiesOf('Online', module).add(
+  'Default',
+  withReadme(readme, () => <Online />)
+)

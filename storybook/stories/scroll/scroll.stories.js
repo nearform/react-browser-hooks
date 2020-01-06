@@ -29,4 +29,7 @@ function Scroll() {
   )
 }
 
-storiesOf('Scroll', module).add('Default', withReadme(readme, () => <Scroll />))
+storiesOf('Scroll', module).add(
+  'Default',
+  withReadme(readme, () => <Scroll />)
+)
