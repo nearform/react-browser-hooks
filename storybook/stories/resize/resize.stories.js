@@ -32,4 +32,7 @@ function Resize() {
   )
 }
 
-storiesOf('Resize', module).add('Default', withReadme(readme, () => <Resize />))
+storiesOf('Resize', module).add(
+  'Default',
+  withReadme(readme, () => <Resize />)
+)

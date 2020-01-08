@@ -9,7 +9,9 @@ import { IS_SERVER } from '../constants'
  *  and visibilityChange properties
  */
 const getVisibilityProps = () => {
-  if (IS_SERVER) return {}
+  if (IS_SERVER) {
+    return {}
+  }
 
   let hidden
   let visibilityChange
@@ -25,6 +27,7 @@ const getVisibilityProps = () => {
     hidden = 'webkitHidden'
     visibilityChange = 'webkitvisibilitychange'
   }
+
   return { hidden, visibilityChange }
 }
 
@@ -35,13 +38,16 @@ const getVisibilityProps = () => {
  */
 export const usePageVisibility = () => {
   const { hidden, visibilityChange } = getVisibilityProps()
-  const [visible, setVisible] = useState(IS_SERVER ? true : !document[hidden])
-  const handler = () => setVisible(!document[hidden])
+  const [visible, setVisible] = useState(IS_SERVER || !document[hidden])
+
   useEffect(() => {
+    const handler = () => setVisible(!document[hidden])
+
     document.addEventListener(visibilityChange, handler)
     return () => {
       document.removeEventListener(visibilityChange, handler)
     }
-  }, [])
+  }, [hidden, visibilityChange])
+
   return visible
 }
