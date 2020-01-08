@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import { storiesOf } from '@storybook/react'
-import { withReadme } from 'storybook-readme'
 import { useClickOutside } from '../../../src'
 import readme from './README.md'
 
@@ -40,7 +39,6 @@ function ClickOutside() {
   )
 }
 
-storiesOf('Click Outside', module).add(
-  'Default',
-  withReadme(readme, () => <ClickOutside />)
-)
+storiesOf('Click Outside', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <ClickOutside />)

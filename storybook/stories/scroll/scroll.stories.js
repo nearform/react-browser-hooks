@@ -1,6 +1,5 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withReadme } from 'storybook-readme'
 
 import { useScroll } from '../../../src'
 import readme from './README.md'
@@ -29,7 +28,6 @@ function Scroll() {
   )
 }
 
-storiesOf('Scroll', module).add(
-  'Default',
-  withReadme(readme, () => <Scroll />)
-)
+storiesOf('Scroll', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <Scroll />)

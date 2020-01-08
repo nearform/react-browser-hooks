@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { storiesOf } from '@storybook/react'
-import { withReadme } from 'storybook-readme'
 import { useMediaControls } from '../../../src'
 import readme from './README.md'
 
@@ -127,7 +126,6 @@ function MediaControls() {
   )
 }
 
-storiesOf('MediaControls', module).add(
-  'Default',
-  withReadme(readme, () => <MediaControls />)
-)
+storiesOf('MediaControls', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <MediaControls />)

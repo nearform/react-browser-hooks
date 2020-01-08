@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { useGeolocation } from '../../../src'
 import readme from './README.md'
-import { withReadme } from 'storybook-readme'
 
 function CurrentLocation() {
   const { position, error } = useGeolocation()
@@ -46,7 +45,6 @@ function Geolocation() {
   )
 }
 
-storiesOf('Geolocation', module).add(
-  'Default',
-  withReadme(readme, () => <Geolocation />)
-)
+storiesOf('Geolocation', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <Geolocation />)

@@ -11,7 +11,7 @@
     "umd"
   ],
   "scripts": {
-    "acceptance": "testcafe chrome,firefox test/acceptance/",
+    "acceptance": "testcafe chrome test/acceptance/",
     "acceptance-ci": "testcafe browserstack:chrome,browserstack:firefox,browserstack:ie,browserstack:safari test/acceptance/",
     "build": "nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
@@ -36,7 +36,6 @@
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
     "@emotion/core": "^10.0.27",
-    "@storybook/addon-options": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
     "@testing-library/dom": "^6.11.0",
