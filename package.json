@@ -35,9 +35,14 @@
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
+    "@emotion/core": "^10.0.27",
     "@storybook/addon-options": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
+    "@testing-library/dom": "^6.11.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/react-hooks": "^3.2.1",
     "axios": "^0.19.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
@@ -55,7 +60,7 @@
     "lint-staged": "^9.5.0",
     "prettier": "^1.16.4",
     "react": "^16.8.6",
-    "react-hooks-testing-library": "^0.4.0",
+    "react-test-renderer": "^16.12.0",
     "storybook-readme": "^5.0.8",
     "testcafe": "^1.1.1",
     "testcafe-browser-provider-browserstack": "^1.8.0"
@@ -78,9 +83,5 @@
     "orientation",
     "geolocation"
   ],
-  "dependencies": {
-    "@testing-library/dom": "^6.11.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0"
-  }
+  "dependencies": {}
 }
