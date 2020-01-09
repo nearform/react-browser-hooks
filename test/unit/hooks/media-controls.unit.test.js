@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import { act, cleanup } from '@testing-library/react-hooks'
-import { fireEvent, render } from '@testing-library/react'
+import { cleanup } from '@testing-library/react-hooks'
+import { act, fireEvent, render } from '@testing-library/react'
 
 import { useMediaControls } from '../../../src'
 
@@ -266,6 +266,32 @@ describe('useMediaControls', () => {
 
       act(() => {
         setVolume(1)
+      })
+
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+    })
+
+    it('when unmute() is called after mute()', () => {
+      expect(volume).toBe(0)
+      expect(mediaElementRef.current.volume).toBe(0)
+
+      act(() => {
+        unmute()
+      })
+
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+
+      act(() => {
+        mute()
+      })
+
+      expect(volume).toBe(0)
+      expect(mediaElementRef.current.volume).toBe(0)
+
+      act(() => {
+        unmute()
       })
 
       expect(volume).toBe(1)
