@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { useMediaControls } from '../../../src'
 import readme from './README.md'
 
-export default function Audio() {
+function Audio() {
   const player = useRef(null)
   const {
     mute,
@@ -20,7 +20,7 @@ export default function Audio() {
     <div>
       <h3>Audio</h3>
       <div>
-        <p>
+        <div>
           <audio
             ref={player}
             muted
@@ -28,8 +28,8 @@ export default function Audio() {
             width="250">
             Your browser does not support the <code>audio</code> element.
           </audio>
-        </p>
-        <p>
+        </div>
+        <div>
           <button onClick={paused ? play : pause}>
             {paused ? 'Play' : 'Pause'}
           </button>
@@ -37,14 +37,20 @@ export default function Audio() {
             {muted ? 'Unmute' : 'Mute'}
           </button>
           <button
-            onClick={() => setVolume(Math.round((volume - 0.1) * 10) / 10)}>
+            onClick={() =>
+              setVolume(Math.max(0, Math.round((volume - 0.1) * 10) / 10))
+            }
+            disabled={volume === 0}>
             Volume down
           </button>
           <button
-            onClick={() => setVolume(Math.round((volume + 0.1) * 10) / 10)}>
+            onClick={() =>
+              setVolume(Math.min(1, Math.round((volume + 0.1) * 10) / 10))
+            }
+            disabled={volume === 1}>
             Volume up
           </button>
-        </p>
+        </div>
         <p>The audio is paused: {paused !== null ? paused.toString() : ''}</p>
         <p>The audio is volume: {volume !== null ? volume.toString() : ''}</p>
         <p>The audio is muted: {muted !== null ? muted.toString() : ''}</p>
