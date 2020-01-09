@@ -71,7 +71,19 @@ export function useMediaControls(element) {
     currEl.addEventListener('pause', playPauseHandler) // fired by pause method
     currEl.addEventListener('waiting', playPauseHandler) // fired by pause due to lack of data
 
-    const volumeHandler = () => _setVolume(currEl.volume)
+    const volumeHandler = () => {
+      let vol = currEl.volume
+
+      if (vol < 0) {
+        vol = 0
+      }
+
+      if (vol > 1) {
+        vol = 1
+      }
+
+      _setVolume(vol)
+    }
     currEl.addEventListener('volumechange', volumeHandler) // fired by a change of volume
 
     const seekHandler = () => setCurrentTime(currEl.currentTime)
