@@ -81,7 +81,7 @@ describe('useMediaControls', () => {
     expect(currentTime).toBe(0)
     expect(muted).toBe(true)
     expect(paused).toBe(true)
-    expect(volume).toBe(0)
+    expect(volume).toBe(1)
   })
 
   describe('plays', () => {
@@ -217,27 +217,76 @@ describe('useMediaControls', () => {
     })
 
     it('when mute() is called', () => {
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
 
       act(() => {
         mute()
       })
 
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
     })
 
     it('when setVolume() is called with 0', () => {
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
 
       act(() => {
         setVolume(0)
       })
 
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
+    })
+
+    it('when unmute() is called after setVolume() is called with 0', () => {
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
+
+      const originalVolume = mediaElementRef.current.volume
+
+      act(() => {
+        setVolume(0)
+      })
+
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
+
+      act(() => {
+        unmute()
+      })
+
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
+      expect(volume).toBe(originalVolume)
+      expect(mediaElementRef.current.volume).toBe(originalVolume)
+    })
+
+    it('when mute() or unmute() is called directly, volume does not change', () => {
+      setVolume(1)
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
+
+      act(() => {
+        mute()
+      })
+
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
+
+      act(() => {
+        unmute()
+      })
+
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
     })
   })
 
@@ -249,53 +298,27 @@ describe('useMediaControls', () => {
     })
 
     it('when unmute() is called', () => {
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
 
       act(() => {
         unmute()
       })
 
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
     })
 
     it('when setVolume() is called with >0', () => {
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
 
       act(() => {
         setVolume(1)
       })
 
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
-    })
-
-    it('when unmute() is called after mute()', () => {
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
-
-      act(() => {
-        unmute()
-      })
-
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
-
-      act(() => {
-        mute()
-      })
-
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
-
-      act(() => {
-        unmute()
-      })
-
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
     })
   })
 

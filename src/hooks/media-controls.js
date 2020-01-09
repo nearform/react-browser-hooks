@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 export function useMediaControls(element) {
   const [currentTime, setCurrentTime] = useState(null)
   const [muted, setMuted] = useState(null)
-  const [oldVolume, setOldVolume] = useState(null)
   const [paused, setPaused] = useState(null)
-  const [volume, _setVolume] = useState(null)
+  const [volume, adjustVolume] = useState(null)
+  const [cachedVolume, setCachedVolume] = useState(null)
 
   function pause() {
     element.current.pause()
@@ -16,24 +16,26 @@ export function useMediaControls(element) {
   }
 
   function setVolume(value) {
-    setOldVolume(element.current.volume)
-    element.current.volume = value
-
-    // no onmuted event, must set on volumechange
     if (value === 0) {
-      element.current.muted = true
+      setCachedVolume(element.current.volume)
+      mute()
     } else {
-      element.current.muted = false
+      unmute()
     }
-    setMuted(element.current.muted)
+
+    element.current.volume = value
   }
 
   function mute() {
-    setVolume(0)
+    element.current.muted = true
   }
 
   function unmute() {
-    setVolume(oldVolume)
+    element.current.muted = false
+    if (cachedVolume) {
+      element.current.volume = cachedVolume
+      setCachedVolume(null)
+    }
   }
 
   function seek(value) {
@@ -56,14 +58,8 @@ export function useMediaControls(element) {
 
     setCurrentTime(currEl.currentTime)
     setPaused(isPaused())
-
+    adjustVolume(currEl.volume)
     setMuted(currEl.muted)
-    if (muted) {
-      setOldVolume(currEl.volume)
-      _setVolume(0)
-    } else {
-      _setVolume(currEl.volume)
-    }
 
     const playPauseHandler = () => setPaused(isPaused())
     currEl.addEventListener('play', playPauseHandler) // fired by play method or autoplay attribute
@@ -72,6 +68,8 @@ export function useMediaControls(element) {
     currEl.addEventListener('waiting', playPauseHandler) // fired by pause due to lack of data
 
     const volumeHandler = () => {
+      setMuted(currEl.muted)
+
       let vol = currEl.volume
 
       if (vol < 0) {
@@ -82,7 +80,7 @@ export function useMediaControls(element) {
         vol = 1
       }
 
-      _setVolume(vol)
+      adjustVolume(vol)
     }
     currEl.addEventListener('volumechange', volumeHandler) // fired by a change of volume
 
