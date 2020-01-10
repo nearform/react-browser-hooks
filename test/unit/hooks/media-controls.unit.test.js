@@ -207,6 +207,30 @@ describe('useMediaControls', () => {
       expect(volume).toBe(0.2)
       expect(mediaElementRef.current.volume).toBe(0.2)
     })
+
+    it('when setVolume() attempts to set a value > 1', () => {
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+
+      act(() => {
+        setVolume(1.1)
+      })
+
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+    })
+
+    it('when setVolume() attempts to set a value < 0', () => {
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+
+      act(() => {
+        setVolume(-0.1)
+      })
+
+      expect(volume).toBe(0)
+      expect(mediaElementRef.current.volume).toBe(0)
+    })
   })
 
   describe('mutes', () => {

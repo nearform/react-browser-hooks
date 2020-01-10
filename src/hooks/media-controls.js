@@ -16,14 +16,24 @@ export function useMediaControls(element) {
   }
 
   function setVolume(value) {
-    if (value === 0) {
+    let volume
+
+    if (value < 0) {
+      volume = 0
+    } else if (value > 1) {
+      volume = 1
+    } else {
+      volume = value
+    }
+
+    if (volume === 0) {
       setCachedVolume(element.current.volume)
       mute()
     } else {
       unmute()
     }
 
-    element.current.volume = value
+    element.current.volume = volume
   }
 
   function mute() {
@@ -69,18 +79,7 @@ export function useMediaControls(element) {
 
     const volumeHandler = () => {
       setMuted(currEl.muted)
-
-      let vol = currEl.volume
-
-      if (vol < 0) {
-        vol = 0
-      }
-
-      if (vol > 1) {
-        vol = 1
-      }
-
-      adjustVolume(vol)
+      adjustVolume(currEl.volume)
     }
     currEl.addEventListener('volumechange', volumeHandler) // fired by a change of volume
 
