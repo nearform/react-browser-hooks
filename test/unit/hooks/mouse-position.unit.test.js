@@ -1,5 +1,5 @@
-import { act, cleanup, renderHook } from 'react-hooks-testing-library'
-import { fireEvent } from 'react-testing-library'
+import { act, cleanup, renderHook } from '@testing-library/react-hooks'
+import { fireEvent } from '@testing-library/react'
 import { useMousePosition } from '../../../src'
 
 afterEach(cleanup)

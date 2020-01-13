@@ -1,4 +1,4 @@
-import { act, renderHook, cleanup } from 'react-hooks-testing-library'
+import { act, renderHook, cleanup } from '@testing-library/react-hooks'
 
 import { useGeolocation } from '../../../src'
 

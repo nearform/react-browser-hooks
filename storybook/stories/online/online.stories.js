@@ -1,6 +1,5 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withReadme } from 'storybook-readme'
 import { useOnline } from '../../../src'
 import readme from './README.md'
 
@@ -14,4 +13,6 @@ function Online() {
   )
 }
 
-storiesOf('Online', module).add('Default', withReadme(readme, () => <Online />))
+storiesOf('Online', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <Online />)

@@ -1,5 +1,5 @@
 import React, { forwardRef, createRef } from 'react'
-import { cleanup, fireEvent, render } from 'react-testing-library'
+import { cleanup, fireEvent, render } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 
 import { useClickOutside } from '../../../src'

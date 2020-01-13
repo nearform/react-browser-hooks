@@ -4,10 +4,7 @@ import Storybook from '../storybook'
 const storybook = new Storybook()
 
 fixture('Mouse Position Hook')
-  .page(
-    globals.url +
-      '/?selectedKind=Mouse Position&selectedStory=Default&full=0&addons=1&stories=1&panelRight=1&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel'
-  )
+  .page(globals.url + '/?path=/story/mouse-position--default')
   .beforeEach((t) => t.switchToIframe(storybook.iframe))
   .afterEach((t) => t.switchToMainWindow())
 

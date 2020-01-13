@@ -49,11 +49,11 @@ export function useFullScreen(options = {}) {
     if (document.msExitFullscreen) return document.msExitFullscreen()
   }
 
-  function handleChange() {
-    setFullScreen(isFullScreenElement(fsEl))
-  }
-
   useEffect(() => {
+    function handleChange() {
+      setFullScreen(isFullScreenElement(fsEl))
+    }
+
     document.addEventListener('webkitfullscreenchange', handleChange, false)
     document.addEventListener('mozfullscreenchange', handleChange, false)
     document.addEventListener('msfullscreenchange', handleChange, false)
@@ -67,7 +67,7 @@ export function useFullScreen(options = {}) {
       document.removeEventListener('MSFullscreenChange', handleChange)
       document.removeEventListener('fullscreenchange', handleChange)
     }
-  }, [options.element])
+  }, [options.element, fsEl])
 
   return {
     fullScreen,

@@ -1,6 +1,5 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { withReadme } from 'storybook-readme'
 import { useMousePosition } from '../../../src'
 import readme from './README.md'
 
@@ -30,7 +29,6 @@ function MousePosition() {
   )
 }
 
-storiesOf('Mouse Position', module).add(
-  'Default',
-  withReadme(readme, () => <MousePosition />)
-)
+storiesOf('Mouse Position', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <MousePosition />)

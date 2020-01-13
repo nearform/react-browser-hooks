@@ -37,11 +37,11 @@ class MediaControlsHook extends Hook {
     this.volumeUpButton = buttons.nth(7)
 
     const descriptions = this.demo.find('p')
-    this.videoPausedState = descriptions.nth(2)
-    this.currentTimeState = descriptions.nth(3)
-    this.audioPausedState = descriptions.nth(6)
-    this.volumeState = descriptions.nth(7)
-    this.mutedState = descriptions.nth(8)
+    this.videoPausedState = descriptions.nth(0)
+    this.currentTimeState = descriptions.nth(1)
+    this.audioPausedState = descriptions.nth(2)
+    this.volumeState = descriptions.nth(3)
+    this.mutedState = descriptions.nth(4)
   }
 }
 

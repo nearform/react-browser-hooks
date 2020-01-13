@@ -9,10 +9,6 @@ const defaultState = {
 export function useResize() {
   const [size, setSize] = useState(IS_SERVER ? defaultState : getWindowSize())
 
-  function handleResize() {
-    setSize(getWindowSize())
-  }
-
   function getWindowSize() {
     return {
       height: window.innerHeight,
@@ -21,9 +17,13 @@ export function useResize() {
   }
 
   useEffect(() => {
+    function handleResize() {
+      setSize(getWindowSize())
+    }
+
     window.addEventListener('resize', handleResize, false)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [setSize])
 
   return size
 }

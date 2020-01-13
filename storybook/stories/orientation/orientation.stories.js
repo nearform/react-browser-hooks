@@ -2,7 +2,6 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { useOrientation } from '../../../src'
 import readme from './README.md'
-import { withReadme } from 'storybook-readme'
 
 function Orientation() {
   const { angle, type } = useOrientation()
@@ -21,7 +20,6 @@ function Orientation() {
   )
 }
 
-storiesOf('Orientation', module).add(
-  'Default',
-  withReadme(readme, () => <Orientation />)
-)
+storiesOf('Orientation', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <Orientation />)
