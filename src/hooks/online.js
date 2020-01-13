@@ -6,10 +6,6 @@ import { IS_SERVER } from '../constants'
 export function useOnline() {
   const [online, setOnline] = useState(getOnlineStatus())
 
-  function handleChange() {
-    setOnline(getOnlineStatus())
-  }
-
   function getOnlineStatus() {
     return IS_SERVER || (window.navigator && window.navigator.onLine)
       ? true
@@ -17,6 +13,10 @@ export function useOnline() {
   }
 
   useEffect(() => {
+    function handleChange() {
+      setOnline(getOnlineStatus())
+    }
+
     window.addEventListener('offline', handleChange, false)
     window.addEventListener('online', handleChange, false)
 

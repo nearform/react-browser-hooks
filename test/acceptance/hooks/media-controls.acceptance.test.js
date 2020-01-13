@@ -4,10 +4,7 @@ import Storybook from '../storybook'
 const storybook = new Storybook()
 
 fixture('Media Controls Hook')
-  .page(
-    globals.url +
-      '/?selectedKind=MediaControls&selectedStory=Default&full=0&addons=1&stories=1&panelRight=1&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel'
-  )
+  .page(globals.url + '/?path=/story/mediacontrols--default')
   .beforeEach(async (t) => {
     await t.switchToIframe(storybook.iframe)
   })
@@ -133,7 +130,7 @@ test('The audio should initialize in the correct state', async (t) => {
     .expect(audioPausedState.textContent)
     .contains('The audio is paused: true')
     .expect(volumeState.textContent)
-    .contains('The audio is volume: 0')
+    .contains('The audio is volume: 1')
     .expect(mutedState.textContent)
     .contains('The audio is muted: true')
 })
@@ -179,7 +176,7 @@ test('The mute button should mute the audio if muted === false', async (t) => {
     .expect(mutedState.textContent)
     .contains('The audio is muted: true')
     .expect(volumeState.textContent)
-    .contains('The audio is volume: 0')
+    .contains('The audio is volume: 1')
 })
 
 test('The mute button should unmute the audio if muted === true', async (t) => {
@@ -240,24 +237,4 @@ test('The volume down button should decrease the volume by 0.1', async (t) => {
     .click(volumeDownButton)
     .expect(volumeState.textContent)
     .contains('The audio is volume: 0.8')
-})
-
-test('The volume up button should increase the volume by 0.1', async (t) => {
-  const {
-    muteButton,
-    volumeUpButton,
-    volumeState
-  } = storybook.hooks.mediaControls
-
-  await t
-    .expect(muteButton.textContent)
-    .contains('Unmute')
-    .hover(volumeUpButton)
-    .click(volumeUpButton)
-    .expect(volumeState.textContent)
-    .contains('The audio is volume: 0.1')
-    .hover(volumeUpButton)
-    .click(volumeUpButton)
-    .expect(volumeState.textContent)
-    .contains('The audio is volume: 0.2')
 })

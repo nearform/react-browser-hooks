@@ -1,4 +1,4 @@
-import { baseFonts, monoFonts } from '@storybook/components'
+import { create } from '@storybook/theming'
 
 const brand = {
   blue: '#2165e5',
@@ -12,34 +12,18 @@ const brand = {
   white: '#FFFFFF'
 }
 
-// see https://storybook.js.org/configurations/theming/
-// for more information on what can be themed
+export default create({
+  base: 'light',
 
-const theme = {
-  // variables
-  mainBackground: brand.blue,
-  mainBorder: brand.blue,
-  mainBorderColor: brand.blue,
-  mainBorderRadius: 4,
-  mainFill: brand.greyLighter,
-  barFill: brand.greyLighter,
-  barSelectedColor: brand.greyLight,
-  inputFill: brand.blueDark,
-  mainTextFace: baseFonts.fontFamily,
-  mainTextColor: brand.grey,
-  dimmedTextColor: brand.greyLight,
-  highlightColor: brand.orange,
-  successColor: brand.green,
-  failColor: brand.pink,
-  warnColor: brand.orange,
-  mainTextSize: 14,
-  monoTextFace: monoFonts.fontFamily,
-  layoutMargin: 10,
+  brandTitle: 'React Browser Hooks',
+  brandUrl: 'https://react-browser-hooks.netlify.com/',
 
-  // components
-  brand: { background: brand.blueDark },
-  brandLink: { border: 'none' },
-  storiesNav: { color: brand.white }
-}
+  colorPrimary: brand.blue,
+  colorSecondary: brand.blueDark,
 
-export default theme
+  appBg: brand.blue,
+  appContentBg: brand.white,
+
+  barTextColor: brand.blueDark,
+  barSelectedColor: brand.blueDark
+})

@@ -5,10 +5,7 @@ import { getWindowAttribute, scrollWindow } from '../util'
 const storybook = new Storybook()
 
 fixture('Scroll Hook')
-  .page(
-    globals.url +
-      '?selectedKind=Scroll&selectedStory=Default&full=0&addons=1&stories=1&panelRight=1&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel'
-  )
+  .page(globals.url + '/?path=/story/scroll--default')
   .beforeEach((t) => t.switchToIframe(storybook.iframe))
   .afterEach((t) => t.switchToMainWindow())
 

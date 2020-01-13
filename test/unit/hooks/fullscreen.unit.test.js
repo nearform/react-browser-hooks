@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
-import { act, cleanup, renderHook } from 'react-hooks-testing-library'
-import { fireEvent, render } from 'react-testing-library'
+import { act, cleanup, renderHook } from '@testing-library/react-hooks'
+import { fireEvent, render } from '@testing-library/react'
 
 import { useFullScreen, useFullScreenBrowser } from '../../../src'
 import * as constants from '../../../src/constants'

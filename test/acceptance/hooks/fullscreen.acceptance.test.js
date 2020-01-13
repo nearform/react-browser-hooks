@@ -4,10 +4,7 @@ import Storybook from '../storybook'
 const storybook = new Storybook()
 
 fixture('Fullscreen Hook')
-  .page(
-    globals.url +
-      '/?selectedKind=FullScreen&selectedStory=Default&full=0&addons=1&stories=1&panelRight=1&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel'
-  )
+  .page(globals.url + '/?path=/story/fullscreen--default')
   .beforeEach((t) => t.switchToIframe(storybook.iframe))
   .afterEach((t) => t.switchToMainWindow())
 

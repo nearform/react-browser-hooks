@@ -1,6 +1,6 @@
 import React from 'react'
-import { configure, addDecorator } from '@storybook/react'
-import { withOptions } from '@storybook/addon-options'
+import { configure, addDecorator, addParameters } from '@storybook/react'
+import { addReadme } from 'storybook-readme'
 import theme from './theme'
 
 const req = require.context('../stories', true, /\.stories\.js$/)
@@ -9,22 +9,19 @@ function loadStories() {
   req.keys().forEach((filename) => req(filename))
 }
 
-addDecorator(
-  withOptions({
-    name: 'React Browser Hooks',
-    url: 'https://react-browser-hooks.netlify.com/',
-    goFullScreen: false,
-    showStoriesPanel: true,
-    showAddonPanel: true,
-    showSearchBox: false,
-    addonPanelInRight: true,
+addParameters({
+  options: {
+    panelPosition: 'right',
     sortStoriesByKind: true,
     theme
-  })
-)
+  },
+  readme: {
+    codeTheme: 'github'
+  }
+})
 
 const storyWrapper = (story) => <div style={{ margin: 35 }}>{story()}</div>
 
-addDecorator(storyWrapper)
+addDecorator(addReadme)
 
 configure(loadStories, module)

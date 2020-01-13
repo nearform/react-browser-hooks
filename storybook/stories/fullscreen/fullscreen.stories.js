@@ -1,6 +1,5 @@
 import React, { useRef } from 'react'
 import { storiesOf } from '@storybook/react'
-import { withReadme } from 'storybook-readme'
 import { useFullScreen, useFullScreenBrowser } from '../../../src'
 import readme from './README.md'
 
@@ -36,7 +35,6 @@ function BrowserFullScreen() {
   )
 }
 
-storiesOf('FullScreen', module).add(
-  'Default',
-  withReadme(readme, () => <BrowserFullScreen />)
-)
+storiesOf('FullScreen', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <BrowserFullScreen />)

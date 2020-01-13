@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import { act, cleanup } from 'react-hooks-testing-library'
-import { fireEvent, render } from 'react-testing-library'
+import { cleanup } from '@testing-library/react-hooks'
+import { act, fireEvent, render } from '@testing-library/react'
 
 import { useMediaControls } from '../../../src'
 
@@ -81,7 +81,7 @@ describe('useMediaControls', () => {
     expect(currentTime).toBe(0)
     expect(muted).toBe(true)
     expect(paused).toBe(true)
-    expect(volume).toBe(0)
+    expect(volume).toBe(1)
   })
 
   describe('plays', () => {
@@ -207,6 +207,30 @@ describe('useMediaControls', () => {
       expect(volume).toBe(0.2)
       expect(mediaElementRef.current.volume).toBe(0.2)
     })
+
+    it('when setVolume() attempts to set a value > 1', () => {
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+
+      act(() => {
+        setVolume(1.1)
+      })
+
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+    })
+
+    it('when setVolume() attempts to set a value < 0', () => {
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+
+      act(() => {
+        setVolume(-0.1)
+      })
+
+      expect(volume).toBe(0)
+      expect(mediaElementRef.current.volume).toBe(0)
+    })
   })
 
   describe('mutes', () => {
@@ -217,27 +241,76 @@ describe('useMediaControls', () => {
     })
 
     it('when mute() is called', () => {
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
 
       act(() => {
         mute()
       })
 
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
     })
 
     it('when setVolume() is called with 0', () => {
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
 
       act(() => {
         setVolume(0)
       })
 
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
+    })
+
+    it('when unmute() is called after setVolume() is called with 0', () => {
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
+
+      const originalVolume = mediaElementRef.current.volume
+
+      act(() => {
+        setVolume(0)
+      })
+
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
+
+      act(() => {
+        unmute()
+      })
+
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
+      expect(volume).toBe(originalVolume)
+      expect(mediaElementRef.current.volume).toBe(originalVolume)
+    })
+
+    it('when mute() or unmute() is called directly, volume does not change', () => {
+      setVolume(1)
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
+
+      act(() => {
+        mute()
+      })
+
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
+
+      act(() => {
+        unmute()
+      })
+
+      expect(volume).toBe(1)
+      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
     })
   })
 
@@ -249,27 +322,27 @@ describe('useMediaControls', () => {
     })
 
     it('when unmute() is called', () => {
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
 
       act(() => {
         unmute()
       })
 
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
     })
 
     it('when setVolume() is called with >0', () => {
-      expect(volume).toBe(0)
-      expect(mediaElementRef.current.volume).toBe(0)
+      expect(muted).toBe(true)
+      expect(mediaElementRef.current.muted).toBe(true)
 
       act(() => {
         setVolume(1)
       })
 
-      expect(volume).toBe(1)
-      expect(mediaElementRef.current.volume).toBe(1)
+      expect(muted).toBe(false)
+      expect(mediaElementRef.current.muted).toBe(false)
     })
   })
 

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { storiesOf } from '@storybook/react'
-import { withReadme } from 'storybook-readme'
 import { usePageVisibility } from '../../../src'
 import readme from './README.md'
 
@@ -22,7 +21,6 @@ function PageVisibility() {
   )
 }
 
-storiesOf('PageVisibility', module).add(
-  'Default',
-  withReadme(readme, () => <PageVisibility />)
-)
+storiesOf('PageVisibility', module)
+  .addParameters({ readme: { sidebar: readme } })
+  .add('Default', () => <PageVisibility />)
