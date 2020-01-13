@@ -6,8 +6,8 @@ React Browser Hooks
 [![NPM version](https://img.shields.io/npm/v/react-browser-hooks.svg)](https://www.npmjs.com/package/react-browser-hooks)
 [![Coverage Status](https://coveralls.io/repos/github/nearform/react-browser-hooks/badge.svg?branch=master)](https://coveralls.io/github/nearform/react-browser-hooks?branch=master)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8855d56c-7b73-4070-92e8-e7c1b2e80d7e/deploy-status)](https://app.netlify.com/sites/react-browser-hooks/deploys)
-[![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=b1dHQTVIVmpFLzYwVnZuaWlqUmpLa01ScUdQM2VrZUZIZG9Hc0ZTWVZjVT0tLW44NnBTK0hrdjNDaDVBeDFLQUJhUnc9PQ==--536a48a483a1ad3da80e28a99cc396d7de9a9151)](https://www.browserstack.com/automate/public-build/b1dHQTVIVmpFLzYwVnZuaWlqUmpLa01ScUdQM2VrZUZIZG9Hc0ZTWVZjVT0tLW44NnBTK0hrdjNDaDVBeDFLQUJhUnc9PQ==--536a48a483a1ad3da80e28a99cc396d7de9a9151)
 ![minified & gzipped size](https://img.shields.io/bundlephobia/minzip/react-browser-hooks.svg?style=flat)
+<!-- [![BrowserStack Status](https://www.browserstack.com/automate/badge.svg?badge_key=b1dHQTVIVmpFLzYwVnZuaWlqUmpLa01ScUdQM2VrZUZIZG9Hc0ZTWVZjVT0tLW44NnBTK0hrdjNDaDVBeDFLQUJhUnc9PQ==--536a48a483a1ad3da80e28a99cc396d7de9a9151)](https://www.browserstack.com/automate/public-build/b1dHQTVIVmpFLzYwVnZuaWlqUmpLa01ScUdQM2VrZUZIZG9Hc0ZTWVZjVT0tLW44NnBTK0hrdjNDaDVBeDFLQUJhUnc9PQ==--536a48a483a1ad3da80e28a99cc396d7de9a9151) -->
 
 A simple utility library that provides custom hooks for some common browser events.
 
