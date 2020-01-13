@@ -23,3 +23,7 @@
 - `npm run build` will build the component for publishing to npm and also bundle the demo app.
 
 - `npm run clean` will delete built resources.
+
+## Publishing
+- `npm publish --otp=[6-digit 2FA code]` will publish repo to npm, provided your npm account has been added to the
+  project as a maintainer.
