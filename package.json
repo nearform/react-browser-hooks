@@ -29,7 +29,7 @@
     "test:watch": "jest --watch"
   },
   "peerDependencies": {
-    "react": ">= 16.8 < 17"
+    "react": "< 18"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
@@ -55,13 +55,13 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
     "husky": "^4.0.6",
     "jest": "^24.7.1",
     "lint-staged": "^9.5.0",
     "prettier": "^1.16.4",
-    "react": "^16.8.6",
-    "react-test-renderer": "^16.12.0",
+    "react": "^17.0.0",
+    "react-test-renderer": "^17.0.0",
     "storybook-readme": "^5.0.8",
     "testcafe": "^1.1.1",
     "testcafe-browser-provider-browserstack": "^1.8.0"
