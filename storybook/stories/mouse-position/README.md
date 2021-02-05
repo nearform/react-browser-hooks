@@ -11,7 +11,7 @@ import { useMousePosition } from 'react-browser-hooks'
 Example of usage:
 
 ```javascript
-const { x, y } = useMousePosition(60)
+const { x, y } = useMousePosition()
 <p>X: {x}px, Y: {y}px</p>
 ```
 
