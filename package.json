@@ -48,7 +48,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "eslint": "^6.0.0",
-    "eslint-config-prettier": "^6.9.0",
+    "eslint-config-prettier": "^8.0.0",
     "eslint-config-react-app": "^5.1.0",
     "eslint-plugin-flowtype": "^3.13.0",
     "eslint-plugin-import": "^2.16.0",
